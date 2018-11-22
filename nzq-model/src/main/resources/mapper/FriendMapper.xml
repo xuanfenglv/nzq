@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuanfeng.nzq.domain.mapper.FriendMapper">
+  <resultMap id="BaseResultMap" type="com.xuanfeng.nzq.domain.model.Friend">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="xf" jdbcType="BIGINT" property="xf" />
+    <result column="fxf" jdbcType="BIGINT" property="fxf" />
+    <result column="groupId" jdbcType="BIGINT" property="groupid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, xf, fxf, groupId, remark, ctime, mtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Friend
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from Friend
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xuanfeng.nzq.domain.model.Friend">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Friend (xf, fxf, groupId, 
+      remark, ctime, mtime
+      )
+    values (#{xf,jdbcType=BIGINT}, #{fxf,jdbcType=BIGINT}, #{groupid,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xuanfeng.nzq.domain.model.Friend">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Friend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="xf != null">
+        xf,
+      </if>
+      <if test="fxf != null">
+        fxf,
+      </if>
+      <if test="groupid != null">
+        groupId,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="xf != null">
+        #{xf,jdbcType=BIGINT},
+      </if>
+      <if test="fxf != null">
+        #{fxf,jdbcType=BIGINT},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xuanfeng.nzq.domain.model.Friend">
+    update Friend
+    <set>
+      <if test="xf != null">
+        xf = #{xf,jdbcType=BIGINT},
+      </if>
+      <if test="fxf != null">
+        fxf = #{fxf,jdbcType=BIGINT},
+      </if>
+      <if test="groupid != null">
+        groupId = #{groupid,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xuanfeng.nzq.domain.model.Friend">
+    update Friend
+    set xf = #{xf,jdbcType=BIGINT},
+      fxf = #{fxf,jdbcType=BIGINT},
+      groupId = #{groupid,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

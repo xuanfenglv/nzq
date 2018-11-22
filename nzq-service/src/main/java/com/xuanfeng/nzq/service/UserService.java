@@ -1,0 +1,51 @@
+package com.xuanfeng.nzq.service;
+
+import com.xuanfeng.nzq.api.request.user.RegisterUserRequest;
+import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
+import com.xuanfeng.nzq.domain.dao.UserDao;
+import com.xuanfeng.nzq.domain.mapper.UserMapper;
+import com.xuanfeng.nzq.domain.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @description:
+ * @author: lvxianqing
+ * @create: 2018/11/22 12:28
+ */
+@Service
+public class UserService {
+
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private UserMapper mapper;
+    @Autowired
+    private UserDao dao;
+
+    public Long registerUser(RegisterUserRequest request) {
+        User user =new User();
+        BeanUtils.copyProperties(request, user);
+        mapper.insertSelective(user);
+        logger.info("[DB] insert into User, user:{}", user);
+        return user.getId();
+    }
+    public boolean login(Long xf,String pwd) {
+
+        Long id = dao.selectIdByIdAndPwd(xf, pwd);
+        if (id != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public void changeStatus(Long xf, UserStatusEnum statusEnum) {
+        dao.changeStatus(xf, statusEnum.getStatus());
+    }
+
+}

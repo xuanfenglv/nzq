@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/common/jquery-3.1.1.min.js"></script>
+		<style>
+			body {
+				background-color: white;
+			}
+			
+			#main {
+				margin-left: 50px;
+				margin-top: 20px;
+				width: 1200px;
+				height: 560px;
+				border: solid 1px #DED7BB;
+				background-image: url(/nzq/img/register.png);
+				position: absolute;
+			}
+			
+			#register_form {
+				width: 360px;
+				height: 520px;
+				border: solid 1px #DED7BB;
+				background-color: white;
+				position: absolute;
+				top: 20px;
+				left: 100px;
+			}
+			
+			.map {
+				width: 340px;
+				height: 40px;
+				margin-left: 10px;
+				margin-right: 10px;
+				border: solid 1px #DED7BB;
+			}
+			
+			.err {
+				width: 340px;
+				height: 30px;
+				margin-left: 10px;
+				margin-right: 10px;
+				border: 0px;
+				color: red;
+				font-size: 15px;
+			}
+			
+			.key {
+				width: 70px;
+				height: 40px;
+				float: left;
+				line-height: 40px;
+				font-size: 15px;
+				text-align: right;
+				background-color: #DED7BB;
+				border: 0px;
+			}
+			
+			.val {
+				width: 226px;
+				height: 40px;
+				float: left;
+				border: 0px;
+				line-height: 40px;
+				padding-left: 5px;
+			}
+			
+			.true {
+				width: 38px;
+				height: 40px;
+				float: left;
+			}
+			
+			#submit {
+				width: 332px;
+				height: 40px;
+				margin-left: 15px;
+				margin-right: 15px;
+				border: 0px;
+				background-color: #C2C167;
+				font-size: 25px;
+				color: white;
+				border-radius: 7px;
+				line-height: 40px;
+			}
+			
+			#nickname,
+			#pwd1,
+			#pwd2,
+			#birthday,
+			#telephone {
+				width: 224px;
+				height: 34px;
+				border: 0px;
+			}
+			
+			.true {
+				background-image: url(/nzq/img/x.png);
+			}
+			
+			#sex_true {
+				background-image: url(/nzq/img/y.png);
+			}
+/*	/*	/*	/*
+			input[type='radio'].radio {
+				opacity: 0;
+				display: inline-block;
+				height: 20px;
+			}
+			
+			label.radio {
+				background: url(/nzq/img/radio_check.png) no-repeat;
+				height: 20px;
+				padding-left: 25px;
+			}
+			
+			input[type='radio'].radio:checked+.radio {
+				background: url(/nzq/img/radio_checked.png) no-repeat;
+			}*/
+		</style>
+	</head>
+
+	<body>
+		<form action="/nzq/RegisterServlet" method="post">
+			<div id="main">
+				<div id="register_form">
+					<div class="map" style="margin-top: 30px;">
+						<div class="key">昵称：</div>
+						<div class="val">
+							<input type="text" name="nickname" id="nickname" value="" />
+						</div>
+						<div id="nickname_true" class="true"></div>
+					</div>
+					<div id="username_err" class="err"></div>
+					<div class="map">
+						<div class="key">密码：</div>
+						<div class="val">
+							<input type="password" name="pwd1" id="pwd1" value="" />
+						</div>
+						<div id="pwd1_true" class="true"></div>
+					</div>
+					<div id="pwd1_err" class="err"></div>
+					<div class="map">
+						<div class="key">确认密码:</div>
+						<div class="val">
+							<input type="password" name="pwd2" id="pwd2" value="" maxlength="15" />
+						</div>
+						<div id="pwd2_true" class="true"></div>
+					</div>
+					<div id="pwd2_err" class="err"></div>
+					<div class="map">
+						<div class="key">性别：</div>
+						<div class="val">
+							
+							<input type="radio" name="sex" id="sex" value="m" checked="checked" /> 男&nbsp;
+							<input type="radio" name="sex" id="sex" value="w" />女
+						</div>
+						<div id="sex_true" class="true"></div>
+					</div>
+					<div id="sex_err" class="err"></div>
+					<div class="map">
+						<div class="key">生日：</div>
+						<div class="val">
+							<input type="text" name="birthday" id="birthday" />
+						</div>
+						<div id="birthday_true" class="true"></div>
+					</div>
+					<div id="birthday_err" class="err"></div>
+					<div class="map">
+						<div class="key">电话：</div>
+						<div class="val">
+							<input type="text" name="telephone" id="telephone" value="" maxlength="11" />
+						</div>
+						<div id="telephone_true" class="true"></div>
+					</div>
+					<div id="phone_err" class="err"></div>
+					<input type="submit" name="submit" id="submit" value="注册" disabled="disabled" />
+				</div>
+			</div>
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript" src="/nzq/js/laydate.dev.js" ></script>
+	<script>
+		var nickname_state = false;
+		var pwd1_state = false;
+		var pwd2_state = false;
+		var birthday_state = false;
+		var telephone_state = false;
+
+		function checkForm() {
+			if(nickname_state && pwd1_state && pwd2_state && birthday_state && telephone_state) {
+				$("#submit").removeAttr("disabled");
+				$("#submit").css("background-color", "#C2C167");
+			} else {
+				$("#submit").attr("disabled", true);
+				$("#submit").css("background-color", "darkgray");
+			}
+		}
+		$(document).ready(function() {
+			$("#nickname").blur(function() {
+				if(this.value.length == 0 || this.value.length > 10) {
+					$("#nickname_true").css("background-image", "url(../../img/x.png)");
+					nickname_state = false;
+					$("#username_err").html("用户名的长度应在1-10之间");
+				} else {
+					$("#nickname_true").css("background-image", "url(../../img/y.png)");
+					nickname_state = true;
+					$("#username_err").html("");
+				}
+				checkForm();
+			})
+		})
+
+		$(document).ready(function() {
+			$("#pwd1").blur(function() {
+				if(this.value.length < 8 || this.value.length > 15) {
+					$("#pwd1_true").css("background-image", "url(../../img/x.png)");
+					pwd1_state = false;
+					$("#pwd1_err").html("密码的长度应在8-15之间");
+				} else {
+					$("#pwd1_true").css("background-image", "url(../../img/y.png)");
+					pwd1_state = true;
+					$("#pwd1_err").html("");
+				}
+				checkForm();
+			})
+		})
+
+		$(document).ready(function() {
+			$("#pwd2").blur(function() {
+				if(this.value != $("#pwd1").val()) {
+					$("#pwd2_true").css("background-image", "url(../../img/x.png)");
+					pwd2_state = false;
+					$("#pwd2_err").html("两次输入密码不一致");
+				} else {
+					if(this.value == "") {
+						$("#pwd2_true").css("background-image", "url(../../img/x.png)");
+						pwd2_state = false;
+						$("#pwd2_err").html("请先输入第一个密码");
+					} else {
+						$("#pwd2_true").css("background-image", "url(../../img/y.png)");
+						pwd2_state = true;
+						$("#pwd2_err").html("");
+					}
+				}
+				checkForm();
+			})
+		})
+
+		$(document).ready(function() {
+			$("#birthday").blur(function() {
+				if(this.value == "") {
+					$("#birthday_true").css("background-image", "url(../../img/x.png)");
+					birthday_state = false;
+					$("#birthday_err").html("请选择您的生日");
+				} else {
+					$("#birthday_true").css("background-image", "url(../../img/y.png)");
+					birthday_state = true;
+					$("#birthday_err").html("");
+				}
+				checkForm();
+			})
+		})
+
+		$(document).ready(function() {
+			$("#telephone").blur(function() {
+				if(this.value == "") {
+					$("#telephone_true").css("background-image", "url(../../img/x.png)");
+					telephone_state = false;
+					$("#phone_err").html("请输入您的手机号码");
+				} else if(!(/^1[3|4|5|8][0-9]\d{8}$/.test(this.value))) {
+					$("#telephone_true").css("background-image", "url(../../img/x.png)");
+					telephone_state = false;
+					$("#phone_err").html("请输入正确的号码格式");
+				} else {
+					$("#telephone_true").css("background-image", "url(../../img/y.png)");
+					telephone_state = true;
+					$("#phone_err").html("");
+				}
+				checkForm();
+			})
+		})
+		 laydate({
+            elem: '#birthday'
+        });
+	</script>
+
+</html>

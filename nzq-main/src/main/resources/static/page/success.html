@@ -1,0 +1,106 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'success.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<style>
+			body {
+				background-color: white;
+			}
+			#main {
+				margin-left: 50px;
+				margin-top: 20px;
+				width: 1200px;
+				height: 560px;
+				border: solid 1px black;
+				background-color: cornflowerblue;
+				position: absolute;
+			}
+			#board {
+				margin-left: 200px;
+				margin-top: 60px;
+				width: 800px;
+				height: 400px;
+				border: solid 1px black;
+				background-color: white;
+				position: absolute;
+			}
+			#xf {
+				margin-left: 100px;
+				margin-top: 50px;
+				width: 600px;
+				height: 300px;
+				border: ridge 1px darkgray;
+				background-color: white;
+				position: absolute;
+			}
+			#xf_tip{
+				width: 250px;
+				height: 40px;
+				position: absolute;
+				left: 40px;
+				top:90px;
+				border: solid 1px black;
+				font-family: "楷体";
+				font-size: 35px;
+			}
+			#xf_id{
+				width: 250px;
+				height: 40px;
+				position: absolute;
+				left: 300px;
+				top:90px;
+				border: solid 1px black;
+				font-family: "楷体";
+				font-size: 35px;
+				color: red;
+			}
+			#login {
+				width: 250px;
+				height: 40px;
+				position: absolute;
+				left: 175px;
+				top:200px;
+				/*border: solid 1px black;*/
+				font-family: "微软雅黑";
+				font-size: 18px;
+				text-align: center;
+			}
+	</style>
+  </head>
+  
+  <body>
+		<div id="main">
+			<div id="board">
+				<div id="xf">
+					<div id="xf_tip">
+						您的炫封号是：
+					</div>
+					<div id="xf_id">
+						[[${xf}]]
+					</div>
+					<div id="login">
+						<a href="page/login.html">立即登录</a>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</body>
+</html>

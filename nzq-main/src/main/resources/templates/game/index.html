@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>game</title>
+<script type="text/javascript" src="/nzq/js/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="/nzq/css/chat.css" />
+<link rel="stylesheet" href="/nzq/css/game.css" />
+<link rel="stylesheet" href="/nzq/css/playgame.css" />
+</head>
+
+<body>
+
+	<div id="main">
+	
+	
+		<div id="game">
+			
+			<div id="menu">
+					<div id="play_b">
+						<img id="play_b_sign" src="/nzq/img/play_b_sign.png" /> PLAY
+					</div>
+
+					<div id="homepage_b">
+						主页
+					</div>
+					<div id="commodity_b">
+						藏品
+					</div>
+
+					<div id="money_b">
+						3000
+					</div>
+					<img id="money_b_sign" src="/nzq/img/money_b_sign.png" />
+					<div id="store_b">
+						商城
+					</div>
+
+				</div>
+				<div id="display">
+					<div id="play">
+						<div id="play_menu">
+							<div id="playergame" style="box-shadow: #BCBD93 2px 2px 2px;">
+								玩家对战
+							</div>
+							<div id="conputergame">
+								人机对战
+							</div>
+							<div id="friendgame">
+								好友约战
+							</div>
+						</div>
+						<div id="player_fight">
+							<div id="play_mode">
+
+								<div id="wuziqi">
+									<img src="/nzq/img/wuziqi_sign2.png" class="wuziqi_sign" /> 双人五子棋
+
+								</div>
+
+								<div id="siziqi">
+									<img src="/nzq/img/siziqi_sign.png" class="siziqi_sign" /> 三人四子棋
+								</div>
+							</div>
+							<div id="play_method">
+								<div id="wuziqi_introduce">
+									与你的对手进行传统的双人五子棋在线对弈，首先五子连珠者胜利。
+								</div>
+								<div id="siziqi_introduce">
+									与你的对手进行新颖的三人四子棋在线对弈，首先四子连珠者胜利。
+								</div>
+								<div id="game_pattern">
+									<div id="pipei">
+										<input type="radio" name="pattern_select" id="pattern_select" value="0" checked="checked" />
+										<div id="pipei_text">
+											匹配模式
+										</div>
+									</div>
+									<div id="rank">
+										<input type="radio" name="pattern_select" id="pattern_select" value="1" disabled="disabled" />
+										<div id="rank_text">
+											排位模式
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="play_begin">
+								<div class="quit_game">取消</div>
+								<div id="confirm_game">确认</div>
+							</div>
+						</div>
+						<div id="computer_fight">
+							
+								
+					
+							<div id="computer_fight_introduce">
+								在人工智能飞速发展的21世纪，机器已经足够强大，他们通过自己独特的学习能力越来越强，每次失败都是新的进步，敢来挑战吗？少年！
+							</div>
+							<div id="computer_begin">开始挑战</div>
+						</div>
+						<div id="friend_fight">
+							<div id="play_mode_f">
+								<div id="wuziqi_f">
+									<img src="/nzq/img/wuziqi_sign2.png" class="wuziqi_sign" /> 双人五子棋
+								</div>
+								<div id="siziqi_f">
+									<img src="/nzq/img/siziqi_sign.png" class="siziqi_sign" />三人四子棋
+								</div>
+							</div>
+							<div id="play_method_f">
+								<div id="wuziqi_introduce_f">
+									邀请一位你的好友进行传统的双人五子棋在线对弈，首先五子连珠者胜利。
+								</div>
+								<div id="siziqi_introduce_f">
+									邀请两位你的好友进行新颖的三人四子棋在线对弈，首先四子连珠者胜利。
+								</div>
+							</div>
+							<div id="play_begin_f">
+								<div class="quit_game">取消</div>
+								<div id="confirm_game_f">确认</div>
+							</div>
+						</div>
+					</div>
+					<div id="homepage">
+						<div id="treasure_bang">
+							<div class="bang_title">
+								富豪榜
+							</div>
+							<div id="treasure_set">
+								<div id="treasure_friend">
+									好友榜
+								</div>
+								<div id="treasure_world">
+									世界榜
+								</div>
+							</div>
+							<div id="treasure_bangdan">
+								<div id="treasure_bangdan_friend">
+									好友
+								</div>
+								<div id="treasure_bangdan_world">
+									世界
+								</div>
+							</div>
+						</div>
+						<div id="rank_bang">
+							<div class="bang_title">
+								排位榜
+							</div>
+							<div id="rank_set">
+								<div id="rank_friend">
+									好友榜
+								</div>
+								<div id="rank_world">
+									世界榜
+								</div>
+							</div>
+							<div id="rank_bangdan">
+								<div id="rank_bangdan_friend">
+									好友
+								</div>
+								<div id="rank_bangdan_world">
+									世界
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="commodity">
+						我的皮肤
+					</div>
+					<div id="store">
+						这是商店
+					</div>
+				</div>
+
+			<div id="game_warn"></div>
+
+			<div id="game_success">
+				<div class="game_gray"></div>
+				<div class="game_result">
+					<div id="user_success">
+						<img class="success_colorful" src="/nzq/img/colorful.png" />
+						<div id="user_success_content">恭喜骚年！你赢啦</div>
+					</div>
+					<div class="game_confirm">
+						<button id="game_success_button">确认</button>
+					</div>
+				</div>
+			</div>
+
+			<div id="game_fail">
+				<div class="game_gray"></div>
+				<div class="game_result">
+					<div id="user_fail">
+						<img class="fail_black" src="/nzq/img/fail.jpg" />
+						<div id="user_fail_content">表桑心&nbsp;再接再厉！</div>
+					</div>
+					<div class="game_confirm">
+						<button id="game_fail_button">确认</button>
+					</div>
+				</div>
+			</div>
+
+			<div id="yaoqing">
+				<div class="game_gray"></div>
+				<div id="yaoqing_menu">
+
+					<div id="yaoqing_title">邀请</div>
+					<img id="yaoqing_close" src="/nzq/game_img/invitation_close3.png" />
+
+					<div id="yaoqing_info">
+						<img id="yaoqing_photo" src="" />
+						<div id="yaoqing_detail_info">
+							<div id="yaoqing_sex_name">
+								<img id="yaoqing_sex" src="" />
+								<div id="yaoqing_nickname"></div>
+							</div>
+							<div id="yaoqing_grade">
+								<img id="yaoqing_grade_img" src="" />
+								<div id="yaoqing_grade_text"></div>
+							</div>
+						</div>
+					</div>
+
+					<div id="yaoqing_tip">
+						<div id="yaoqing_tip_prefix">邀请您玩一局</div>
+						<div id="yaoqing_tip_model">双人五子棋</div>
+					</div>
+
+					<div id="yaoqing_button">
+						<button id="yaoqing_refuse">拒绝</button>
+						<button id="yaoqing_confirm">接受
+					</div>
+					<div id="yaoqing_refuse_a_while">
+						<input type="checkbox" name="yaoqing_refuse3" id="yaoqing_refuse3"
+							value="" />
+						<div id="yaoqing_refuse3_tip">3分钟内不接受该玩家邀请</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="match_ready_pz2">
+				<div class="game_gray"></div>
+				<div id="match_ready_pz2_kuang">
+
+					<div class="pz_title">
+						<div class="pz_title1">匹配成功</div>
+						<div class="pz_title2">
+							<div class="pz_number" id="pz2_number">0</div>
+							<div class="pz_count" id="pz2_count">30</div>
+							<div class="pz_number_right1">/2已就绪</div>
+							<div class="pz_number_right2">倒计时</div>
+							<div class="pz_number_right3">秒</div>
+						</div>
+					</div>
+					<div class="pz_detail">
+						<div id="pz2_black">
+							<img class="pz2_photo" id="pz2_black_photo" th:src="${'/nzq/photo/'+xf+'.jpg'}" />
+							<div class="pz2_photo_cover"></div>
+							<div class="pz2_color_sign" id="pz2_black_sign"></div>
+						</div>
+						<div id="pz2_white">
+							<img class="pz2_photo" id="pz2_white_photo" th:src="${'/nzq/photo/'+xf+'.jpg'}" />
+							<div class="pz2_photo_cover"></div>
+							<div class="pz2_color_sign" id="pz2_white_sign"></div>
+
+						</div>
+					</div>
+					<div class="pz_start">
+						<button class="pz_start_button" id="pz2_start_button">进入游戏</button>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="match_ready_pz3">
+			<div class="game_gray"></div>
+			<div id="match_ready_pz2_kuang">
+				<div class="pz_title">
+					<div class="pz_title1">
+						匹配成功
+					</div>
+					<div class="pz_title2">
+						<div class="pz_number" id="pz3_number">0</div>
+						<div class="pz_count" id="pz3_count">30</div>
+						<div class="pz_number_right1">/3已就绪</div>
+						<div class="pz_number_right2">倒计时</div>
+						<div class="pz_number_right3">秒</div>
+					</div>
+				</div>
+				<div class="pz_detail">
+					<div id="pz3_black">
+						<img class="pz3_photo" id="pz3_black_photo" th:src="${'/nzq/photo/'+xf+'.jpg'}"  />
+						<div class="pz3_photo_cover">
+
+						</div>
+						<div class="pz3_color_sign" id="pz3_black_sign">
+
+						</div>
+					</div>
+					<div id="pz3_white">
+						<img class="pz3_photo" id="pz3_white_photo" th:src="${'/nzq/photo/'+xf+'.jpg'}"  />
+						<div class="pz3_photo_cover">
+
+						</div>
+						<div class="pz3_color_sign" id="pz3_white_sign">
+
+						</div>
+					</div>
+					<div id="pz3_red">
+						<img class="pz3_photo" id="pz3_red_photo" src="photo/10003.jpg" />
+						<div class="pz3_photo_cover">
+
+						</div>
+						<div class="pz3_color_sign" id="pz3_red_sign">
+
+						</div>
+					</div>
+				</div>
+				<div class="pz_start">
+					<button class="pz_start_button" id="pz3_start_button">进入游戏</button>
+				</div>
+			</div>
+		</div>
+		
+			<div id="match_pipei_wait">
+
+				<div class="pp_wait_return_middle">
+					<div class="pp_wait_predict">
+						预计匹配时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<div id="pp_wait_predict">00:01</div>
+					</div>
+					<div id="pp_wait_count">00:00</div>
+				</div>
+
+				<img src="/nzq/img/close_wait.png" class="pp_close_wait" />
+
+			</div>
+
+			<div id="game_yue_competitor" class="game_yue_competitor">
+				<div id="game_yue2_competitor" class="gy_main">
+					<div id="gy_return">
+						<img id="gy_return_photo" class="gy_return_photo"
+							src="/nzq/game_img/gy_return.png" title="返回" />
+						<div class="gy_return_sign">准备</div>
+					</div>
+
+					<div class="gy_title">
+						<div class="gy_title_first">好友约战</div>
+						<div class="gy_title_second">双人五子棋</div>
+					</div>
+
+					<div id="gy_black">
+						<div class="gy_competitor_none">
+							<img class="gy_competitor_questionmark"
+								src="/nzq/game_img/gy_questionmark.png" />
+							<button id="to_Black" class="gy_competitor_exchange">换位
+							</button>
+						</div>
+
+						<div id="gy_competitor_black" class="gy_competitor_detail">
+							<img class="gy_competitor_photo" />
+							<div class="gy_competitor_name">猪哥</div>
+						</div>
+
+						<div class="gy_competitor_cover" id="gy_black_cover">
+							<div class="gy_exchange_count" id="gy_black_count"></div>
+							<div class="gy_exchange_note">等待确认</div>
+						</div>
+
+						<div id="gy_competitor_img_black" class="gy_competitor_img">
+							<img id="black_house_owner" class="gy_house_owner"
+								src="/nzq/game_img/gy_house.png" /> <img id="tick_black"
+								class="gy_exit" src="/nzq/game_img/gy_close.png" />
+							<div id="change_black" class="gy_exchange">
+								<img src="/nzq/game_img/gy_exchange.png"
+									class="gy_exchange_sign" />
+							</div>
+						</div>
+
+						<div id="gy_exchange_request_black" class="gy_exchange_request">
+							<div class="gy_ex_from ">
+								黑方请求与你换位(
+								<div class="gy_excount" id="gy_exblack_count">15</div>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+							</div>
+							<div class="gy_ex_button">
+
+								<button class="gy_exbutton gy_exbutton_no" >拒绝</button>
+								<button class="gy_exbutton gy_exbutton_yes" >同意</button>
+							</div>
+						</div>
+
+					</div>
+
+					<div id="gy_vs">
+						<img src="/nzq/game_img/gy_vs.png" id="gy_vs_sign" />
+					</div>
+
+					<div id="gy_white">
+						<div class="gy_competitor_none">
+							<img class="gy_competitor_questionmark"
+								src="/nzq/game_img/gy_questionmark.png" />
+							<button id="to_White" class="gy_competitor_exchange">换位
+							</button>
+						</div>
+
+						<div id="gy_competitor_white" class="gy_competitor_detail">
+							<img class="gy_competitor_photo" />
+							<div class="gy_competitor_name">猪妹</div>
+						</div>
+
+						<div class="gy_competitor_cover" id="gy_white_cover">
+							<div class="gy_exchange_count" id="gy_white_count"></div>
+							<div class="gy_exchange_note">等待确认</div>
+						</div>
+
+						<div id="gy_competitor_img_white" class="gy_competitor_img">
+							<img id="white_house_owner" class="gy_house_owner"
+								src="/nzq/game_img/gy_house.png" /> <img id="tick_white"
+								class="gy_exit" src="/nzq/game_img/gy_close.png" />
+							<div id="change_white" class="gy_exchange">
+								<img src="/nzq/game_img/gy_exchange.png"
+									class="gy_exchange_sign" />
+							</div>
+						</div>
+
+						<div id="gy_exchange_request_white" class="gy_exchange_request">
+							<div class="gy_ex_from ">
+								白方请求与你换位(
+								<div class="gy_excount" id="gy_exwhite_count">15</div>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+							</div>
+							<div class="gy_ex_button">
+								<button class="gy_exbutton gy_exbutton_no" >拒绝</button>
+								<button class="gy_exbutton gy_exbutton_yes" >同意</button>
+							</div>
+						</div>
+					</div>
+
+					<div id="gy_bottom">
+						<div id="gy_chat">
+							<img id="gy_chat_sign" src="/nzq/game_img/gy_chat_sign.png" /> <input
+								id="gy_chat_content" placeholder="点击这里开始聊天" />
+
+						</div>
+						<button id="gy_start" disabled="disabled">开始游戏</button>
+					</div>
+				</div>
+
+				<div id="game_yue3_competitor" class="gy_main">
+					<div class="gy_return">
+						<img id="gy3_return_photo" class="gy_return_photo"
+							src="/nzq/game_img/gy_return.png" title="返回" />
+						<div class="gy_return_sign">准备</div>
+					</div>
+
+					<div class="gy_title">
+						<div class="gy_title_first">好友约战</div>
+						<div class="gy_title_second">三人四子棋</div>
+					</div>
+
+					<div id="gy3_black">
+						<div class="gy3_competitor_none">
+							<img class="gy3_competitor_questionmark"
+								src="/nzq/game_img/gy_questionmark.png" />
+							<button id="gy3_to_Black" class="gy3_competitor_exchange">
+								换位</button>
+						</div>
+
+						<div id="gy3_competitor_black" class="gy3_competitor_detail">
+							<img class="gy3_competitor_photo" th:src="${'/nzq/photo/'+xf+'.jpg'}"  />
+							<div class="gy3_competitor_name">猪哥</div>
+						</div>
+
+						<div id="gy3_exchange_request_black" class="gy3_exchange_request">
+							<div class="gy3_ex_from ">
+								<div class="gy3_exchange_note1">黑方请求与你换位(</div>
+								<div class="gy3_excount" id="gy3_exblack_count">15</div>
+								<div class="gy3_exchange_note2">)</div>
+							</div>
+							<div class="gy3_ex_button">
+
+								<button class="gy3_exbutton gy3_exbutton_no" id="refuse_black">
+									拒绝</button>
+								<button class="gy3_exbutton gy3_exbutton_yes" id="agree_black">
+									同意</button>
+							</div>
+						</div>
+
+						<div class="gy3_competitor_cover" id="gy3_black_cover">
+							<div class="gy_exchange_count" id="gy3_black_count">5</div>
+							<div class="gy_exchange_note">等待确认</div>
+						</div>
+
+						<div id="gy3_competitor_img_black" class="gy3_competitor_img">
+							<img class="gy3_house_owner" src="/nzq/game_img/gy_house.png" /> <img
+								class="gy3_exit" src="/nzq/game_img/gy_close.png" />
+							<div class="gy3_exchange">
+								<img src="/nzq/game_img/gy_exchange.png" id="gy3_exchange_sign" />
+							</div>
+						</div>
+
+					</div>
+
+					<div id="gy3_vs1">
+						<img src="/nzq/game_img/gy_vs.png" id="gy_vs_sign" />
+					</div>
+
+					<div id="gy3_white">
+						<div class="gy3_competitor_none">
+							<img class="gy3_competitor_questionmark"
+								src="/nzq/game_img/gy_questionmark.png" />
+							<button id="gy3_to_White" class="gy3_competitor_exchange">
+								换位</button>
+						</div>
+
+						<div id="gy3_competitor_white" class="gy3_competitor_detail">
+							<img class="gy3_competitor_photo" src="photo/10003.jpg" />
+
+							<div class="gy3_competitor_name">猪妹</div>
+						</div>
+
+						<div id="gy3_exchange_request_white" class="gy3_exchange_request">
+							<div class="gy3_ex_from ">
+								<div class="gy3_exchange_note1">白方请求与你换位(</div>
+								<div class="gy3_excount" id="gy3_exwhite_count">15</div>
+								<div class="gy3_exchange_note2">)</div>
+							</div>
+							<div class="gy3_ex_button">
+								<button class="gy3_exbutton gy3_exbutton_no" id="refuse_white">
+									拒绝</button>
+								<button class="gy3_exbutton gy3_exbutton_no" id="agree_white">
+									同意</button>
+							</div>
+						</div>
+
+						<div class="gy3_competitor_cover" id="gy3_white_cover">
+							<div class="gy_exchange_count" id="gy3_white_count">5</div>
+							<div class="gy_exchange_note">等待确认</div>
+						</div>
+
+						<div id="gy3_competitor_img_white" class="gy3_competitor_img">
+							<img class="gy3_house_owner" src="/nzq/game_img/gy_house.png" /> <img
+								class="gy3_exit" src="/nzq/game_img/gy_close.png" />
+							<div class="gy3_exchange">
+								<img src="/nzq/game_img/gy_exchange.png" id="gy3_exchange_sign" />
+							</div>
+						</div>
+					</div>
+
+					<div id="gy3_vs2">
+						<img src="/nzq/game_img/gy_vs.png" id="gy_vs_sign" />
+					</div>
+
+					<div id="gy3_red">
+						<div class="gy3_competitor_none">
+							<img class="gy3_competitor_questionmark"
+								src="/nzq/game_img/gy_questionmark.png" />
+							<button id="gy3_to_Red" class="gy3_competitor_exchange">
+								换位</button>
+						</div>
+						<div id="gy3_competitor_red" class="gy3_competitor_detail">
+							<img class="gy3_competitor_photo" src="photo/10003.jpg" />
+							<div class="gy3_competitor_name">猪宝</div>
+						</div>
+
+						<div id="gy3_exchange_request_red" class="gy3_exchange_request">
+							<div class="gy3_ex_from ">
+								<div class="gy3_exchange_note1">红方请求与你换位(</div>
+								<div class="gy3_excount" id="gy3_exred_count">15</div>
+								<div class="gy3_exchange_note2">)</div>
+							</div>
+							<div class="gy3_ex_button">
+
+								<button class="gy3_exbutton gy3_exbutton_no" id="refuse_red">
+									拒绝</button>
+								<button class="gy3_exbutton gy3_exbutton_yes" id="agree_red">
+									同意</button>
+							</div>
+						</div>
+
+						<div class="gy3_competitor_cover" id="gy3_red_cover">
+							<div class="gy_exchange_count" id="gy3_red_count">5</div>
+							<div class="gy_exchange_note">等待确认</div>
+						</div>
+						<div id="gy3_competitor_img_red" class="gy3_competitor_img">
+							<img class="gy3_house_owner" src="/nzq/game_img/gy_house.png" /> <img
+								class="gy3_exit" src="/nzq/game_img/gy_close.png" />
+							<div class="gy3_exchange">
+								<img src="/nzq/game_img/gy_exchange.png" id="gy3_exchange_sign" />
+							</div>
+						</div>
+					</div>
+
+					<div id="gy3_bottom">
+						<div id="gy3_chat">
+							<img id="gy3_chat_sign" src="img/gy_chat_sign.png" /> <input
+								id="gy3_chat_content" placeholder="点击这里开始聊天" />
+
+						</div>
+						<button id="gy3_start">开始游戏</button>
+					</div>
+				</div>
+
+				<div id="gy_list">
+
+					<div class="gy_list_title">好友</div>
+					<div id="gy_list_content">
+						<div id="gy_list_online"></div>
+						<div id="gy_list_offline"></div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div id="wuziqi_game">
+				<div id="friend_1">
+					<div id="player1_show" class="player_show">
+						<img id="player1_photo" class="player_photo" src="" />
+						<div id="player1_name" class="player_name"></div>
+						<div id="player1_daojishi" class="player_daojishi">
+							<div id="player1_daojishi_count" class="player_daojishi_count">
+								30</div>
+							<div class="player_daojishi_tip">剩余时间</div>
+						</div>
+						<img id="player1_emoticon" class="player_emoticon" src="" />
+					</div>
+				</div>
+				<div id="friend_2">
+					<div id="player2_show" class="player_show">
+						<img id="player2_photo" class="player_photo" src="" />
+						<div id="player2_name" class="player_name"></div>
+						<div id="player2_daojishi" class="player_daojishi">
+							<div id="player2_daojishi_count" class="player_daojishi_count">
+								30</div>
+							<div class="player_daojishi_tip">剩余时间</div>
+						</div>
+						<img id="player2_emoticon" class="player_emoticon" src="" />
+					</div>
+				</div>
+				<div id="qipan">
+					<table id="board" cellspacing="0px">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+				<div id="daojishi"></div>
+				<div id="mine_5">
+					<div id="player3_show" class="player_show">
+						<img id="player3_photo" class="player_photo" src="" />
+						<div id="player3_name" class="player_name"></div>
+						<div id="player3_daojishi" class="player_daojishi">
+							<div id="player3_daojishi_count" class="player_daojishi_count">
+								30</div>
+							<div class="player_daojishi_tip">剩余时间</div>
+						</div>
+						<img id="player3_emoticon" class="player_emoticon" src="" />
+					</div>
+
+					<div id="inner_chat">
+						<div id="inner_chat_1">
+							<input type="text" name="inner_chat_input" id="inner_chat_input"
+								value="" />
+							<button id="inner_chat_send">发送</button>
+						</div>
+						<div id="inner_chat_menu">快速交流</div>
+						<div id="inner_chat_record"></div>
+						<div id="inner_chat_fast">
+							<div id="fast_menu">
+								<div id="fast_emoticon">秀表情</div>
+								<div id="fast_msg">快捷消息</div>
+							</div>
+							<div id="fast_container">
+								<div id="inner_chat_emoticon">
+									<div emoid="1" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/1.gif" />
+										<div class="emo_name">舔屏</div>
+									</div>
+									<div emoid="2" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/2.gif" />
+										<div class="emo_name">doge</div>
+									</div>
+									<div emoid="3" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/3.gif" />
+										<div class="emo_name">愤怒</div>
+									</div>
+									<div emoid="4" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/4.gif" />
+										<div class="emo_name">色</div>
+									</div>
+									<div emoid="5" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/5.gif" />
+										<div class="emo_name">亲亲</div>
+									</div>
+									<div emoid="6" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/6.gif" />
+										<div class="emo_name">鼓掌</div>
+									</div>
+									<div emoid="7" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/7.gif" />
+										<div class="emo_name">不约</div>
+									</div>
+									<div emoid="8" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/8.gif" />
+										<div class="emo_name">心</div>
+									</div>
+									<div emoid="9" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/9.gif" />
+										<div class="emo_name">羞涩</div>
+									</div>
+									<div emoid="10" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/10.gif" />
+										<div class="emo_name">大笑</div>
+									</div>
+									<div emoid="11" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/11.gif" />
+										<div class="emo_name">委屈</div>
+									</div>
+									<div emoid="12" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/12.gif" />
+										<div class="emo_name">傲慢</div>
+									</div>
+									<div emoid="13" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/13.gif" />
+										<div class="emo_name">赞</div>
+									</div>
+									<div emoid="14" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/14.gif" />
+										<div class="emo_name">惊讶</div>
+									</div>
+									<div emoid="15" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/15.gif" />
+										<div class="emo_name">偷笑</div>
+									</div>
+									<div emoid="16" class="emo_contain">
+										<img class="emo" src="/nzq/emoticon/16.gif" />
+										<div class="emo_name">坏笑</div>
+									</div>
+								</div>
+								<div id="inner_chat_fastmsg">
+									<div voiceid="1" class="voice">&nbsp快点吧，我等的花都谢了！</div>
+									<div voiceid="2" class="voice">&nbsp别着急，让我想想。</div>
+									<div voiceid="3" class="voice">&nbsp你这么厉害，你咋不上天呢？</div>
+									<div voiceid="4" class="voice">&nbsp没办法，我就是这么厉害！</div>
+									<div voiceid="5" class="voice">&nbsp小心，我要赢了！</div>
+									<div voiceid="6" class="voice">&nbsp我怎么看不出来你要赢了</div>
+									<div voiceid="7" class="voice">&nbsp一不小心我就赢了！</div>
+									<div voiceid="8" class="voice">&nbsp难道这就是失败的滋味？</div>
+									<div voiceid="9" class="voice">&nbsp你确定下在这里吗？</div>
+									<div voiceid="10" class="voice">&nbsp没错，我就下在这。</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div id="phone">
+			<div id="chat">
+
+				<div id="list">
+					<div class="head">
+						<img id="photo" alt="头像" th:src="${'/nzq/photo/'+xf+'.jpg'}" >
+						<div id="id_container">[[${xf}]]</div>
+						<div id="choose">
+							<div id="msg">消息</div>
+							<div id="friend">联系人</div>
+						</div>
+						<img id="addfriend" style="display: none;" title="添加好友"
+							src="/nzq/img/plus.png" /> <img id="editgroup" title="分组管理"
+							src="/nzq/img/group.png" />
+						<div id="newMsg_num" class="new_num">1</div>
+						<div id="newFriend_num" class="new_num">1</div>
+					</div>
+					<div id="inner">
+						<div id="msglist"></div>
+
+						<div id="friendlist">
+							<div class="fl_select">
+								<div class="newfriend" title="新朋友">
+									<img id="newfriend" src="/nzq/img/userplus.png"
+										style="width: 100%;" />
+								</div>
+								<div class="withfriends" title="群聊">
+									<img src="/nzq/img/users.png" style="width: 100%;" />
+								</div>
+								<div class="refresh" title="刷新">
+									<img src="/nzq/img/refresh.png" style="width: 100%;" />
+								</div>
+							</div>
+							<div id="fl_group"></div>
+						</div>
+
+					</div>
+				</div>
+
+
+				<div id="chat_detail">
+					<div class="head">
+						<div id="msg_number">
+							＜消息<span id="msg_number_val"></span>
+						</div>
+						<div id="f_name"></div>
+						<div id="f_state"></div>
+						<img id="f_detail" title="好友设置" src="/nzq/img/account.png" />
+					</div>
+
+					<div class="chat_box"></div>
+
+					<div class="chat_send">
+						<input type="text" name="" id="msg_input" value="" />
+						<button id="send_button1" onclick="sendMessage()">发送</button>
+						<button id="send_button2" onclick="sendMessageAndCreateSession()">发送</button>
+					</div>
+				</div>
+
+				<!--begin添加好友页面add_friend-->
+				<div id="search_friend">
+					<div class="head">
+						<img class="return" id="search_friend_return"
+							src="/nzq/img/return.png" />
+						<div class="function_title" onclick="changeOffline()">查找用户</div>
+					</div>
+					<div class="search_friend_id">
+						<input class="input_condition" id="search_friend_xf"
+							placeholder="请输入查找的用户ID" /> <img id="search_photo"
+							src="/nzq/img/search.png" />
+					</div>
+					<div class="search_friend_condition">
+						<div class="condition_name">
+							<input class="input_condition" id="search_friend_nickname"
+								placeholder="昵称" style="width: 330px;left: 10px;" />
+						</div>
+						<div id="conditon_sex" sex="n">
+							<div class="limit" id="w">
+								<div class="girl">
+
+									<img src="/nzq/img/girl.png" style="width: 100%;" />
+								</div>
+								&nbsp;女
+							</div>
+							<div class="limit" id="m">
+								<img src="/nzq/img/boy.png" class="boy" />&nbsp;男
+							</div>
+							<div class="limit" style="text-align: center;" id="n">不限</div>
+
+						</div>
+						<div class="condition_grade">
+							<select name="段位" id="search_friend_grade" class="grade_select">
+								<option value="all" selected="selected">段位：全部</option>
+								<option value="青铜3">青铜3</option>
+								<option value="青铜2">青铜2</option>
+								<option value="青铜1">青铜1</option>
+								<option value="白银3">白银3</option>
+								<option value="白银2">白银2</option>
+								<option value="白银1">白银1</option>
+								<option value="黄金3">黄金3</option>
+								<option value="黄金2">黄金2</option>
+								<option value="黄金1">黄金1</option>
+								<option value="铂金3">铂金3</option>
+								<option value="铂金2">铂金2</option>
+								<option value="铂金1">铂金1</option>
+								<option value="钻石3">钻石3</option>
+								<option value="钻石2">钻石2</option>
+								<option value="钻石1">钻石1</option>
+								<option value="最强王者">最强王者</option>
+							</select>
+
+						</div>
+						<div id="condition_button">按条件查找</div>
+					</div>
+					<div id="search_friend_result"></div>
+				</div>
+				<!--end添加好友页面add_friend-->
+
+				<!--begin好友设置-->
+				<div id="chat_friendset">
+					<div class="head">
+						<img class="return" id="chat_friendset_return"
+							src="/nzq/img/return.png" />
+						<div class="function_title">好友设置</div>
+					</div>
+					<div id="friend_info">
+						<div class="friendset_text">详细资料</div>
+						<img class="detail_arrow" src="/nzq/img/right.png" />
+					</div>
+					<div id="friend_note">
+						<div class="friendset_text">备注</div>
+						<div class="note">猪妹</div>
+						<img class="detail_arrow" src="/nzq/img/right.png" />
+					</div>
+					<div id="input_note">
+						<input id="remark_input" type="text" value="猪妹" /> <input
+							id="remark_confirm" type="button" value="确定">
+					</div>
+					<div id="friend_group">
+						<span class="friendset_text">分组</span>
+						<div id="group2">我的宝贝</div>
+						<img class="detail_arrow" src="/nzq/img/right.png" />
+					</div>
+					<div id="delete_friend_button">删除好友</div>
+
+					<div id="selectnewgroup">
+						<div class="head">
+							<img class="return" id="selectnewgroup_return"
+								src="/nzq/img/return.png" />
+							<div class="function_title" onclick="changeOffline()">移至分组
+							</div>
+						</div>
+						<div id="selgroups">
+							<div selectgroupid="1" class="selectgroup"
+								onclick="moveToGroup(1)">
+								<div class="selgroupname">朋友</div>
+							</div>
+							<div selectgroupid="1" class="selectgroup"
+								onclick="moveToGroup(1)">
+								<div class="selgroupname">朋友</div>
+							</div>
+							<div selectgroupid="1" class="selectgroup"
+								onclick="moveToGroup(1)">
+								<div class="selgroupname">朋友</div>
+							</div>
+							<div selectgroupid="1" class="selectgroup"
+								onclick="moveToGroup(1)">
+								<div class="selgroupname">朋友</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+				<!--end好友设置-->
+
+
+
+				<div id="add_friend">
+					<div class="head">
+						<img class="return" id="add_friend_return"
+							src="/nzq/img/return.png" />
+						<div class="function_title">添加好友</div>
+						<img id="add_friend_send" class="right" src="/nzq/img/send.png"
+							title="发送请求" />
+					</div>
+					<div id="add_friend_data"></div>
+					<div id="add_friend_message">
+						<div class="add_friend_tip">填写验证信息</div>
+						<textarea id="add_friend_msg" name="" rows="10" cols="2"></textarea>
+					</div>
+					<div class="remark_group">
+						<div class="add_friend_tip">设置备注和分组</div>
+						<div id="add_friend_remark">
+							<div class="add_friend_key">备注</div>
+							<div class="add_friend_val">
+								<input type="text" id="remark" />
+							</div>
+						</div>
+						<div id="add_friend_group">
+							<div class="add_friend_key">分组</div>
+							<div class="add_friend_val">
+								<select id="group">
+								</select>
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+
+				<div id="application">
+					<div class="head">
+						<img class="return" id="application_return"
+							src="/nzq/img/return.png" />
+						<div class="function_title">新朋友</div>
+					</div>
+					<div class="application_title">我的请求</div>
+					<div id="application_notice">
+						<div id="application_send"></div>
+						<div class="application_title2">来自陌生人的请求</div>
+						<div id="application_receive"></div>
+					</div>
+				</div>
+
+				<div id="acceptApplication">
+					<div id="gray"></div>
+					<div class="hovermenu">
+						<div class="menu_name">设置备注和分组</div>
+						<div id="acceptApplication_remark">
+							<div class="acceptApplication_key">备注</div>
+							<input type="text" id="remark1" maxlength="10" />
+						</div>
+						<div id="acceptApplication_group">
+							<div class="acceptApplication_key">分组</div>
+							<select id="group1"></select>
+						</div>
+						<div id="edit_groupname_menu_button">
+							<div id="accept_quit">取消</div>
+							<div id="accept_confirm">确定</div>
+						</div>
+					</div>
+				</div>
+
+				<!--begin个人资料myinfo------------------------------------------------------------->
+				<div id="log_window"></div>
+				<div id="myinfo">
+					<div id="myinfo_first">
+
+						<img id="myinfo_photo" th:src="${'/nzq/photo/'+xf+'.jpg'}"  />
+						<div id="myinfo_name"></div>
+						<input id="myinfo_name_edit" value="" maxlength="10" />
+
+						<div id="myinfo_xfid">
+							<img class="myinfo_xfid_photo" src="/nzq/img/xfid_photo.png" />
+							<div id="xf_id">[[${xf}]]</div>
+						</div>
+						<img id="myinfo_quit_edit" title="放弃修改" src="/nzq/img/close.png" />
+						<img id="myinfo_return" title="返回"
+							src="/nzq/img/myinfo_return.png" /> <img id="myinfo_edit_sign"
+							src="/nzq/img/edit_sign.png" />
+						<div id="my_phone_err">
+							<img class="myinfo_err_sign" src="/nzq/img/err_sign.png" />
+							<div id="phone_err_content"></div>
+						</div>
+						<div id="my_birthday_err">
+							<img class="myinfo_err_sign" src="/nzq/img/err_sign.png" />
+							<div id="birthday_err_content"></div>
+						</div>
+
+					</div>
+					<div id="myinfo_second">
+						<div class="myinfo_detail">
+							<img class="myinfo_detail_photo" src="/nzq/img/birth.png" />
+
+							<div class="myinfo_detail_label">生日</div>
+							<div class="myinfo_detail_content" id="my_birth"></div>
+							<input class="myinfo_edit" id="edit_my_birth" />
+						</div>
+
+						<div class="myinfo_detail">
+							<img class="myinfo_detail_photo" src="/nzq/img/age.png" />
+
+							<div class="myinfo_detail_label">年龄</div>
+							<div class="myinfo_detail_content" id="my_age"></div>
+						</div>
+
+						<div class="myinfo_detail">
+							<img class="myinfo_detail_photo" src="/nzq/img/sex.png" />
+
+							<div class="myinfo_detail_label">性别</div>
+							<div class="myinfo_detail_content" id="my_sex"></div>
+
+							<select id="select_my_sex">
+								<option value="m">男</option>
+								<option value="w">女</option>
+							</select>
+
+						</div>
+						<div class="myinfo_detail">
+							<img class="myinfo_detail_photo" src="/nzq/img/phone.png" />
+
+							<div class="myinfo_detail_label">手机</div>
+							<div class="myinfo_detail_content" id="my_phone"></div>
+
+							<input class="myinfo_edit" id="edit_my_phone" maxlength="11" />
+
+						</div>
+						<div class="myinfo_detail">
+							<img class="myinfo_detail_photo" src="/nzq/img/grade.png" />
+
+							<div class="myinfo_detail_label">段位</div>
+							<div class="myinfo_detail_content" id="my_grade"></div>
+						</div>
+
+						<div class="myinfo_detail">
+							<img class="myinfo_detail_photo" src="/nzq/img/money.png" />
+
+							<div class="myinfo_detail_label">金币</div>
+							<div class="myinfo_detail_content" id="my_money"></div>
+						</div>
+					</div>
+
+				</div>
+				<!--end个人资料-->
+				<!--begin查看好友资料页--------------------------------------------------------------->
+				<div id="friendinfo">
+					<div class="head">
+						<img class="return" id="friendinfo_return"
+							src="/nzq/img/return.png" />
+						<div class="function_title">查找用户</div>
+					</div>
+					<div id="friendinfo_inner">
+						<div class="friendinfo_detail">
+							<div class="friendinfo_detail_lable">昵称</div>
+							<div class="friendinfo_content" id="friendinfo_name"></div>
+						</div>
+						<div class="friendinfo_detail">
+							<div class="friendinfo_detail_lable">性别</div>
+							<div class="friendinfo_content" id="friendinfo_sex"></div>
+						</div>
+						<div class="friendinfo_detail">
+							<div class="friendinfo_detail_lable">年龄</div>
+							<div class="friendinfo_content" id="friendinfo_age"></div>
+						</div>
+						<div class="friendinfo_detail">
+							<div class="friendinfo_detail_lable">生日</div>
+							<div class="friendinfo_content" id="friendinfo_birth"></div>
+						</div>
+						<div class="friendinfo_detail">
+							<div class="friendinfo_detail_lable">手机</div>
+							<div class="friendinfo_content" id="friendinfo_phone"></div>
+						</div>
+						<div class="friendinfo_detail">
+							<div class="friendinfo_detail_lable">段位</div>
+							<div class="friendinfo_content" id="friendinfo_grade"></div>
+						</div>
+						<div class="friendinfo_detail">
+							<div class="friendinfo_detail_lable">金币</div>
+							<div class="friendinfo_content" id="friendinfo_money"></div>
+						</div>
+					</div>
+				</div>
+				<!--end查看好友资料页--------------------------------------------------------------->
+				<!--begin分组管理-->
+				<div id="manage_group">
+					<div class="head">
+						<div class="function_title" onclick="changeOffline()">分组管理</div>
+						<div id="end_manage_group">完成</div>
+
+					</div>
+					<div id="add_group">
+						<img id="add_group_img" src="/nzq/img/add_group.png" />
+						<div id="add_group_text">添加分组</div>
+					</div>
+					<div id="my_groups"></div>
+
+					<div id="edit_groupname">
+						<div id="edit_groupname_gray"></div>
+						<div id="edit_groupname_menu">
+							<div id="edit_groupname_menu_name">编辑分组</div>
+							<div id="edit_groupname_menu_tip">请输入新的分组名称</div>
+							<input type="text" name="" id="edit_groupname_menu_input"
+								value="" />
+							<div id="edit_groupname_menu_button">
+								<div id="edit_groupname_menu_quit">取消</div>
+								<div id="edit_groupname_menu_confirm">确定</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="del_group">
+						<div id="del_group_gray"></div>
+						<div id="del_group_menu">
+							<div id="del_group_tip">删除该分组后，组内联系人将移至默认分组</div>
+							<div id="del_group_confirm">删除分组</div>
+							<div id="del_group_quit">取消</div>
+						</div>
+					</div>
+
+				</div>
+				<!--end分组管理-->
+				<div id="running">
+					<div id="running_gray"></div>
+					<div id="running_tip">
+						<img id="running_img" src="/nzq/img/running.png" />
+						<div id="running_title"></div>
+					</div>
+				</div>
+				<div id="chatTip">
+					
+				</div>
+
+				<div id="error">
+					<img class="error_img" src="/nzq/img/i.png" />
+					<div class="error_title">网络出问题了</div>
+				</div>
+				<div id="db_error">
+					<img class="error_img" src="/nzq/img/i.png" />
+					<div class="error_title">数据库访问失败</div>
+				</div>
+
+			</div>
+
+			<div id="home_button"></div>
+		</div>
+
+		<div id="test" style="display: none ">
+			<button id="bt1">1</button>
+			<button id="bt2">2</button>
+			<button id="bt3">3</button>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" src="/nzq/js/laydate.dev.js"></script>
+<script type="text/javascript" src="/nzq/js/chat.js"></script>
+<script type="text/javascript" src="/nzq/js/game.js"></script>
+<script type="text/javascript" src="/nzq/js/playgame.js"></script>
+<script type="text/javascript" src="/nzq/js/qipan.js"></script>
+
+</html>
