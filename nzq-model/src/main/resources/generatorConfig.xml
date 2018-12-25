@@ -50,40 +50,40 @@
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
-        <table schema="nzq" tableName="FriendGroup" domainObjectName="FriendGroup"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table schema="nzq" tableName="FriendGroup" domainObjectName="FriendGroup"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
-        <table schema="nzq" tableName="Friend" domainObjectName="Friend"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table schema="nzq" tableName="Friend" domainObjectName="Friend"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
-        <table schema="nzq" tableName="Application" domainObjectName="Application"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table schema="nzq" tableName="Application" domainObjectName="Application"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
-        <table schema="nzq" tableName="ChatInfo" domainObjectName="ChatInfo"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table schema="nzq" tableName="ChatInfo" domainObjectName="ChatInfo"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
-        <table schema="nzq" tableName="ChatGroup" domainObjectName="ChatGroup"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table schema="nzq" tableName="ChatGroup" domainObjectName="ChatGroup"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
 
     </context>
 </generatorConfiguration>

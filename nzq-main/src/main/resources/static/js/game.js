@@ -21,7 +21,7 @@ if ('WebSocket' in window) {
 }
 //连接发生错误的回调方法
 nzqGameWebSocket.onerror = function() {
-	console.log("nzqGameWebSocket错误");
+//	console.log("nzqGameWebSocket错误");
 };
 
 // 连接成功建立的回调方法
@@ -141,7 +141,7 @@ nzqGameWebSocket.onmessage = function(event) {
 
 // 连接关闭的回调方法
 nzqGameWebSocket.onclose = function() {
-	alert("连接关闭！！！");
+//	alert("连接关闭！！！");
 };
 //--------------------------------------------------------------------
 //2

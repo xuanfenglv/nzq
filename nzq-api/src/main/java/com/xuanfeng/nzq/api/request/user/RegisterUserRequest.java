@@ -20,9 +20,9 @@ public class RegisterUserRequest {
     @Length(min = 1, max = 20, message = "param 'nickname' 长度范围为[1,20]")
     @NotBlank(message = "昵称不能为空")
     private String nickname;
-    @Length(min = 1, max = 20, message = "param 'password' 长度范围为[8,20]")
+    @Length(min = 1, max = 20, message = "param 'pwd' 长度范围为[8,20]")
     @NotBlank(message = "昵称不能为空")
-    private String password;
+    private String pwd;
     @Range(min = 0, max = 1, message = "param 'sex' 取值为0、1")
     @NotNull(message = "param 'sex' 不能为空")
     private Byte sex;
@@ -41,12 +41,12 @@ public class RegisterUserRequest {
         this.nickname = nickname;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     @NotNull

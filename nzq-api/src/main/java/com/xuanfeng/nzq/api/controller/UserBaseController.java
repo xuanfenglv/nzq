@@ -2,6 +2,7 @@ package com.xuanfeng.nzq.api.controller;
 
 import com.xuanfeng.nzq.api.request.user.LoginRequest;
 import com.xuanfeng.nzq.api.request.user.RegisterUserRequest;
+import com.xuanfeng.nzq.api.request.user.UpdateSelfInfoRequest;
 import com.xuanfeng.nzq.api.response.user.OtherUserInfo;
 import com.xuanfeng.nzq.api.response.user.SelfUserInfo;
 import com.xuanfeng.nzq.commons.Result;
@@ -22,16 +23,22 @@ public interface UserBaseController {
     @PostMapping("login")
     Result login(@RequestBody LoginRequest request);
 
-    @GetMapping("{xf}")
-    Result<SelfUserInfo> querySelfUserInfo(@PathVariable Long xf);
+    @GetMapping("self")
+    Result<SelfUserInfo> querySelfUserInfo();
 
-    @GetMapping("others/{xf}")
+    @GetMapping("strangers/{xf}")
     Result<OtherUserInfo> searchOtherUser(@PathVariable("xf") Long xf);
 
     // TODO: 2018/11/22 后期做分页
-    @GetMapping("others")
-    Result<List<OtherUserInfo>> searchOtherUsers(@RequestParam(value = "nickname",required = false) String nickname,@RequestParam(value = "sex",required = false) Byte sex,@RequestParam(value = "grade",required = false) Byte grade,@RequestParam(value = "lastXf",required = false) Long lastXf);
+    @GetMapping("strangers")
+    Result<List<OtherUserInfo>> searchOtherUsers(
+            @RequestParam(value = "nickname",required = false) String nickname,
+            @RequestParam(value = "sex",required = false) Byte sex,
+            @RequestParam(value = "grade",required = false) Byte grade,
+            @RequestParam(value = "pageSize",required = true) Integer pageSize,
+            @RequestParam(value = "pageNum",required = true) Integer pageNum
+    );
 
-    @PutMapping("{xf}")
-    Result updateSelfUserInfo(@RequestBody SelfUserInfo request);
+    @PutMapping("self")
+    Result updateSelfUserInfo(@RequestBody UpdateSelfInfoRequest request);
 }

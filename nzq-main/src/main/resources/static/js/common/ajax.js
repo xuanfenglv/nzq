@@ -3,7 +3,7 @@ $.ajaxSetup({
 		'withCredentials': true
 	}
 });
-let httpUtil = {
+var httpUtil = {
 	get: function(url, data, callback) {
 		ajax(url, data, "get", callback);
 	},
@@ -18,38 +18,10 @@ let httpUtil = {
 	}
 }
 
-//function get(url, data, callback) {
-//	ajax(url, data, "get", callback);
-//}
-//
-//function post(url, data, callback) {
-//	ajax(url, data, "post", callback);
-//}
-//
-//function put(url, data, callback) {
-//	ajax(url, data, "put", callback);
-//}
-//
-//function delete(url, data, callback) {
-//	ajax(url, data, "delete", callback);
-//}
-
-function getService(data, callback) {
-	get(server.service, {
-		msg: JSON.stringify(data)
-	}, callback);
-}
-
-function postService(data, callback) {
-	post(server.service, {
-		msg: JSON.stringify(data)
-	}, callback);
-}
-
 function ajax(url, data, type, callback) {
-	layer.load(1, {
-		shade: true
-	});
+//	layer.load(1, {
+//		shade: true
+//	});
 
 	console.log("发送请求：" + data);
 	$.ajax({
@@ -60,78 +32,13 @@ function ajax(url, data, type, callback) {
 		type: type,
 		url: url,
 		data: data,
-		timeout: 100000,
+		timeout: 1000000,
 		dataType: "json",
 		success: function(data) {
 			console.log("收到响应：" + JSON.stringify(data));
-			let ret = data.ret;
-			let tip = data.errmsg;
-			switch(ret) {
-				case 1:
-					if(callback) {
-						callback(data);
-					}
-					break;
-				case 2:
-					//未登录
-					layer.msg(tip, {
-						icon: 0,
-						time: 1000
-					}, function() {
-						location.href = loginPage;
-					});
-					break;
-				case 3:
-					// 参数不正确
-					layer.msg(tip, {
-						icon: 2,
-						time: 1000
-					});
-					break;
-				case 4:
-					// 权限不足
-					layer.msg(tip, {
-						icon: 5,
-						time: 1000
-					});
-					break;
-				case 5:
-					// 需要备注
-					layer.msg(tip, {
-						icon: 3,
-						time: 1000
-					});
-					break;
-				case 6:
-					// 已被封号
-					layer.msg('已被封号', {
-						icon: 4,
-						time: 1000
-					});
-					break;
-				case 7:
-					// 登录失败
-					layer.msg(tip, {
-						icon: 2,
-						time: 1000
-					});
-					break;
-				case 8:
-					// 服务器故障
-					layer.msg(tip, {
-						icon: 2,
-						time: 1000
-					});
-					break;
-				case 9:
-					// 服务器故障
-					layer.msg(tip, {
-						icon: 2,
-						time: 1000
-					});
-					break;
-				default:
-					break;
+			let success = CommonUtils.checkRet(msg);
+			if(success) {
+				callback(msg);
 			}
 		},
 		complete: function(XMLHttpRequest, status) { //求完成后最终执行参数
@@ -150,16 +57,4 @@ function ajax(url, data, type, callback) {
 			}
 		}
 	});
-}
-
-function getServiceWithCheck(msg, callback) {
-	let check = msg.checkProperty(msg);
-	if(!check) return;
-	getService(msg, callback);
-}
-
-function postServiceWithCheck(msg, callback) {
-	let check = msg.checkProperty(msg);
-	if(!check) return;
-	postService(msg, callback);
 }

@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 public class LoginRequest {
     @NotNull(message = "param 'xf' 不能为空")
     private Long xf;
-    @NotNull(message = "param 'password' 不能为空")
-    private String password;
+    @NotNull(message = "param 'pwd' 不能为空")
+    private String pwd;
 
     @NotNull
     public Long getXf() {
@@ -24,11 +24,11 @@ public class LoginRequest {
     }
 
     @NotNull
-    public String getPassword() {
-        return password;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setPassword(@NotNull String password) {
-        this.password = password;
+    public void setPwd(@NotNull String pwd) {
+        this.pwd = pwd;
     }
 }

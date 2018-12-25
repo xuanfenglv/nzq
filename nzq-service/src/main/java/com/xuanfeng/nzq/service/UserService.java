@@ -1,6 +1,9 @@
 package com.xuanfeng.nzq.service;
 
 import com.xuanfeng.nzq.api.request.user.RegisterUserRequest;
+import com.xuanfeng.nzq.api.request.user.UpdateSelfInfoRequest;
+import com.xuanfeng.nzq.api.response.user.OtherUserInfo;
+import com.xuanfeng.nzq.api.response.user.SelfUserInfo;
 import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
 import com.xuanfeng.nzq.domain.dao.UserDao;
 import com.xuanfeng.nzq.domain.mapper.UserMapper;
@@ -10,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @description:
@@ -48,4 +53,24 @@ public class UserService {
         dao.changeStatus(xf, statusEnum.getStatus());
     }
 
+    public SelfUserInfo querySelfUserInfo(Long xf) {
+        return dao.querySelfUserInfo(xf);
+    }
+
+    public OtherUserInfo searchOtherUser(Long xf) {
+        return dao.searchOtherUser(xf);
+    }
+
+    public List<OtherUserInfo> searchOtherUsers(String nickname, Byte sex, Byte grade,Integer pageSize, Integer pageNum) {
+        int offSet = pageSize * (pageNum - 1);
+
+        return dao.searchOtherUsers(nickname,sex,grade,offSet,pageSize);
+    }
+
+    public void updateSelfUserInfo(UpdateSelfInfoRequest request, Long xf) {
+        User user = new User();
+        user.setId(xf);
+        BeanUtils.copyProperties(request, user);
+        mapper.updateByPrimaryKeySelective(user);
+    }
 }

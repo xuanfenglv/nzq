@@ -1,5 +1,10 @@
 package com.xuanfeng.nzq.domain.dao;
 
+import com.xuanfeng.nzq.domain.entity.GroupInfo;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+
 /**
  * @description:
  * @author: lvxianqing
@@ -7,4 +12,6 @@ package com.xuanfeng.nzq.domain.dao;
  */
 
 public interface FriendGroupDao {
+    @Select("select id,name from FriendGroup where xf=#{xf}")
+    List<GroupInfo> selectGroupInfos(Long xf);
 }

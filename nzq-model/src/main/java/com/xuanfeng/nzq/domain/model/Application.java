@@ -3,21 +3,21 @@ package com.xuanfeng.nzq.domain.model;
 public class Application {
     private Long id;
 
-    private Long sendxf;
+    private Long sendXf;
 
-    private Long receivexf;
+    private Long receiveXf;
 
     private String text;
 
-    private Long groupid;
+    private Long friendGroupId;
 
     private String remark;
 
     private Byte status;
 
-    private Boolean sendvisible;
+    private Boolean sendVisible;
 
-    private Boolean receivevisible;
+    private Boolean receiveVisible;
 
     public Long getId() {
         return id;
@@ -27,20 +27,20 @@ public class Application {
         this.id = id;
     }
 
-    public Long getSendxf() {
-        return sendxf;
+    public Long getSendXf() {
+        return sendXf;
     }
 
-    public void setSendxf(Long sendxf) {
-        this.sendxf = sendxf;
+    public void setSendXf(Long sendXf) {
+        this.sendXf = sendXf;
     }
 
-    public Long getReceivexf() {
-        return receivexf;
+    public Long getReceiveXf() {
+        return receiveXf;
     }
 
-    public void setReceivexf(Long receivexf) {
-        this.receivexf = receivexf;
+    public void setReceiveXf(Long receiveXf) {
+        this.receiveXf = receiveXf;
     }
 
     public String getText() {
@@ -51,12 +51,12 @@ public class Application {
         this.text = text == null ? null : text.trim();
     }
 
-    public Long getGroupid() {
-        return groupid;
+    public Long getFriendGroupId() {
+        return friendGroupId;
     }
 
-    public void setGroupid(Long groupid) {
-        this.groupid = groupid;
+    public void setFriendGroupId(Long friendGroupId) {
+        this.friendGroupId = friendGroupId;
     }
 
     public String getRemark() {
@@ -75,19 +75,19 @@ public class Application {
         this.status = status;
     }
 
-    public Boolean getSendvisible() {
-        return sendvisible;
+    public Boolean getSendVisible() {
+        return sendVisible;
     }
 
-    public void setSendvisible(Boolean sendvisible) {
-        this.sendvisible = sendvisible;
+    public void setSendVisible(Boolean sendVisible) {
+        this.sendVisible = sendVisible;
     }
 
-    public Boolean getReceivevisible() {
-        return receivevisible;
+    public Boolean getReceiveVisible() {
+        return receiveVisible;
     }
 
-    public void setReceivevisible(Boolean receivevisible) {
-        this.receivevisible = receivevisible;
+    public void setReceiveVisible(Boolean receiveVisible) {
+        this.receiveVisible = receiveVisible;
     }
 }

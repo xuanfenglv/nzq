@@ -3,17 +3,17 @@
 <mapper namespace="com.xuanfeng.nzq.domain.mapper.ApplicationMapper">
   <resultMap id="BaseResultMap" type="com.xuanfeng.nzq.domain.model.Application">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="sendXf" jdbcType="BIGINT" property="sendxf" />
-    <result column="receiveXf" jdbcType="BIGINT" property="receivexf" />
+    <result column="send_xf" jdbcType="BIGINT" property="xf" />
+    <result column="receive_xf" jdbcType="BIGINT" property="xf" />
     <result column="text" jdbcType="VARCHAR" property="text" />
-    <result column="groupId" jdbcType="BIGINT" property="groupid" />
+    <result column="friend_group_id" jdbcType="BIGINT" property="friendGroupId" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="sendVisible" jdbcType="BIT" property="sendvisible" />
-    <result column="receiveVisible" jdbcType="BIT" property="receivevisible" />
+    <result column="send_visible" jdbcType="BIT" property="sendVisible" />
+    <result column="receive_visible" jdbcType="BIT" property="receiveVisible" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, sendXf, receiveXf, text, groupId, remark, status, sendVisible, receiveVisible
+    id, send_xf, receive_xf, text, friend_group_id, remark, status, send_visible, receive_visible
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -29,12 +29,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into Application (sendXf, receiveXf, text, 
-      groupId, remark, status, 
-      sendVisible, receiveVisible)
-    values (#{sendxf,jdbcType=BIGINT}, #{receivexf,jdbcType=BIGINT}, #{text,jdbcType=VARCHAR}, 
-      #{groupid,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{sendvisible,jdbcType=BIT}, #{receivevisible,jdbcType=BIT})
+    insert into Application (send_xf, receive_xf, text, 
+      friend_group_id, remark, status, 
+      send_visible, receive_visible)
+    values (#{xf,jdbcType=BIGINT}, #{xf,jdbcType=BIGINT}, #{text,jdbcType=VARCHAR},
+      #{friendGroupId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{sendVisible,jdbcType=BIT}, #{receiveVisible,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.xuanfeng.nzq.domain.model.Application">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -42,17 +42,17 @@
     </selectKey>
     insert into Application
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="sendxf != null">
-        sendXf,
+      <if test="xf != null">
+        send_xf,
       </if>
-      <if test="receivexf != null">
-        receiveXf,
+      <if test="xf != null">
+        receive_xf,
       </if>
       <if test="text != null">
         text,
       </if>
-      <if test="groupid != null">
-        groupId,
+      <if test="friendGroupId != null">
+        friend_group_id,
       </if>
       <if test="remark != null">
         remark,
@@ -60,25 +60,25 @@
       <if test="status != null">
         status,
       </if>
-      <if test="sendvisible != null">
-        sendVisible,
+      <if test="sendVisible != null">
+        send_visible,
       </if>
-      <if test="receivevisible != null">
-        receiveVisible,
+      <if test="receiveVisible != null">
+        receive_visible,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="sendxf != null">
-        #{sendxf,jdbcType=BIGINT},
+      <if test="xf != null">
+        #{xf,jdbcType=BIGINT},
       </if>
-      <if test="receivexf != null">
-        #{receivexf,jdbcType=BIGINT},
+      <if test="xf != null">
+        #{xf,jdbcType=BIGINT},
       </if>
       <if test="text != null">
         #{text,jdbcType=VARCHAR},
       </if>
-      <if test="groupid != null">
-        #{groupid,jdbcType=BIGINT},
+      <if test="friendGroupId != null">
+        #{friendGroupId,jdbcType=BIGINT},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -86,28 +86,28 @@
       <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
-      <if test="sendvisible != null">
-        #{sendvisible,jdbcType=BIT},
+      <if test="sendVisible != null">
+        #{sendVisible,jdbcType=BIT},
       </if>
-      <if test="receivevisible != null">
-        #{receivevisible,jdbcType=BIT},
+      <if test="receiveVisible != null">
+        #{receiveVisible,jdbcType=BIT},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xuanfeng.nzq.domain.model.Application">
     update Application
     <set>
-      <if test="sendxf != null">
-        sendXf = #{sendxf,jdbcType=BIGINT},
+      <if test="xf != null">
+        send_xf = #{xf,jdbcType=BIGINT},
       </if>
-      <if test="receivexf != null">
-        receiveXf = #{receivexf,jdbcType=BIGINT},
+      <if test="xf != null">
+        receive_xf = #{xf,jdbcType=BIGINT},
       </if>
       <if test="text != null">
         text = #{text,jdbcType=VARCHAR},
       </if>
-      <if test="groupid != null">
-        groupId = #{groupid,jdbcType=BIGINT},
+      <if test="friendGroupId != null">
+        friend_group_id = #{friendGroupId,jdbcType=BIGINT},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
@@ -115,25 +115,25 @@
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="sendvisible != null">
-        sendVisible = #{sendvisible,jdbcType=BIT},
+      <if test="sendVisible != null">
+        send_visible = #{sendVisible,jdbcType=BIT},
       </if>
-      <if test="receivevisible != null">
-        receiveVisible = #{receivevisible,jdbcType=BIT},
+      <if test="receiveVisible != null">
+        receive_visible = #{receiveVisible,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xuanfeng.nzq.domain.model.Application">
     update Application
-    set sendXf = #{sendxf,jdbcType=BIGINT},
-      receiveXf = #{receivexf,jdbcType=BIGINT},
+    set send_xf = #{xf,jdbcType=BIGINT},
+      receive_xf = #{xf,jdbcType=BIGINT},
       text = #{text,jdbcType=VARCHAR},
-      groupId = #{groupid,jdbcType=BIGINT},
+      friend_group_id = #{friendGroupId,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
-      sendVisible = #{sendvisible,jdbcType=BIT},
-      receiveVisible = #{receivevisible,jdbcType=BIT}
+      send_visible = #{sendVisible,jdbcType=BIT},
+      receive_visible = #{receiveVisible,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

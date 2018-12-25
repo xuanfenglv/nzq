@@ -13,7 +13,7 @@ public class User {
 
     private Date birthday;
 
-    private Long tel;
+    private String tel;
 
     private Byte grade;
 
@@ -65,12 +65,12 @@ public class User {
         this.birthday = birthday;
     }
 
-    public Long getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(Long tel) {
-        this.tel = tel;
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
     }
 
     public Byte getGrade() {

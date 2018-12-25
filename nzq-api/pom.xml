@@ -15,6 +15,9 @@
     <version>1.0-SNAPSHOT</version>
     <name>nzq-api</name>
 
+    <properties>
+        <lombok.version>1.16.20</lombok.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.xuanfeng.nzq</groupId>
@@ -41,6 +44,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.5.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

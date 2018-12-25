@@ -2,28 +2,32 @@ package com.xuanfeng.nzq.websocket.base.process.base;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
-import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsgImpl;
-import com.xuanfeng.nzq.websocket.constant.ResponseEnum;
-import com.xuanfeng.nzq.websocket.result.CheckParamResult;
+import com.xuanfeng.nzq.commons.RetEnum;
+import com.xuanfeng.nzq.commons.msg.CheckParamResult;
+import com.xuanfeng.nzq.commons.msg.request.RequestMsg;
+import com.xuanfeng.nzq.commons.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.websocket.Session;
 import java.io.IOException;
 
 public abstract class IMsgHandler {
-	public ResponseMsg process(JSONObject parms,long xf, Session session) throws IOException {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	public ResponseMsg process(JSONObject parms,long xf, Session session,int msgId) throws IOException {
+
 		RequestMsg message = null;
 		ResponseMsg result = null;
-		// B2SMessage 为空时表示只有消息号的消息，不需要反序列化和校验参数
+		// RequestMsg 为空时表示只有消息号的消息，不需要反序列化和校验参数
 		if (getRequestMessageType() != null) {
 			boolean hasException = false;
 			try {
 				message = parms.toJavaObject(getRequestMessageType());
 			} catch (JSONException e) {
 //				e.printStackTrace();
-				result = new ResponseMsgImpl(ResponseEnum.参数错误,"请求消息不是正确的json");
+				result = new ResponseMsg(RetEnum.PARAM_ERROR,"请求消息不是正确的json");
 				hasException = true;
 			}
 			if (!hasException) {
@@ -31,16 +35,19 @@ public abstract class IMsgHandler {
 				CheckParamResult checkParmResult = message.checkParams();
 				if (!checkParmResult.isValid()) {
 
-					result = new ResponseMsgImpl(ResponseEnum.参数错误,checkParmResult.getErrmsg());
+					result = new ResponseMsg(RetEnum.PARAM_ERROR,checkParmResult.getErrmsg());
 				}
 			}
 
-		} else {
-			result = new ResponseMsgImpl(ResponseEnum.服务器故障,"服务器未声明请求消息类型");
+		}
+		// 发生故障了就直接返回，不执行handle方法
+		if (result == null) {
+			logger.info("[chat][协议{}][message:{}]",message.getMsgId(),message);
+			result = handle(message,xf,session);
 		}
 
-		result = result==null?handle(message,xf,session):result;
-		result.setMsgId(message.getMsgId());
+		result.setMsgId(msgId);
+		// 响应消息
 		SendMsgUtil.sendMessage(session,result);
 		return result;
 	}

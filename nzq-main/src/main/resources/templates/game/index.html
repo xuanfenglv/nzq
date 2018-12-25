@@ -229,7 +229,7 @@
 
 					<div id="yaoqing_button">
 						<button id="yaoqing_refuse">拒绝</button>
-						<button id="yaoqing_confirm">接受
+						<button id="yaoqing_confirm">接受</button>
 					</div>
 					<div id="yaoqing_refuse_a_while">
 						<input type="checkbox" name="yaoqing_refuse3" id="yaoqing_refuse3"
@@ -993,16 +993,16 @@
 									</div>
 								</div>
 								<div id="inner_chat_fastmsg">
-									<div voiceid="1" class="voice">&nbsp快点吧，我等的花都谢了！</div>
-									<div voiceid="2" class="voice">&nbsp别着急，让我想想。</div>
-									<div voiceid="3" class="voice">&nbsp你这么厉害，你咋不上天呢？</div>
-									<div voiceid="4" class="voice">&nbsp没办法，我就是这么厉害！</div>
-									<div voiceid="5" class="voice">&nbsp小心，我要赢了！</div>
-									<div voiceid="6" class="voice">&nbsp我怎么看不出来你要赢了</div>
-									<div voiceid="7" class="voice">&nbsp一不小心我就赢了！</div>
-									<div voiceid="8" class="voice">&nbsp难道这就是失败的滋味？</div>
-									<div voiceid="9" class="voice">&nbsp你确定下在这里吗？</div>
-									<div voiceid="10" class="voice">&nbsp没错，我就下在这。</div>
+									<div voiceid="1" class="voice">&nbsp;快点吧，我等的花都谢了！</div>
+									<div voiceid="2" class="voice">&nbsp;别着急，让我想想。</div>
+									<div voiceid="3" class="voice">&nbsp;你这么厉害，你咋不上天呢？</div>
+									<div voiceid="4" class="voice">&nbsp;没办法，我就是这么厉害！</div>
+									<div voiceid="5" class="voice">&nbsp;小心，我要赢了！</div>
+									<div voiceid="6" class="voice">&nbsp;我怎么看不出来你要赢了</div>
+									<div voiceid="7" class="voice">&nbsp;一不小心我就赢了！</div>
+									<div voiceid="8" class="voice">&nbsp;难道这就是失败的滋味？</div>
+									<div voiceid="9" class="voice">&nbsp;你确定下在这里吗？</div>
+									<div voiceid="10" class="voice">&nbsp;没错，我就下在这。</div>
 								</div>
 							</div>
 						</div>
@@ -1018,8 +1018,8 @@
 
 				<div id="list">
 					<div class="head">
-						<img id="photo" alt="头像" th:src="${'/nzq/photo/'+xf+'.jpg'}" >
-						<div id="id_container">[[${xf}]]</div>
+						<img id="photo" alt="头像" th:src="${'/nzq/photo/'+xf+'.jpg'}" />
+						<div id="id_container" th:text="${xf}">10000</div>
 						<div id="choose">
 							<div id="msg">消息</div>
 							<div id="friend">联系人</div>
@@ -1450,6 +1450,9 @@
 
 </body>
 <script type="text/javascript" src="/nzq/js/laydate.dev.js"></script>
+<script type="text/javascript" src="/nzq/js/common/websocket.js"></script>
+<script type="text/javascript" src="/nzq/js/handler.js"></script>
+
 <script type="text/javascript" src="/nzq/js/chat.js"></script>
 <script type="text/javascript" src="/nzq/js/game.js"></script>
 <script type="text/javascript" src="/nzq/js/playgame.js"></script>

@@ -7,15 +7,8 @@ import java.util.Map;
 
 public class HandlerManager {
     // 消息列表
-    private Map<Integer, IMsgHandler> handlerMapping =new HashMap<>();
+    private Map<Integer, IMsgHandler> handlerMapping =new HashMap<>(64);
 
-    public Map<Integer, IMsgHandler> getHandlerMapping() {
-        return handlerMapping;
-    }
-
-    public void setHandlerMapping(Map<Integer, IMsgHandler> handlerMapping) {
-        this.handlerMapping = handlerMapping;
-    }
 
     public void putAHandler(int msgId, IMsgHandler handler) {
         handlerMapping.put(msgId,handler);

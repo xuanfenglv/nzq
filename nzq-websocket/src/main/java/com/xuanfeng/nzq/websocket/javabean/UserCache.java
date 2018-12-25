@@ -11,6 +11,9 @@ import java.util.Set;
 public class UserCache {
     private long xf;
     private Set<Long> friendXf;
+    private Long roomId;
+    // 禁赛截止时间
+    private Long suspendDeadline;
 
     public long getXf() {
         return xf;
@@ -28,4 +31,19 @@ public class UserCache {
         this.friendXf = friendXf;
     }
 
+    public Long getSuspendDeadline() {
+        return suspendDeadline;
+    }
+
+    public void setSuspendDeadline(Long suspendDeadline) {
+        this.suspendDeadline = suspendDeadline;
+    }
+
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
+    }
 }

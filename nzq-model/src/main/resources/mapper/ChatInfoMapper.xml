@@ -3,13 +3,13 @@
 <mapper namespace="com.xuanfeng.nzq.domain.mapper.ChatInfoMapper">
   <resultMap id="BaseResultMap" type="com.xuanfeng.nzq.domain.model.ChatInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="sendXf" jdbcType="BIGINT" property="sendxf" />
-    <result column="receiveXf" jdbcType="BIGINT" property="receivexf" />
+    <result column="xf" jdbcType="BIGINT" property="sendxf" />
+    <result column="xf" jdbcType="BIGINT" property="receivexf" />
     <result column="text" jdbcType="VARCHAR" property="text" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, sendXf, receiveXf, text, ctime
+    id, xf, xf, text, ctime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -25,7 +25,7 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ChatInfo (sendXf, receiveXf, text, 
+    insert into ChatInfo (xf, xf, text,
       ctime)
     values (#{sendxf,jdbcType=BIGINT}, #{receivexf,jdbcType=BIGINT}, #{text,jdbcType=VARCHAR}, 
       #{ctime,jdbcType=TIMESTAMP})
@@ -37,10 +37,10 @@
     insert into ChatInfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sendxf != null">
-        sendXf,
+        xf,
       </if>
       <if test="receivexf != null">
-        receiveXf,
+        xf,
       </if>
       <if test="text != null">
         text,
@@ -68,10 +68,10 @@
     update ChatInfo
     <set>
       <if test="sendxf != null">
-        sendXf = #{sendxf,jdbcType=BIGINT},
+        xf = #{sendxf,jdbcType=BIGINT},
       </if>
       <if test="receivexf != null">
-        receiveXf = #{receivexf,jdbcType=BIGINT},
+        xf = #{receivexf,jdbcType=BIGINT},
       </if>
       <if test="text != null">
         text = #{text,jdbcType=VARCHAR},
@@ -84,8 +84,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xuanfeng.nzq.domain.model.ChatInfo">
     update ChatInfo
-    set sendXf = #{sendxf,jdbcType=BIGINT},
-      receiveXf = #{receivexf,jdbcType=BIGINT},
+    set xf = #{sendxf,jdbcType=BIGINT},
+      xf = #{receivexf,jdbcType=BIGINT},
       text = #{text,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
