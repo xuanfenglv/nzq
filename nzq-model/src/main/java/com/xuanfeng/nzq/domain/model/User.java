@@ -19,7 +19,9 @@ public class User {
 
     private Long money;
 
-    private Boolean status;
+    private Byte imStatus;
+
+    private Byte nzqStatus;
 
     private Date ctime;
 
@@ -89,12 +91,20 @@ public class User {
         this.money = money;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Byte getImStatus() {
+        return imStatus;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setImStatus(Byte imStatus) {
+        this.imStatus = imStatus;
+    }
+
+    public Byte getNzqStatus() {
+        return nzqStatus;
+    }
+
+    public void setNzqStatus(Byte nzqStatus) {
+        this.nzqStatus = nzqStatus;
     }
 
     public Date getCtime() {

@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.xuanfeng.nzq.domain.model.FriendGroup">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="xf" jdbcType="BIGINT" property="xf" />
+    <result column="receiveXf" jdbcType="BIGINT" property="receiveXf" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
     <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, xf, ctime, mtime
+    id, name, receiveXf, ctime, mtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -25,9 +25,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into FriendGroup (name, xf, ctime, 
+    insert into FriendGroup (name, receiveXf, ctime,
       mtime)
-    values (#{name,jdbcType=VARCHAR}, #{xf,jdbcType=BIGINT}, #{ctime,jdbcType=TIMESTAMP}, 
+    values (#{name,jdbcType=VARCHAR}, #{receiveXf,jdbcType=BIGINT}, #{ctime,jdbcType=TIMESTAMP},
       #{mtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xuanfeng.nzq.domain.model.FriendGroup">
@@ -39,8 +39,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="xf != null">
-        xf,
+      <if test="receiveXf != null">
+        receiveXf,
       </if>
       <if test="ctime != null">
         ctime,
@@ -53,8 +53,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="xf != null">
-        #{xf,jdbcType=BIGINT},
+      <if test="receiveXf != null">
+        #{receiveXf,jdbcType=BIGINT},
       </if>
       <if test="ctime != null">
         #{ctime,jdbcType=TIMESTAMP},
@@ -70,8 +70,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="xf != null">
-        xf = #{xf,jdbcType=BIGINT},
+      <if test="receiveXf != null">
+        receiveXf = #{receiveXf,jdbcType=BIGINT},
       </if>
       <if test="ctime != null">
         ctime = #{ctime,jdbcType=TIMESTAMP},
@@ -85,7 +85,7 @@
   <update id="updateByPrimaryKey" parameterType="com.xuanfeng.nzq.domain.model.FriendGroup">
     update FriendGroup
     set name = #{name,jdbcType=VARCHAR},
-      xf = #{xf,jdbcType=BIGINT},
+      receiveXf = #{receiveXf,jdbcType=BIGINT},
       ctime = #{ctime,jdbcType=TIMESTAMP},
       mtime = #{mtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

@@ -1,14 +1,12 @@
 package com.xuanfeng.nzq.websocket.main.im.msg.response;
 
-import com.xuanfeng.nzq.commons.msg.response.ResponseMsg;
-
 /**
  * @description: 发送好友申请
  * @author: lvxianqing
  * @create: 2018/10/03 10:47
  */
 
-public class SendFriendApplicationResp extends ResponseMsg {
+public class SendFriendApplicationResp {
     private Long applicationId;
     private Long xf;
     private String nickname;

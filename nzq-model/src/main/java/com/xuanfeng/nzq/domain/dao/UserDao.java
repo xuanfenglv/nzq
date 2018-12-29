@@ -40,8 +40,11 @@ public interface UserDao {
             "</script>")
     List<OtherUserInfo> searchOtherUsers(@Param("nickname") String nickname, @Param("sex") Byte sex, @Param("grade") Byte grade, @Param("offSet") Integer offSet,@Param("pageNum") Integer pageNum);
 
-    @Update("update `User` set status = #{status} where id = #{xf}")
-    int changeStatus(@Param("xf") Long xf, @Param("status") Byte status);
+    @Update("update `User` set im_status = #{status} where id = #{xf}")
+    int changeImStatus(@Param("xf") Long xf, @Param("status") Byte status);
+
+    @Update("update `User` set nzq_status = #{status} where id = #{xf}")
+    int changeNzqStatus(@Param("xf") Long xf, @Param("status") Byte status);
 
     @Select("select id from `User` where id = #{xf} and pwd = #{pwd}")
     Long selectIdByIdAndPwd(@Param("xf") Long xf, @Param("pwd") String pwd);

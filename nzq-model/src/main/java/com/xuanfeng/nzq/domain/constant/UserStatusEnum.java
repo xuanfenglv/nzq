@@ -2,11 +2,7 @@ package com.xuanfeng.nzq.domain.constant;
 
 public enum UserStatusEnum {
     离线((byte)0),
-    闲逛中((byte)1),
-    房间中((byte)2),
-    匹配中((byte)3),
-    战斗中((byte)4),
-    观战中((byte)5)
+    在线((byte)1)
     ;
     private Byte status;
 

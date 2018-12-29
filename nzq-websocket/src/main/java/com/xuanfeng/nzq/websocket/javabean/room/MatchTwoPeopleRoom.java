@@ -1,11 +1,14 @@
 package com.xuanfeng.nzq.websocket.javabean.room;
 
-import com.xuanfeng.nzq.commons.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
+import com.xuanfeng.nzq.websocket.component.NzqGameStatusHandler;
+import com.xuanfeng.nzq.websocket.constant.RoomType;
 import com.xuanfeng.nzq.websocket.javabean.UserCache;
 import com.xuanfeng.nzq.websocket.javabean.room.base.BaseTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.main.game.component.IdGenerator;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.MatchNotice;
-import com.xuanfeng.nzq.websocket.util.GameSessions;
+import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.util.NzqGameSessions;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 import com.xuanfeng.nzq.websocket.util.UserManager;
 
@@ -29,11 +32,11 @@ public class MatchTwoPeopleRoom extends BaseTwoPeopleRoom {
     // 房间销毁时间（房间晚5s销毁，适应网络延迟）
     private long destroyTime;
     public MatchTwoPeopleRoom(Long one, Long another) {
-        super.id = IdGenerator.getMatchRommId();
+        super.id = IdGenerator.getId();
         super.black = one;
         super.white=another;
-        super.blackSession = GameSessions.get(one);
-        super.whiteSession = GameSessions.get(another);
+        super.blackSession = NzqGameSessions.get(one);
+        super.whiteSession = NzqGameSessions.get(another);
         UserCache black = UserManager.getUserCache(one);
         black.setRoomId(id);
         UserCache white = UserManager.getUserCache(another);
@@ -41,6 +44,10 @@ public class MatchTwoPeopleRoom extends BaseTwoPeopleRoom {
 
     }
 
+    @Override
+    public RoomType getRoomType() {
+        return RoomType.二人匹配房间;
+    }
     /**
      * 房间开始工作
      */
@@ -68,6 +75,10 @@ public class MatchTwoPeopleRoom extends BaseTwoPeopleRoom {
             // TODO: 2018/12/21 开始游戏通知
             SendMsgUtil.sendMessage(blackSession, new NoticeMsg(21));
             SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(21));
+            // 修改状态
+            NzqGameStatusHandler.changeStatus(black, NzqStatusEnum.战斗中);
+            NzqGameStatusHandler.changeStatus(white, NzqStatusEnum.战斗中);
+
         }
     }
 

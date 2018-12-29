@@ -4,6 +4,7 @@ import com.xuanfeng.nzq.api.request.user.RegisterUserRequest;
 import com.xuanfeng.nzq.api.request.user.UpdateSelfInfoRequest;
 import com.xuanfeng.nzq.api.response.user.OtherUserInfo;
 import com.xuanfeng.nzq.api.response.user.SelfUserInfo;
+import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
 import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
 import com.xuanfeng.nzq.domain.dao.UserDao;
 import com.xuanfeng.nzq.domain.mapper.UserMapper;
@@ -49,8 +50,12 @@ public class UserService {
 
     }
 
-    public void changeStatus(Long xf, UserStatusEnum statusEnum) {
-        dao.changeStatus(xf, statusEnum.getStatus());
+    public void changeImStatus(Long xf, UserStatusEnum statusEnum) {
+        dao.changeImStatus(xf, statusEnum.getStatus());
+    }
+
+    public void changeNzqStatus(Long xf, NzqStatusEnum statusEnum) {
+        dao.changeNzqStatus(xf, statusEnum.getStatus());
     }
 
     public SelfUserInfo querySelfUserInfo(Long xf) {

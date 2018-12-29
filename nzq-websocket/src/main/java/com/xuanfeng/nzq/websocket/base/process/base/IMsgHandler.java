@@ -3,9 +3,9 @@ package com.xuanfeng.nzq.websocket.base.process.base;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.xuanfeng.nzq.commons.RetEnum;
-import com.xuanfeng.nzq.commons.msg.CheckParamResult;
-import com.xuanfeng.nzq.commons.msg.request.RequestMsg;
-import com.xuanfeng.nzq.commons.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.msg.CheckParamResult;
+import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public abstract class IMsgHandler {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public ResponseMsg process(JSONObject parms,long xf, Session session,int msgId) throws IOException {
+	public void process(JSONObject parms,long xf, Session session,int msgId) throws IOException {
 
 		RequestMsg message = null;
 		ResponseMsg result = null;
@@ -46,10 +46,11 @@ public abstract class IMsgHandler {
 			result = handle(message,xf,session);
 		}
 
-		result.setMsgId(msgId);
-		// 响应消息
-		SendMsgUtil.sendMessage(session,result);
-		return result;
+		if (result != null) {
+			result.setMsgId(msgId);
+			// 响应消息
+			SendMsgUtil.sendMessage(session,result);
+		}
 	}
 
 	// 需要具体业务实现的

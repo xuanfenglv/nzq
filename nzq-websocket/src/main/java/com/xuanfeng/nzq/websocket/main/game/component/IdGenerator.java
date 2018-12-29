@@ -7,10 +7,10 @@ package com.xuanfeng.nzq.websocket.main.game.component;
  */
 
 public class IdGenerator {
-    private static volatile long matchRommId = 10001l;
+    private static volatile long id = 10001l;
 
-    public static long getMatchRommId() {
-        return matchRommId++;
+    public static long getId() {
+        return id++;
     }
 
 }

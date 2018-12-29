@@ -1,6 +1,6 @@
 package com.xuanfeng.nzq.websocket.util.base;
 
-import com.xuanfeng.nzq.commons.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 
 import javax.websocket.Session;

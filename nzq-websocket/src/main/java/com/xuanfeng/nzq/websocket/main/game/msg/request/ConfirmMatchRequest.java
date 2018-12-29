@@ -1,7 +1,7 @@
 package com.xuanfeng.nzq.websocket.main.game.msg.request;
 
-import com.xuanfeng.nzq.commons.msg.CheckParamResult;
-import com.xuanfeng.nzq.commons.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.msg.CheckParamResult;
+import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
 
 /**
  * @description: 确认匹配结果请求

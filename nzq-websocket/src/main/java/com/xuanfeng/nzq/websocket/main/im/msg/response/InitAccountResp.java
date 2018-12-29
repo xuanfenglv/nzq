@@ -1,6 +1,5 @@
 package com.xuanfeng.nzq.websocket.main.im.msg.response;
 
-import com.xuanfeng.nzq.commons.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.domain.entity.FriendInfo;
 import com.xuanfeng.nzq.domain.entity.GroupInfo;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * @create: 2018/11/23 10:45
  */
 
-public class InitAccountResp extends ResponseMsg {
+public class InitAccountResp {
     private List<GroupInfo> groupList;
     private List<FriendInfo> friendList;
 

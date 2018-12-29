@@ -1,5 +1,9 @@
 package com.xuanfeng.nzq.websocket.javabean;
 
+import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
+import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
+import com.xuanfeng.nzq.websocket.constant.RoomType;
+
 import java.util.Set;
 
 /**
@@ -12,8 +16,13 @@ public class UserCache {
     private long xf;
     private Set<Long> friendXf;
     private Long roomId;
+    private RoomType roomType;
     // 禁赛截止时间
     private Long suspendDeadline;
+    // 当前状态
+    private UserStatusEnum imStatus;
+    // nzq游戏中的状态
+    private NzqStatusEnum nzqStatusEnum;
 
     public long getXf() {
         return xf;
@@ -45,5 +54,29 @@ public class UserCache {
 
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
+    }
+
+    public UserStatusEnum getImStatus() {
+        return imStatus;
+    }
+
+    public void setImStatus(UserStatusEnum imStatus) {
+        this.imStatus = imStatus;
+    }
+
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public NzqStatusEnum getNzqStatusEnum() {
+        return nzqStatusEnum;
+    }
+
+    public void setNzqStatusEnum(NzqStatusEnum nzqStatusEnum) {
+        this.nzqStatusEnum = nzqStatusEnum;
     }
 }

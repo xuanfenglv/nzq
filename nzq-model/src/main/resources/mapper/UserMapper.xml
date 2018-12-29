@@ -10,12 +10,14 @@
     <result column="tel" jdbcType="VARCHAR" property="tel" />
     <result column="grade" jdbcType="TINYINT" property="grade" />
     <result column="money" jdbcType="BIGINT" property="money" />
-    <result column="status" jdbcType="BIT" property="status" />
+    <result column="im_status" jdbcType="TINYINT" property="imStatus" />
+    <result column="nzq_status" jdbcType="TINYINT" property="nzqStatus" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
     <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, nickname, pwd, sex, birthday, tel, grade, money, status, ctime, mtime
+    id, nickname, pwd, sex, birthday, tel, grade, money, im_status, nzq_status, ctime, 
+    mtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -33,12 +35,12 @@
     </selectKey>
     insert into User (nickname, pwd, sex, 
       birthday, tel, grade, 
-      money, status, ctime, 
-      mtime)
+      money, im_status, nzq_status, 
+      ctime, mtime)
     values (#{nickname,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, 
       #{birthday,jdbcType=DATE}, #{tel,jdbcType=VARCHAR}, #{grade,jdbcType=TINYINT}, 
-      #{money,jdbcType=BIGINT}, #{status,jdbcType=BIT}, #{ctime,jdbcType=TIMESTAMP}, 
-      #{mtime,jdbcType=TIMESTAMP})
+      #{money,jdbcType=BIGINT}, #{imStatus,jdbcType=TINYINT}, #{nzqStatus,jdbcType=TINYINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xuanfeng.nzq.domain.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
@@ -67,8 +69,11 @@
       <if test="money != null">
         money,
       </if>
-      <if test="status != null">
-        status,
+      <if test="imStatus != null">
+        im_status,
+      </if>
+      <if test="nzqStatus != null">
+        nzq_status,
       </if>
       <if test="ctime != null">
         ctime,
@@ -99,8 +104,11 @@
       <if test="money != null">
         #{money,jdbcType=BIGINT},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=BIT},
+      <if test="imStatus != null">
+        #{imStatus,jdbcType=TINYINT},
+      </if>
+      <if test="nzqStatus != null">
+        #{nzqStatus,jdbcType=TINYINT},
       </if>
       <if test="ctime != null">
         #{ctime,jdbcType=TIMESTAMP},
@@ -134,8 +142,11 @@
       <if test="money != null">
         money = #{money,jdbcType=BIGINT},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=BIT},
+      <if test="imStatus != null">
+        im_status = #{imStatus,jdbcType=TINYINT},
+      </if>
+      <if test="nzqStatus != null">
+        nzq_status = #{nzqStatus,jdbcType=TINYINT},
       </if>
       <if test="ctime != null">
         ctime = #{ctime,jdbcType=TIMESTAMP},
@@ -155,7 +166,8 @@
       tel = #{tel,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=TINYINT},
       money = #{money,jdbcType=BIGINT},
-      status = #{status,jdbcType=BIT},
+      im_status = #{imStatus,jdbcType=TINYINT},
+      nzq_status = #{nzqStatus,jdbcType=TINYINT},
       ctime = #{ctime,jdbcType=TIMESTAMP},
       mtime = #{mtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

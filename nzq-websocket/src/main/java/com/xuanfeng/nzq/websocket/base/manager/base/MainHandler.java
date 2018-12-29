@@ -3,10 +3,10 @@ package com.xuanfeng.nzq.websocket.base.manager.base;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.xuanfeng.nzq.commons.RetEnum;
-import com.xuanfeng.nzq.commons.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.commons.utils.CommonUtil;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
-import com.xuanfeng.nzq.websocket.session.ChatSession;
+import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.session.base.WsServer;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 
 import javax.websocket.Session;
@@ -22,7 +22,7 @@ public class MainHandler {
 
     private HandlerManager handlerManager;
 
-    public void process(String message, ChatSession chatSession, Session session) throws IOException {
+    public void process(String message, WsServer wsServer, Session session) throws IOException {
         JSONObject reqMsg = JSON.parseObject(message);
         // gateway处已经校验过了，可以放心使用（不必担心空指针）
         int msgId = CommonUtil.parseInt(reqMsg.getString("msgId"),-1);
@@ -39,10 +39,10 @@ public class MainHandler {
         }
         if (msgId == 1) {
             long xf = CommonUtil.parseLong(reqMsg.getString("xf"),0);
-            chatSession.setXf(xf);
+            wsServer.setXf(xf);
         }
         // 处理
-        msgHandler.process(reqMsg,chatSession.getXf(),session,msgId);
+        msgHandler.process(reqMsg,wsServer.getXf(),session,msgId);
 
     }
 

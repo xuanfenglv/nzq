@@ -10,7 +10,7 @@ public enum RetEnum {
     LOGIN_FAIL(7, "登录失败"),
     SERVER_ERROR(8, "服务器故障"),
     非法请求(9, "非法请求"),
-    其他错误(10, "未知错误");
+    其他错误(10, "其他错误");
 
     private int ret;
     private String desc;

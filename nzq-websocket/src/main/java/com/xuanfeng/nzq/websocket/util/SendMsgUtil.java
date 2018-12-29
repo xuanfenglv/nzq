@@ -1,8 +1,6 @@
 package com.xuanfeng.nzq.websocket.util;
 
 import com.alibaba.fastjson.JSON;
-import com.xuanfeng.nzq.commons.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.commons.msg.response.ResponseMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,11 +25,7 @@ public class SendMsgUtil {
         }
     }
 
-    public static void sendMessage(Session session, ResponseMsg message) {
-        sendMessage(session, JSON.toJSONString(message));
-    }
-
-    public static void sendMessage(Session session, NoticeMsg message) {
+    public static void sendMessage(Session session, Object message) {
         sendMessage(session, JSON.toJSONString(message));
     }
 }

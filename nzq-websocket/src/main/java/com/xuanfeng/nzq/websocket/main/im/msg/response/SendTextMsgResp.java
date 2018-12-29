@@ -1,7 +1,6 @@
 package com.xuanfeng.nzq.websocket.main.im.msg.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.xuanfeng.nzq.commons.msg.response.ResponseMsg;
 
 import java.util.Date;
 
@@ -11,7 +10,7 @@ import java.util.Date;
  * @create: 2018/10/03 10:11
  */
 
-public class SendTextMsgResp extends ResponseMsg {
+public class SendTextMsgResp {
     private Long xf;
     private Long clientTime;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

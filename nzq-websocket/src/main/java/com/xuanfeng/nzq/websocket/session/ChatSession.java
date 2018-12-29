@@ -3,8 +3,9 @@ package com.xuanfeng.nzq.websocket.session;
 import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
 import com.xuanfeng.nzq.service.UserService;
 import com.xuanfeng.nzq.websocket.base.manager.base.MainHandler;
-import com.xuanfeng.nzq.websocket.main.im.component.StatusHandler;
-import com.xuanfeng.nzq.websocket.util.ChatSessions;
+import com.xuanfeng.nzq.websocket.component.ImStatusHandler;
+import com.xuanfeng.nzq.websocket.session.base.WsServer;
+import com.xuanfeng.nzq.websocket.util.ImSessions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,31 +20,23 @@ import java.io.IOException;
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
 @Component
 @ServerEndpoint("/chatserver")
-public class ChatSession {
+public class ChatSession extends WsServer {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    // xf号
-    private long xf;
-
 
     private static MainHandler chatMainHandler;
 
     private static UserService loginService;
 
-    private static StatusHandler statusHandler;
 
     @Autowired
-    @Qualifier("chatMainHandler")
+    @Qualifier("imMainHandler")
     public void setChatMainHandler(MainHandler chatMainHandler) {
         ChatSession.chatMainHandler = chatMainHandler;
     }
     @Autowired
     public void setLoginService(UserService loginService) {
         ChatSession.loginService = loginService;
-    }
-    @Autowired
-    public void setStatusHandler(StatusHandler statusHandler) {
-        ChatSession.statusHandler = statusHandler;
     }
 
     /**
@@ -54,7 +47,7 @@ public class ChatSession {
     @OnOpen
     public void onOpen(Session session) {
 
-        System.out.println("有新连接加入！当前在线人数为" + ChatSessions.getOnlineCount());
+        System.out.println("有新连接加入！当前在线人数为" + ImSessions.getOnlineCount());
     }
 
     /**
@@ -83,21 +76,15 @@ public class ChatSession {
         chatMainHandler.process(message, this, session);
     }
 
+
     public void selfOffline() throws IOException {
-        ChatSessions.removeXf(this.xf);
-        logger.info("下线用户是：{},当前在线人数为:{}", this.xf,ChatSessions.getOnlineCount());
+        ImSessions.removeXf(this.xf);
+        logger.info("下线用户是：{},当前在线人数为:{}", this.xf, ImSessions.getOnlineCount());
         // 推送下线消息
-        statusHandler.changeStatus(this.xf,UserStatusEnum.离线);
+        ImStatusHandler.changeStatus(this.xf,UserStatusEnum.离线);
     }
 
 
 
-    public long getXf() {
-        return xf;
-    }
-
-    public void setXf(long xf) {
-        this.xf = xf;
-    }
 
 }
