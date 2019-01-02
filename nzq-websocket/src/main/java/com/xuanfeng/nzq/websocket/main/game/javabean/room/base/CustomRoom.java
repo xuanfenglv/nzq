@@ -1,4 +1,4 @@
-package com.xuanfeng.nzq.websocket.javabean.room.base;
+package com.xuanfeng.nzq.websocket.main.game.javabean.room.base;
 
 /**
  * @description: 自定义房间

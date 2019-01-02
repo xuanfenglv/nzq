@@ -1,7 +1,7 @@
-package com.xuanfeng.nzq.websocket.javabean.room.base;
+package com.xuanfeng.nzq.websocket.main.game.javabean.room.base;
 
 import com.xuanfeng.nzq.websocket.constant.RoomType;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
 
 /**
  * @description: 房间基类

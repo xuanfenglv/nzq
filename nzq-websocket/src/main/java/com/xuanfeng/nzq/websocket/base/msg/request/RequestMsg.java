@@ -1,7 +1,7 @@
-package com.xuanfeng.nzq.websocket.msg.request;
+package com.xuanfeng.nzq.websocket.base.msg.request;
 
-import com.xuanfeng.nzq.websocket.msg.CheckParamResult;
-import com.xuanfeng.nzq.websocket.msg.base.WsMsg;
+import com.xuanfeng.nzq.websocket.base.msg.CheckParamResult;
+import com.xuanfeng.nzq.websocket.base.msg.base.WsMsg;
 /**
  * @description: 请求消息
  * @author: lvxianqing

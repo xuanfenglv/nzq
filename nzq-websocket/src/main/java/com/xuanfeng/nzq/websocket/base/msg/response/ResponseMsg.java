@@ -1,7 +1,7 @@
-package com.xuanfeng.nzq.websocket.msg.response;
+package com.xuanfeng.nzq.websocket.base.msg.response;
 
 import com.xuanfeng.nzq.commons.RetEnum;
-import com.xuanfeng.nzq.websocket.msg.base.PushMsg;
+import com.xuanfeng.nzq.websocket.base.msg.base.PushMsg;
 
 /**
  * @description: websocket响应消息

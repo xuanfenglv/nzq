@@ -16,7 +16,7 @@ public interface FriendDao {
     @Select("select fxf from Friend where xf = #{xf}")
     Set<Long> selectFriendIds(Long xf);
 
-    @Select("select fxf id,remark,nickname,status,groupId from Friend f,`User` u where u.id=f.xf and u.id=#{xf}")
+    @Select("select fxf id,remark,nickname,im_status status,group_id from Friend f,`User` u where u.id=f.xf and u.id=#{xf}")
     List<FriendInfo> selectFriendInfos(Long xf);
 
     @Delete("delete from Friend where xf=#{xf} and fxf=#{fxf}")
@@ -28,6 +28,6 @@ public interface FriendDao {
     @Update("update Friend set remark=#{remark} where xf = #{xf} and fxf=#{fxf}")
     int updateRemark(UpdateRemarkRequest request);
 
-    @Update("update Friend set groupId=#{groupId} where xf = #{xf} and fxf=#{fxf}")
+    @Update("update Friend set group_id=#{groupId} where xf = #{xf} and fxf=#{fxf}")
     int updateGroup(UpdateGroupRequest request);
 }

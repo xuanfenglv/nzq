@@ -1,4 +1,4 @@
-package com.xuanfeng.nzq.websocket.msg;
+package com.xuanfeng.nzq.websocket.base.msg;
 
 /**
  * @Author:Lvxingqing

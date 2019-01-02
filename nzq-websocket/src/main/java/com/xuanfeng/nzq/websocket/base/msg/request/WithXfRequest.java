@@ -1,22 +1,22 @@
-package com.xuanfeng.nzq.websocket.main.game.msg.request;
+package com.xuanfeng.nzq.websocket.base.msg.request;
 
 import com.xuanfeng.nzq.websocket.base.msg.CheckParamResult;
-import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
 
 /**
- * @description: 房主踢人请求
+ * @description: 带有一个账号的请求
  * @author: lvxianqing
- * @create: 2018/12/29 15:26
+ * @create: 2019/01/02 17:58
  */
 
-public class TickOutRequest extends RequestMsg {
+public class WithXfRequest extends RequestMsg{
 
-    // 被踢的玩家账号
     private Long xf;
 
     @Override
     protected void doCheck(CheckParamResult result) {
-
+        if (xf == null) {
+            result.setErrMsg("请求参数 'xf' 不能为空");
+        }
     }
 
     public Long getXf() {

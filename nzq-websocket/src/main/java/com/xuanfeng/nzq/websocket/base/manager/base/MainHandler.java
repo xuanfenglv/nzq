@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xuanfeng.nzq.commons.RetEnum;
 import com.xuanfeng.nzq.commons.utils.CommonUtil;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.session.base.WsServer;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 

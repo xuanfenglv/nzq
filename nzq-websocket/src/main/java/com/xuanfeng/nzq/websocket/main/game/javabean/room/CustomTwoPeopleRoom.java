@@ -1,19 +1,19 @@
-package com.xuanfeng.nzq.websocket.javabean.room;
+package com.xuanfeng.nzq.websocket.main.game.javabean.room;
 
 import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.component.CustomRooms;
+import com.xuanfeng.nzq.websocket.component.IdGenerator;
 import com.xuanfeng.nzq.websocket.component.NzqGameStatusHandler;
 import com.xuanfeng.nzq.websocket.constant.RoomType;
-import com.xuanfeng.nzq.websocket.javabean.UserCache;
-import com.xuanfeng.nzq.websocket.javabean.room.base.BaseTwoPeopleRoom;
-import com.xuanfeng.nzq.websocket.javabean.room.base.CustomRoom;
-import com.xuanfeng.nzq.websocket.main.game.component.IdGenerator;
+import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.base.BaseTwoPeopleRoom;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.base.CustomRoom;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.ComeInRoomNotice;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
-import com.xuanfeng.nzq.websocket.util.UserManager;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 
 import javax.websocket.Session;
@@ -46,8 +46,8 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
         super.blackSession = session;
         this.owner = xf;
 
-        UserCache userCache = UserManager.getUserCache(xf);
-        userCache.setRoomId(id);
+        NzqGameCache cache = NzqGameCacheManager.get(xf);
+        cache.setRoomId(id);
         NzqGameStatusHandler.changeStatus(xf, NzqStatusEnum.房间中);
     }
 
@@ -178,8 +178,8 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
             success = false;
         }
         if (success) {
-            UserCache userCache = UserManager.getUserCache(xf);
-            userCache.setRoomId(this.id);
+            NzqGameCache cache = NzqGameCacheManager.get(xf);
+            cache.setRoomId(id);
             // 推送
             ComeInRoomNotice notice = new ComeInRoomNotice();
             notice.setXf(xf);

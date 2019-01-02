@@ -1,9 +1,9 @@
 package com.xuanfeng.nzq.websocket.main.im.handler;
 
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.domain.dao.FriendDao;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.main.im.msg.notice.DeleteFriendNotice;

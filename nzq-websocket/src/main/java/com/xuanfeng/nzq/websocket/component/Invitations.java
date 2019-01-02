@@ -1,7 +1,6 @@
 package com.xuanfeng.nzq.websocket.component;
 
 import com.xuanfeng.nzq.websocket.javabean.Invitation;
-import com.xuanfeng.nzq.websocket.main.game.component.IdGenerator;
 
 import java.util.HashMap;
 import java.util.Map;

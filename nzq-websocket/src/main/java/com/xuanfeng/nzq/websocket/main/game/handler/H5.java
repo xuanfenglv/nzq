@@ -4,13 +4,13 @@ import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.component.CustomRooms;
 import com.xuanfeng.nzq.websocket.component.Invitations;
 import com.xuanfeng.nzq.websocket.javabean.Invitation;
-import com.xuanfeng.nzq.websocket.javabean.room.CustomTwoPeopleRoom;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.CustomTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.RejectInvitationNotice;
 import com.xuanfeng.nzq.websocket.main.game.msg.request.RejectInvitationRequest;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.util.NzqGameSessions;
 
 import javax.websocket.Session;

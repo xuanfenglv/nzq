@@ -1,4 +1,4 @@
-package com.xuanfeng.nzq.websocket.main.game.constant;
+package com.xuanfeng.nzq.websocket.main.im.constant;
 
 public enum ImMsgId {
     初始化账号(1),

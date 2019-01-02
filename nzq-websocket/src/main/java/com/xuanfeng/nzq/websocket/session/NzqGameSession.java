@@ -3,7 +3,9 @@ package com.xuanfeng.nzq.websocket.session;
 import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
 import com.xuanfeng.nzq.websocket.base.manager.base.MainHandler;
 import com.xuanfeng.nzq.websocket.component.NzqGameStatusHandler;
+import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
 import com.xuanfeng.nzq.websocket.session.base.WsServer;
+import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
 import com.xuanfeng.nzq.websocket.util.NzqGameSessions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,6 +76,12 @@ public class NzqGameSession extends WsServer {
 
 	public void selfOffline() throws IOException {
 		NzqGameSessions.removeXf(this.xf);
+		NzqGameCache cache = NzqGameCacheManager.get(this.xf);
+		// 如果在战斗中，先不清缓存，等待玩家断线重连使用
+		if (cache.getNzqStatusEnum() != NzqStatusEnum.战斗中) {
+			NzqGameCacheManager.remove(this.xf);
+			// TODO: 2019/1/2 断线不重连的垃圾回收
+		}
 		logger.info("下线用户是：{},当前在线人数为:{}", this.xf, NzqGameSessions.getOnlineCount());
 		// 推送下线消息
 		NzqGameStatusHandler.changeStatus(this.xf, NzqStatusEnum.离线);

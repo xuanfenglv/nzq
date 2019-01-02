@@ -1,16 +1,17 @@
-package com.xuanfeng.nzq.websocket.javabean.room;
+package com.xuanfeng.nzq.websocket.main.game.javabean.room;
 
 import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
+import com.xuanfeng.nzq.websocket.component.IdGenerator;
 import com.xuanfeng.nzq.websocket.component.NzqGameStatusHandler;
 import com.xuanfeng.nzq.websocket.constant.RoomType;
-import com.xuanfeng.nzq.websocket.javabean.UserCache;
-import com.xuanfeng.nzq.websocket.javabean.room.base.BaseTwoPeopleRoom;
-import com.xuanfeng.nzq.websocket.main.game.component.IdGenerator;
+import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
+import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.base.BaseTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.MatchNotice;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
 import com.xuanfeng.nzq.websocket.util.NzqGameSessions;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
-import com.xuanfeng.nzq.websocket.util.UserManager;
+import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 
 /**
  * @description: 匹配二人房间
@@ -37,9 +38,9 @@ public class MatchTwoPeopleRoom extends BaseTwoPeopleRoom {
         super.white=another;
         super.blackSession = NzqGameSessions.get(one);
         super.whiteSession = NzqGameSessions.get(another);
-        UserCache black = UserManager.getUserCache(one);
+        NzqGameCache black = NzqGameCacheManager.get(one);
         black.setRoomId(id);
-        UserCache white = UserManager.getUserCache(another);
+        NzqGameCache white = NzqGameCacheManager.get(another);
         white.setRoomId(id);
 
     }
@@ -56,8 +57,8 @@ public class MatchTwoPeopleRoom extends BaseTwoPeopleRoom {
         MatchNotice matchNotice = new MatchNotice();
         matchNotice.setBlack(black);
         matchNotice.setWhite(white);
-        SendMsgUtil.sendMessage(blackSession, new NoticeMsg(20, matchNotice));
-        SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(20, matchNotice));
+        SendMsgUtil.sendMessage(blackSession, WsResultUtil.createNoticeResult(GameMsgId.开始匹配));
+        SendMsgUtil.sendMessage(whiteSession, WsResultUtil.createNoticeResult(GameMsgId.开始匹配));
     }
 
     /**
@@ -73,8 +74,8 @@ public class MatchTwoPeopleRoom extends BaseTwoPeopleRoom {
 
         if (isAllConfirm()) {
             // TODO: 2018/12/21 开始游戏通知
-            SendMsgUtil.sendMessage(blackSession, new NoticeMsg(21));
-            SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(21));
+            SendMsgUtil.sendMessage(blackSession, WsResultUtil.createNoticeResult(GameMsgId.匹配成功确认));
+            SendMsgUtil.sendMessage(whiteSession, WsResultUtil.createNoticeResult(GameMsgId.匹配成功确认));
             // 修改状态
             NzqGameStatusHandler.changeStatus(black, NzqStatusEnum.战斗中);
             NzqGameStatusHandler.changeStatus(white, NzqStatusEnum.战斗中);

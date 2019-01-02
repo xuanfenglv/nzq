@@ -1,29 +1,32 @@
 package com.xuanfeng.nzq.websocket.main.game.handler;
 
+import com.xuanfeng.nzq.commons.RetEnum;
 import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.WithXfRequest;
 import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
-import com.xuanfeng.nzq.websocket.component.Rooms;
 import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
-import com.xuanfeng.nzq.websocket.main.game.javabean.room.MatchTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
+import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 
 import javax.websocket.Session;
 import java.io.IOException;
 
 /**
- * @description: 确认匹配结果
+ * @description: 请求观战
  * @author: lvxianqing
- * @create: 2018/12/21 17:51
+ * @create: 2019/01/02 17:56
  */
 
-public class H20 extends IMsgHandler {
+public class H21 extends IMsgHandler {
     @Override
     protected ResponseMsg handle(RequestMsg message, long xf, Session session) throws IOException {
-        NzqGameCache cache = NzqGameCacheManager.get(xf);
-        MatchTwoPeopleRoom room = (MatchTwoPeopleRoom) Rooms.get(cache.getRoomId());
-        // 匹配确认
-        room.confirm(xf);
+        WithXfRequest request = (WithXfRequest)message;
+        request.getXf();
+        NzqGameCache cache = NzqGameCacheManager.get(request.getXf());
+        if (cache == null) {
+            return WsResultUtil.createRespFailedResult(RetEnum.非法请求,"请求观战者已离线");
+        }
         return null;
     }
 

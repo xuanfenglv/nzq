@@ -1,4 +1,4 @@
-package com.xuanfeng.nzq.websocket.main.game.component;
+package com.xuanfeng.nzq.websocket.component;
 
 /**
  * @description: id生成器

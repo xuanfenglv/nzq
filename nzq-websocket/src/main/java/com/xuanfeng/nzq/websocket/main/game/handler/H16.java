@@ -1,16 +1,16 @@
 package com.xuanfeng.nzq.websocket.main.game.handler;
 
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.component.Rooms;
-import com.xuanfeng.nzq.websocket.javabean.UserCache;
-import com.xuanfeng.nzq.websocket.javabean.room.base.BaseRoom;
+import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.base.BaseRoom;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.RoomMsgNotice;
 import com.xuanfeng.nzq.websocket.main.game.msg.request.RoomMsgRequest;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
-import com.xuanfeng.nzq.websocket.util.UserManager;
+import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 
 import javax.websocket.Session;
@@ -31,8 +31,8 @@ public class H16 extends IMsgHandler {
         noticeData.setText(request.getText());
         NoticeMsg noticeMsg = WsResultUtil.createNoticeResult(GameMsgId.发送消息, noticeData);
 
-        UserCache userCache = UserManager.getUserCache(xf);
-        BaseRoom room = Rooms.get(userCache.getRoomId());
+        NzqGameCache cache = NzqGameCacheManager.get(xf);
+        BaseRoom room = Rooms.get(cache.getRoomId());
         room.sendNoticeToOthers(xf,noticeMsg);
         return null;
     }

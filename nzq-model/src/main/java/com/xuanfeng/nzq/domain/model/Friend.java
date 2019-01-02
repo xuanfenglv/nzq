@@ -9,7 +9,7 @@ public class Friend {
 
     private Long fxf;
 
-    private Long groupid;
+    private Long groupId;
 
     private String remark;
 
@@ -41,12 +41,12 @@ public class Friend {
         this.fxf = fxf;
     }
 
-    public Long getGroupid() {
-        return groupid;
+    public Long getGroupId() {
+        return groupId;
     }
 
-    public void setGroupid(Long groupid) {
-        this.groupid = groupid;
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     public String getRemark() {

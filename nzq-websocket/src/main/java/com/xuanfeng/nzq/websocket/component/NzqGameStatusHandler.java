@@ -3,11 +3,11 @@ package com.xuanfeng.nzq.websocket.component;
 import com.alibaba.fastjson.JSON;
 import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
 import com.xuanfeng.nzq.service.UserService;
-import com.xuanfeng.nzq.websocket.javabean.UserCache;
+import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.StatusChangeNotice;
 import com.xuanfeng.nzq.websocket.util.ImSessions;
-import com.xuanfeng.nzq.websocket.util.UserManager;
+import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,11 +41,11 @@ public class NzqGameStatusHandler {
         // 修改状态
         userService.changeNzqStatus(xf, statusEnum);
         // 向好友推送状态变化
-        UserCache userCache = UserManager.getUserCache(xf);
-        userCache.setNzqStatusEnum(statusEnum);
+        NzqGameCache cache = NzqGameCacheManager.get(xf);
+        cache.setNzqStatusEnum(statusEnum);
         // 避免多次序列化
         String statusChangeMessage = JSON.toJSONString(WsResultUtil.createNoticeResult(GameMsgId.状态变化,new StatusChangeNotice(xf,statusEnum)));
-        userCache.getFriendXf().forEach(friendXf -> {
+        cache.getFriendXf().forEach(friendXf -> {
             try {
                 ImSessions.sendMsgToXf(friendXf, statusChangeMessage);
             } catch (IOException e) {

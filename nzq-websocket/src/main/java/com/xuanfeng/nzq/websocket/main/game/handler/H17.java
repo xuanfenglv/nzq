@@ -1,11 +1,11 @@
 package com.xuanfeng.nzq.websocket.main.game.handler;
 
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.component.Rooms;
-import com.xuanfeng.nzq.websocket.javabean.room.MatchTwoPeopleRoom;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.MatchTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.main.game.msg.request.WatchRequest;
 import com.xuanfeng.nzq.websocket.main.game.msg.response.WatchResponse;
 

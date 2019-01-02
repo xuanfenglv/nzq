@@ -4,7 +4,7 @@ package com.xuanfeng.nzq.websocket.main.game.task;
 import com.xuanfeng.nzq.websocket.main.game.constant.MatchGameQueue;
 import com.xuanfeng.nzq.websocket.main.game.javabean.XfPair;
 import com.xuanfeng.nzq.websocket.component.Rooms;
-import com.xuanfeng.nzq.websocket.javabean.room.MatchTwoPeopleRoom;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.MatchTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.util.NzqGameSessions;
 
 /**

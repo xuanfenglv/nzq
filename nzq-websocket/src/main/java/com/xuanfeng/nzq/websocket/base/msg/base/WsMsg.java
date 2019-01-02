@@ -1,4 +1,4 @@
-package com.xuanfeng.nzq.websocket.msg.base;
+package com.xuanfeng.nzq.websocket.base.msg.base;
 
 /**
  * @description: websocket 消息

@@ -3,15 +3,15 @@
 <mapper namespace="com.xuanfeng.nzq.domain.mapper.FriendMapper">
   <resultMap id="BaseResultMap" type="com.xuanfeng.nzq.domain.model.Friend">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="receiveXf" jdbcType="BIGINT" property="receiveXf" />
+    <result column="xf" jdbcType="BIGINT" property="xf" />
     <result column="fxf" jdbcType="BIGINT" property="fxf" />
-    <result column="groupId" jdbcType="BIGINT" property="groupid" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
     <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, receiveXf, fxf, groupId, remark, ctime, mtime
+    id, xf, fxf, group_id, remark, ctime, mtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -27,10 +27,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into Friend (receiveXf, fxf, groupId,
+    insert into Friend (xf, fxf, group_id, 
       remark, ctime, mtime
       )
-    values (#{receiveXf,jdbcType=BIGINT}, #{fxf,jdbcType=BIGINT}, #{groupid,jdbcType=BIGINT},
+    values (#{xf,jdbcType=BIGINT}, #{fxf,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, 
       #{remark,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -40,14 +40,14 @@
     </selectKey>
     insert into Friend
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="receiveXf != null">
-        receiveXf,
+      <if test="xf != null">
+        xf,
       </if>
       <if test="fxf != null">
         fxf,
       </if>
-      <if test="groupid != null">
-        groupId,
+      <if test="groupId != null">
+        group_id,
       </if>
       <if test="remark != null">
         remark,
@@ -60,14 +60,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="receiveXf != null">
-        #{receiveXf,jdbcType=BIGINT},
+      <if test="xf != null">
+        #{xf,jdbcType=BIGINT},
       </if>
       <if test="fxf != null">
         #{fxf,jdbcType=BIGINT},
       </if>
-      <if test="groupid != null">
-        #{groupid,jdbcType=BIGINT},
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -83,14 +83,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.xuanfeng.nzq.domain.model.Friend">
     update Friend
     <set>
-      <if test="receiveXf != null">
-        receiveXf = #{receiveXf,jdbcType=BIGINT},
+      <if test="xf != null">
+        xf = #{xf,jdbcType=BIGINT},
       </if>
       <if test="fxf != null">
         fxf = #{fxf,jdbcType=BIGINT},
       </if>
-      <if test="groupid != null">
-        groupId = #{groupid,jdbcType=BIGINT},
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
@@ -106,9 +106,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xuanfeng.nzq.domain.model.Friend">
     update Friend
-    set receiveXf = #{receiveXf,jdbcType=BIGINT},
+    set xf = #{xf,jdbcType=BIGINT},
       fxf = #{fxf,jdbcType=BIGINT},
-      groupId = #{groupid,jdbcType=BIGINT},
+      group_id = #{groupId,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=TIMESTAMP},
       mtime = #{mtime,jdbcType=TIMESTAMP}

@@ -1,4 +1,4 @@
-package com.xuanfeng.nzq.websocket.javabean.room.base;
+package com.xuanfeng.nzq.websocket.main.game.javabean.room.base;
 
 import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
 import com.xuanfeng.nzq.websocket.component.Rooms;
@@ -9,8 +9,8 @@ import com.xuanfeng.nzq.websocket.main.game.constant.DropResult;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
 import com.xuanfeng.nzq.websocket.main.game.msg.common.DropChessResult;
 import com.xuanfeng.nzq.websocket.main.game.pool.WatchThreadPool;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.util.NzqUtil;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
@@ -95,9 +95,10 @@ public abstract class BaseTwoPeopleRoom extends BaseRoom {
     }
 
     /**
-     * 换位
+     * 换到空位
      */
     protected void exchange() {
+
         Long mid = black;
         black = white;
         white = mid;
@@ -149,7 +150,7 @@ public abstract class BaseTwoPeopleRoom extends BaseRoom {
         ResponseMsg responseMsg = WsResultUtil.createRespSuccessResult(dropChessResult);
         responseMsg.setMsgId(GameMsgId.落子.getMsgId());
         SendMsgUtil.sendMessage(responseSession, responseMsg);
-        SendMsgUtil.sendMessage(noticeSession, WsResultUtil.createNoticeResult(GameMsgId.落子.getMsgId(), dropChessResult));
+        SendMsgUtil.sendMessage(noticeSession, WsResultUtil.createNoticeResult(GameMsgId.落子, dropChessResult));
 
         // 向观战者推送
         WatchThreadPool.push(audience,dropChessResult);

@@ -2,16 +2,16 @@ package com.xuanfeng.nzq.websocket.main.im.handler;
 
 import com.xuanfeng.nzq.commons.RetEnum;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
-import com.xuanfeng.nzq.websocket.javabean.UserCache;
+import com.xuanfeng.nzq.websocket.javabean.IMCache;
 import com.xuanfeng.nzq.websocket.main.im.msg.notice.SendTextMsgNotice;
 import com.xuanfeng.nzq.websocket.main.im.msg.request.SendTextMsgReq;
 import com.xuanfeng.nzq.websocket.main.im.msg.response.SendTextMsgResp;
 import com.xuanfeng.nzq.websocket.util.ImSessions;
-import com.xuanfeng.nzq.websocket.util.UserManager;
+import com.xuanfeng.nzq.websocket.util.IMCacheManager;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.Session;
@@ -31,9 +31,9 @@ public class SendTextMsgHandler extends IMsgHandler {
         SendTextMsgResp resp = new SendTextMsgResp();
         SendTextMsgReq req = (SendTextMsgReq)message;
 
-        UserCache userCache = UserManager.getUserCache(xf);
+        IMCache IMCache = IMCacheManager.get(xf);
 
-        if (!userCache.getFriendXf().contains(req.getXf())) {
+        if (!IMCache.getFriendXf().contains(req.getXf())) {
             return WsResultUtil.createRespFailedResult(RetEnum.非法请求,"对方不是你的好友，不可发送消息");
         }
         Date date = new Date();

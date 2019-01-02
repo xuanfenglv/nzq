@@ -1,7 +1,7 @@
 package com.xuanfeng.nzq.websocket.component;
 
 
-import com.xuanfeng.nzq.websocket.javabean.room.base.BaseRoom;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.base.BaseRoom;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package com.xuanfeng.nzq.websocket.main.im.msg.request;
 
-import com.xuanfeng.nzq.websocket.msg.CheckParamResult;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.CheckParamResult;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
 
 /**
  * @description: 同意好友申请处理器

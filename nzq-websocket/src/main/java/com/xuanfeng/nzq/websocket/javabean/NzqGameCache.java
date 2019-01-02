@@ -1,26 +1,23 @@
 package com.xuanfeng.nzq.websocket.javabean;
 
 import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
-import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
 import com.xuanfeng.nzq.websocket.constant.RoomType;
 
 import java.util.Set;
 
 /**
- * @description: 用户在线缓存（可移到redis）
+ * @description: nzq游戏在线缓存（可移到redis）
  * @author: lvxianqing
  * @create: 2018/09/30 17:33
  */
 
-public class UserCache {
+public class NzqGameCache {
     private long xf;
     private Set<Long> friendXf;
     private Long roomId;
     private RoomType roomType;
     // 禁赛截止时间
     private Long suspendDeadline;
-    // 当前状态
-    private UserStatusEnum imStatus;
     // nzq游戏中的状态
     private NzqStatusEnum nzqStatusEnum;
 
@@ -54,14 +51,6 @@ public class UserCache {
 
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
-    }
-
-    public UserStatusEnum getImStatus() {
-        return imStatus;
-    }
-
-    public void setImStatus(UserStatusEnum imStatus) {
-        this.imStatus = imStatus;
     }
 
     public RoomType getRoomType() {

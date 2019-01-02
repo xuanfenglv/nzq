@@ -1,7 +1,7 @@
 package com.xuanfeng.nzq.websocket.main.game.msg.request;
 
-import com.xuanfeng.nzq.websocket.msg.CheckParamResult;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.CheckParamResult;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
 
 /**
  * @description: 发送房间内消息

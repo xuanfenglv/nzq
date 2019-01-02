@@ -3,9 +3,9 @@ package com.xuanfeng.nzq.websocket.main.im.handler;
 import com.xuanfeng.nzq.commons.RetEnum;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import com.xuanfeng.nzq.commons.constant.ApplicationStatusEnum;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.domain.dao.ApplicationDao;
 import com.xuanfeng.nzq.domain.dao.FriendDao;
 import com.xuanfeng.nzq.domain.dao.UserDao;
@@ -54,14 +54,14 @@ public class AgreeFriendApplicationHandler extends IMsgHandler {
         // 存库
         // 请求方好友信息
         Friend friend1 = new Friend();
-        friend1.setGroupid(application.getFriendGroupId());
+        friend1.setGroupId(application.getFriendGroupId());
         friend1.setFxf(application.getReceiveXf());
         friend1.setXf(application.getSendXf());
         friend1.setRemark(application.getRemark());
 
         // 接收方好友信息
         Friend friend2 = new Friend();
-        friend2.setGroupid(req.getGroupId());
+        friend2.setGroupId(req.getGroupId());
         friend2.setFxf(application.getReceiveXf());
         friend2.setXf(application.getSendXf());
         friend2.setRemark(req.getRemark());

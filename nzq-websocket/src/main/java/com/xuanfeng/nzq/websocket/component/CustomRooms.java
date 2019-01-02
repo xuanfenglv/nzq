@@ -1,6 +1,6 @@
 package com.xuanfeng.nzq.websocket.component;
 
-import com.xuanfeng.nzq.websocket.javabean.room.CustomTwoPeopleRoom;
+import com.xuanfeng.nzq.websocket.main.game.javabean.room.CustomTwoPeopleRoom;
 
 import java.util.HashMap;
 import java.util.Map;

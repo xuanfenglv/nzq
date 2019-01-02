@@ -1,4 +1,4 @@
-package com.xuanfeng.nzq.websocket.config;
+package com.xuanfeng.nzq.websocket.main.im.config;
 
 import com.xuanfeng.nzq.websocket.base.manager.base.HandlerManager;
 import com.xuanfeng.nzq.websocket.base.manager.base.MainHandler;

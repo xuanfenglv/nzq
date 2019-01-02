@@ -1,7 +1,7 @@
 package com.xuanfeng.nzq.websocket.main.game.task;
 
 import com.alibaba.fastjson.JSON;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
 import com.xuanfeng.nzq.websocket.main.game.msg.common.DropChessResult;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;

@@ -1,9 +1,10 @@
 package com.xuanfeng.nzq.websocket.main.im.handler;
 
+import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
-import com.xuanfeng.nzq.websocket.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.msg.response.ResponseMsg;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
 import com.xuanfeng.nzq.domain.dao.FriendDao;
 import com.xuanfeng.nzq.domain.dao.FriendGroupDao;
@@ -11,14 +12,13 @@ import com.xuanfeng.nzq.domain.entity.FriendInfo;
 import com.xuanfeng.nzq.domain.entity.GroupInfo;
 import com.xuanfeng.nzq.service.UserService;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
-import com.xuanfeng.nzq.websocket.javabean.UserCache;
+import com.xuanfeng.nzq.websocket.javabean.IMCache;
 import com.xuanfeng.nzq.websocket.component.ImStatusHandler;
 import com.xuanfeng.nzq.websocket.main.im.msg.request.InitAccountReq;
 import com.xuanfeng.nzq.websocket.main.im.msg.response.InitAccountResp;
 import com.xuanfeng.nzq.websocket.util.ImSessions;
-import com.xuanfeng.nzq.websocket.util.UserManager;
+import com.xuanfeng.nzq.websocket.util.IMCacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.websocket.Session;
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class InitAccountHandler extends IMsgHandler {
 
         if (ImSessions.constainsXf(xf)) {
             try {
-                ImSessions.sendMsgToXf(xf, new NoticeMsg(req.getMsgId()));
+                ImSessions.sendMsgToXf(xf, WsResultUtil.createNoticeResult(GameMsgId.初始化账号));
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -55,10 +55,10 @@ public class InitAccountHandler extends IMsgHandler {
         }
         // 初始化用户信息
         Set<Long> fXfs = friendDao.selectFriendIds(xf);
-        UserCache userCache = new UserCache();
-        userCache.setXf(xf);
-        userCache.setFriendXf(fXfs);
-        UserManager.add(xf, userCache);
+        IMCache IMCache = new IMCache();
+        IMCache.setXf(xf);
+        IMCache.setFriendXf(fXfs);
+        IMCacheManager.add(xf, IMCache);
 
         ImSessions.addxf(xf, session);
         // TODO: 2018/11/23 短线重连
