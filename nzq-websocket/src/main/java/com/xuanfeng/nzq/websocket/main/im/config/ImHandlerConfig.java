@@ -35,29 +35,29 @@ public class ImHandlerConfig {
         return chatHandlerManager;
     }
     @Bean
-    public InitAccountHandler h1_im() {
-        return new InitAccountHandler();
+    public IM_H1 h1_im() {
+        return new IM_H1();
     }
     @Bean
-    public SendTextMsgHandler h2_im() {
-        return new SendTextMsgHandler();
+    public IM_H2 h2_im() {
+        return new IM_H2();
     }
     @Bean
-    public SendFriendApplicationHandler h8_im() {
-        return new SendFriendApplicationHandler();
+    public IM_H8 h8_im() {
+        return new IM_H8();
     }
     @Bean
-    public AgreeFriendApplicationHandler h9_im() {
-        return new AgreeFriendApplicationHandler();
+    public IM_H9 h9_im() {
+        return new IM_H9();
     }
     @Bean
-    public RejectFriendApplicationHandler h10_im() {
-        return new RejectFriendApplicationHandler();
+    public IM_H10 h10_im() {
+        return new IM_H10();
     }
 
     @Bean
-    public DeleteFriendHandler h11_im() {
-        return new DeleteFriendHandler();
+    public IM_H11 h11_im() {
+        return new IM_H11();
     }
 
 }

@@ -71,6 +71,14 @@ public class UserController implements UserBaseController {
     }
 
     @Override
+    public Result updateSelfUserInfo(@RequestBody UpdateSelfInfoRequest request) {
+        logger.info("Enter method updateSelfUserInfo,request:{}.", request);
+        service.updateSelfUserInfo(request,SessionUtil.getUserSessionInfo().getXf());
+        logger.info("End method updateSelfUserInfo.");
+        return ResultUtil.createSuccessResult();
+    }
+
+    @Override
     public Result<OtherUserInfo> searchOtherUser(@PathVariable Long xf) {
         logger.info("Enter method searchOtherUser,xf:{}.", xf);
         OtherUserInfo otherUserInfo = service.searchOtherUser(xf);
@@ -84,13 +92,5 @@ public class UserController implements UserBaseController {
         List<OtherUserInfo> otherUserInfos = service.searchOtherUsers(nickname,sex,grade,pageSize,pageNum);
         logger.info("End method searchOtherUsers.");
         return ResultUtil.createSuccessResult(otherUserInfos);
-    }
-
-    @Override
-    public Result updateSelfUserInfo(@RequestBody UpdateSelfInfoRequest request) {
-        logger.info("Enter method updateSelfUserInfo,request:{}.", request);
-        service.updateSelfUserInfo(request,SessionUtil.getUserSessionInfo().getXf());
-        logger.info("End method updateSelfUserInfo.");
-        return ResultUtil.createSuccessResult();
     }
 }

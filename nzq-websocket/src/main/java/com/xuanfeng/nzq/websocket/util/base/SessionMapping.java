@@ -38,10 +38,10 @@ public class SessionMapping {
             SendMsgUtil.sendMessage(session, msg);
         }
     }
-    public static void addxf(long xf, Session session) {
+    public static void addxf(Long xf, Session session) {
         sessions.put(xf, session);
     }
-    public static void removeXf(long xf) {
+    public static void removeXf(Long xf) {
         sessions.remove(xf);
     }
 

@@ -1,1 +1,0 @@
-let chatWsAddress = "ws://localhost:8080/nzq/chatserver";
