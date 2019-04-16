@@ -31,24 +31,27 @@ function genFriend(friend) {
 
 function genMyText(text) {
     let textHtml = '<div class="outerChat">'
-        + '<img class="outerChat_photo i_photo" src="/nzq/photo/' + myXf + '.jpg"/>'
+        + '<img class="outerChat_photo i_photo" src="/nzq/photo/' + imParam.myXf + '.jpg"/>'
         + '<div class="outerChat_msg i_msg outerChat_msg_blue">' + text + '</div>'
         + '</div>';
-    $("[xf_no=" + onChatXf + "]").append(textHtml);
+    $("[xf_no=" + imParam.onChatXf + "]").append(textHtml);
 }
 
 function genTextByChatInfo(chatInfo) {
     let flag;
+    let xf;
     if (chatInfo.type == ChatInfoType.SEND) {
-        flag = i;
+        flag = 'i';
+        xf = imParam.myXf;
     } else {
-        flag = f;
+        flag = 'f';
+        xf=chatInfo.xf;
     }
     let textHtml = '<div class="outerChat">'
-        + '<img class="outerChat_photo '+flag+'_photo" src="/nzq/photo/' + chatInfo.xf + '.jpg"/>'
+        + '<img class="outerChat_photo '+flag+'_photo" src="/nzq/photo/' + xf + '.jpg"/>'
         + '<div class="outerChat_msg '+flag+'_msg outerChat_msg_blue">' + chatInfo.text + '</div>'
         + '</div>';
-    return textHtml;
+    imDomObj.chatBox.append(textHtml);
 }
 // todo 去dom中查名字，杜绝,serverTime渲染页面
 function createSession(chatInfo) {

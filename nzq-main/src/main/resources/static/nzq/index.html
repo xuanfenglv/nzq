@@ -1014,7 +1014,7 @@
 				<div id="list">
 					<div class="head">
 						<img id="photo" alt="头像" src="/nzq/photo/10001.jpg"/>
-						<input id="id_container" value="10001"></input>
+						<div id="id_container">10001</div>
 						<div id="choose">
 							<div id="msg">消息</div>
 							<div id="friend">联系人</div>
@@ -1022,7 +1022,7 @@
 						<img id="addfriend" style="display: none;" title="添加好友"
 							src="/nzq/img/plus.png" /> <img id="editgroup" title="分组管理"
 							src="/nzq/img/group.png" />
-						<div id="newMsg_num" class="new_num">1</div>
+						<div class="newMsg_num new_num">1</div>
 						<div id="newFriend_num" class="new_num">1</div>
 					</div>
 					<div id="inner">
@@ -1051,7 +1051,7 @@
 				<div id="chat_detail">
 					<div class="head">
 						<div id="msg_number">
-							＜消息<span id="msg_number_val"></span>
+							＜消息<span id="msg_number_val" class="newMsg_num"></span>
 						</div>
 						<div id="f_name"></div>
 						<div id="f_state"></div>
@@ -1061,9 +1061,8 @@
 					<div class="chat_box"></div>
 
 					<div class="chat_send">
-						<input type="text" name="" id="msg_input" value="" />
-						<button id="send_button1" onclick="sendMessage()">发送</button>
-						<button id="send_button2" onclick="sendMessageAndCreateSession()">发送</button>
+						<input type="text" id="msg_input" />
+						<button id="send_button" onclick="sendMessage()">发送</button>
 					</div>
 				</div>
 
@@ -1444,6 +1443,8 @@
 	</div>
 
 </body>
+<!--jquery-->
+<script src="js/common/jquery-3.1.1.min.js"></script>
 <!--常量值-->
 <script src="/nzq/js/common/constant.js"></script>
 <!--枚举-->
@@ -1456,8 +1457,7 @@
 
 <!--基类-->
 <script src="/nzq/js/common/base-class.js"></script>
-<!--jquery-->
-<script src="js/common/jquery-3.1.1.min.js"></script>
+
 <!--日历组件-->
 <script src="/nzq/js/laydate.dev.js"></script>
 <!--通用工具-->

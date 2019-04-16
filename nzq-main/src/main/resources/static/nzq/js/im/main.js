@@ -17,23 +17,23 @@ function showFriends(id) {
  * @param xf
  */
 function showChatDetail(xf) {
+    // 打开
+    imDomObj.chatPage.css("display", "inline");
     // 此好友的未读消息数
     let thisFriendUnreadMsgNo = friendInfoUtil.getUnreadMsgNo(xf);
 
     if (thisFriendUnreadMsgNo > 0) {
-        totalUnreadMsgNo -= thisFriendUnreadMsgNo;
         // 清空此好友的未读消息
         friendInfoUtil.clearUnreadMsgNo(xf);
     }
 
     // 设置当前聊天xf
-    onChatXf = xf;
+    imParam.onChatXf = xf;
 
     // 聊天消息list
     let chatList = friendInfoUtil.getChatInfos(xf);
     chatList.forEach(chatInfo => {
-        let textHtml = genTextByChatInfo(chatInfo);
-        imDomObj.chatBox.append(textHtml);
+        genTextByChatInfo(chatInfo);
     });
     // 也不知道管不管用
 
@@ -49,10 +49,10 @@ function sendMessage() {
         genMyText(text);
 
         // 滚动到底部
-        $("[xf_no=" + chat_xf + "]").scrollTop($("[xf_no=" + chat_xf + "]").height());
+        $("[xf_no=" + imParam.onChatXf + "]").scrollTop($("[xf_no=" + imParam.onChatXf + "]").height());
 
         // 发送消息
-        let msg = new SendTextMsg(onChatXf, text);
+        let msg = new SendTextMsg(imParam.onChatXf, text);
         imWs.sendMsg(msg);
 
         // 清空输入框
@@ -74,11 +74,3 @@ function createOrUpdateSession(chatInfo) {
         $("div[friendid=" + chatInfo.xf + "] .content").html(chatInfo.text);
     }
 }
-
-// 退出聊天框
-$(document).ready(function() {
-    $("#msg_number").click(function() {
-        $("[xf_no=" + chat_xf + "]").css("display", "none");
-        $("#chat_detail").css("display", "none");
-    })
-})

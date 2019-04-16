@@ -1,22 +1,28 @@
 // websocket基类
 class Msg {
-	constructor(msgId) {
-		this.msgId = msgId;
-	}
+    constructor(msgId) {
+        this.msgId = msgId;
+    }
 }
+
 // websocket 处理器基类
 class BaseHandler {
-	handle(msg) {
-		let success = CommonUtils.checkRet(msg);
-		if(success) {
-			if(msg.type == 0) {
-				this.handleResponse(msg.data)
-			} else {
-				this.handleNotice(msg.data)
-			}
-		}
+    handle(msg) {
+        // 如果是推送，直接处理
+        if (PushMsgType.NOTICE == msg.type) {
+            this.handleNotice(msg.data)
+        }
+        // 先判断响应是否成功
+        let success = CommonUtils.checkRet(msg);
+        if (success) {
+            this.handleResponse(msg.data)
+        }
 
-	}
-	handleResponse(msg) {}
-	handleNotice(msg) {}
+    }
+
+    handleResponse(msg) {
+    }
+
+    handleNotice(msg) {
+    }
 }

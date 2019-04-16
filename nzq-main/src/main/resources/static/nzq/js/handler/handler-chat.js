@@ -28,15 +28,15 @@ class ChatInitHandler extends BaseHandler {
 class ChatHandler extends BaseHandler {
 	handleResponse(data) {
 		// 停止转动
-		let chatInfo = new ChatInfo(data.receiveXf,ChatInfoType.SEND,data.serverTime,data.text);
+		let chatInfo = new ChatInfo(data.xf,ChatInfoType.SEND,data.serverTime,data.text);
         friendInfoUtil.addChatInfo(chatInfo);
 	}
 	handleNotice(data) {
 		// 收到一条消息
-		let chatInfo = new ChatInfo(data.sendXf,ChatInfoType.RECEIVE,data.serverTime,data.text);
+		let chatInfo = new ChatInfo(data.xf,ChatInfoType.RECEIVE,data.serverTime,data.text);
         friendInfoUtil.addChatInfo(chatInfo);
 		// 如果收到消息的好友不是正在聊天的好友则增加未读消息数
-        if (chatInfo.xf != onChatXf) {
+        if (chatInfo.xf != imParam.onChatXf) {
         	// 更新未读消息数
             friendInfoUtil.addUnreadMsgNo(chatInfo.xf);
         }

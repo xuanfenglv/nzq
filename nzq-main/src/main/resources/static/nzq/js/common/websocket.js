@@ -1,7 +1,7 @@
 function chatInitMethod() {
-	var xf = $("#id_container").val();
+
 	// 初始化连接
-	let msg = new InitChatMsg(xf,"87DF6AS98DS9F98DF7")
+	let msg = new InitChatMsg(imParam.myXf,"87DF6AS98DS9F98DF7")
     this.sendMsg(msg);
 };
 
@@ -35,6 +35,7 @@ class WebSocketUtil {
 	
 	sendMsg(msg) {
 		let msgStr = JSON.stringify(msg);
+        console.log('[发送消息:'+msg.msgId+']	    '+msgStr)
 		this.websocket.send(msgStr);
 	}
 }

@@ -31,20 +31,21 @@ function ajax(url, data, type, callback) {
 			withCredentials: true
 		},
 		crossDomain: true,
+        contentType: "application/json; charset=utf-8",
 		type: type,
 		url: url,
 		data: data,
 		timeout: 1000000,
 		dataType: "json",
-		success: function(data) {
-			console.log("[收到响应][result:" + JSON.stringify(data) + "]");
-			let success = CommonUtils.checkRet(msg);
+		success: function(result) {
+			console.log("[收到响应][result:" + JSON.stringify(result) + "]");
+			let success = CommonUtils.checkRet(result);
 			if(success) {
-				callback(msg);
+				callback(result);
 			}
 		},
 		complete: function(XMLHttpRequest, status) { //求完成后最终执行参数
-			layer.closeAll('loading');
+			// layer.closeAll('loading');
 			// 设置timeout的时间，通过检测complete时status的值判断请求是否超时，如果超时执行响应的操作
 			if(status == 'timeout') { //超时,status还有success,error等值的情况
 				layer.msg('请求超时', {

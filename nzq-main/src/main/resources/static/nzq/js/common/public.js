@@ -1,11 +1,12 @@
 // 全局变量
-// 正在聊天账号（点开聊天页面时赋值，关闭聊天页面时置为null）
-var onChatXf = null;
-var myXf = null;
+
 var imWs = null;
 let imDomObj;
 
 let imParam = {
+    myXf:null,
+    // 正在聊天账号（点开聊天页面时赋值，关闭聊天页面时置为null）
+    onChatXf:null,
     totalUnreadMsgNo:0,
     // 累加未读消息数
     addTotalUnreadMsgNo:function () {
@@ -29,8 +30,11 @@ let imParam = {
 
 $(()=>{
     imDomObj={
-        totalUnreadMsgNo:$("#msg_number_val"),
+        totalUnreadMsgNo:$(".newMsg_num"),
         chatBox: $(".chat_box"),
-        session:$("#msglist")
+        session:$("#msglist"),
+        idContainer:$("#id_container"),
+        photo:$("#photo"),
+        chatPage:$("#chat_detail")
     }
 })

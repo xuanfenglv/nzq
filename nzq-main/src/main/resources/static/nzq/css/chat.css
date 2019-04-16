@@ -503,7 +503,7 @@
 	border-radius: 8px;
 }
 
-#send_button1, #send_button2 {
+#send_button {
 	position: absolute;
 	right: 5px;
 	top: 5px;
@@ -518,10 +518,6 @@
 	text-align: center;
 	line-height: 40px;
 	border-radius: 8px;
-}
-
-#send_button1 {
-	z-index: 5px;
 }
 
 .chat_f {

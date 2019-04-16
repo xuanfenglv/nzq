@@ -482,6 +482,7 @@ function sendMessageAndCreateSession() {
 	$("#send_button1").css("display", "inline");
 	$("#send_button2").css("display", "none");
 }
+// --+
 $(document).ready(function() {
 	$("#friend").click(function() {
 		$("#friendlist").css("display", "inline");
@@ -497,7 +498,7 @@ $(document).ready(function() {
 		$("#editgroup").css("display", "inline");
 	})
 })
-
+//--++
 $(document).ready(function() {
 	$("#msg").click(function() {
 		$("#friendlist").css("display", "none");

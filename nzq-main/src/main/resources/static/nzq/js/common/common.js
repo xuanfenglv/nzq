@@ -93,10 +93,10 @@ let friendInfoUtil = {
     map: new Map(),
     totalUnreadMsgNo:0,
     getFriendInfo: function (xf) {
-        let friendInfo = this.map.get(chatInfo.xf);
+        let friendInfo = this.map.get(xf);
         if (!friendInfo) {
             friendInfo = new FriendInfo();
-            this.map.set(chatInfo.xf, friendInfo);
+            this.map.set(xf, friendInfo);
         }
         return friendInfo;
     },
@@ -104,12 +104,15 @@ let friendInfoUtil = {
         let friendInfo = this.getFriendInfo(chatInfo.xf);
         // 向数组结尾放入一条新的聊天信息
         friendInfo.chatList.push(chatInfo);
-
+        // 如果正在聊天中，加一个气泡
+        if (imParam.onChatXf == chatInfo.xf) {
+            genTextByChatInfo(chatInfo);
+        }
         // 更新（创建）会话
         createOrUpdateSession(chatInfo);
     },
     getChatInfos: function (xf) {
-        let friendInfo = this.getFriendInfo(chatInfo.xf);
+        let friendInfo = this.getFriendInfo(xf);
         // 向数组开头放入一条新的聊天信息
         return friendInfo.chatList;
     },
@@ -152,7 +155,7 @@ let friendInfoUtil = {
         }
     },
     getUnreadMsgNo: function (xf) {
-        let friendInfo = this.getFriendInfo(chatInfo.xf);
+        let friendInfo = this.getFriendInfo(xf);
         return friendInfo.unreadMsgNo;
     }
 }
@@ -196,4 +199,13 @@ let groupNoInfo = {
         groupNo.total--;
         $("#" + groupId + " .f_total").html(groupNo.total);
     }
+}
+
+function getMyXf() {
+    let thisURL = document.URL;
+    let  key_val =thisURL.split('?')[1];
+    let val= key_val.split("=")[1];
+    imParam.myXf = val;
+    imDomObj.idContainer.html(imParam.myXf);
+    imDomObj.photo.attr("src","/nzq/photo/"+imParam.myXf+".jpg");
 }
