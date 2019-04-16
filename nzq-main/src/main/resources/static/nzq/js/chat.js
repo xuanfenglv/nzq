@@ -513,7 +513,7 @@ $(document).ready(function() {
 		$("#editgroup").css("display", "none");
 	})
 })
-// 退出聊天框
+// 退出聊天框--++
 $(document).ready(function() {
 	$("#msg_number").click(function() {
 		$("[xf_no=" + chat_xf + "]").css("display", "none");

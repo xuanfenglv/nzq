@@ -8,51 +8,77 @@ function showFriends(id) {
         $("[imgid=" + id + "]").attr("src", "/nzq/img/right.png");
     }
 }
+
 // 显示好友聊天框
-function showChatDetail(id) {
-    if (($("[friendid=" + id + "]").length > 0)
-        && ($("div[friendid=" + id + "] .number").html() != "0")) {
-        msg_total -= parseInt($("div[friendid=" + id + "] .number").html());
-        // alert(msg_total);
+/**
+ * 1.如果此好友有未读消息，更新此好友未读消息数和总未读消息数，如果未读消息数==0则隐藏
+ * 2.设置当前聊天xf
+ * 3.加载历史聊天信息
+ * @param xf
+ */
+function showChatDetail(xf) {
+    // 此好友的未读消息数
+    let thisFriendUnreadMsgNo = friendInfoUtil.getUnreadMsgNo(xf);
 
-        $("div[friendid=" + id + "] .number").html("0");
-        $("div[friendid=" + id + "] .number").css("display", "none");
-        if (msg_total == 0) {
-            $("#msg_number_val").html("");
-            $("#newMsg_num").css("display", "none");
-        } else {
-            $("#msg_number_val").html("(" + msg_total + ")");
-        }
-        $("#newMsg_num").html(msg_total);
-
+    if (thisFriendUnreadMsgNo > 0) {
+        totalUnreadMsgNo -= thisFriendUnreadMsgNo;
+        // 清空此好友的未读消息
+        friendInfoUtil.clearUnreadMsgNo(xf);
     }
 
-    chat_xf = id;
-    haveSession(id);
-    $("#chat_detail").css("display", "inline");
-    $("#msglist").css("display", "inline");
-    $("#f_name").html($("div[xf = " + id + "] .friend_msg_name").html());
-    $("#f_state").html($("div[xf = " + id + "] .friend_msg_content").html());
-    // 判断是否有聊天面板，有则直接打开，否则新建
-    if ($("[xf_no=" + id + "]").length > 0) {
-        $("[xf_no=" + id + "]").css("display", "inline");
-    } else {
-        var chat_box = '<div xf_no="' + id + '"></div>';
-        $(".chat_box").html($(".chat_box").html() + chat_box);
-    }
-    $("[xf_no=" + id + "]").scrollTop = $("[xf_no=" + id + "]").scrollHeight;
+    // 设置当前聊天xf
+    onChatXf = xf;
+
+    // 聊天消息list
+    let chatList = friendInfoUtil.getChatInfos(xf);
+    chatList.forEach(chatInfo => {
+        let textHtml = genTextByChatInfo(chatInfo);
+        imDomObj.chatBox.append(textHtml);
+    });
+    // 也不知道管不管用
+
+    $("[xf_no=" + xf + "]").scrollTop = $("[xf_no=" + xf + "]").scrollHeight;
 }
-// 判断点击的好友是否有会话
-function haveSession(id) {
-    if ($("[friendid=" + id + "]").length > 0) {
-        // alert("会话已存在");
-        // 隐藏普通发送按钮
-        $("#send_button1").css("display", "inline");
-        $("#send_button2").css("display", "none");
+
+// 发送消息
+function sendMessage() {
+    var text = $("#msg_input").val();
+
+    if (text) {
+        // 生成html
+        genMyText(text);
+
+        // 滚动到底部
+        $("[xf_no=" + chat_xf + "]").scrollTop($("[xf_no=" + chat_xf + "]").height());
+
+        // 发送消息
+        let msg = new SendTextMsg(onChatXf, text);
+        imWs.sendMsg(msg);
+
+        // 清空输入框
+        $("#msg_input").val(emptyStr);
     } else {
-        // 显示发送按钮
-        // alert("会话不已存在");
-        $("#send_button1").css("display", "none");
-        $("#send_button2").css("display", "inline");
+        showTip("不可发送空消息");
     }
 }
+
+/**
+ * 创建或更新会话
+ * @param chatInfo
+ */
+function createOrUpdateSession(chatInfo) {
+    let session = $("[friendid=" + chatInfo.xf + "]");
+    if (session.length == 0) {
+        createSession(chatInfo);
+    } else {
+        $("div[friendid=" + chatInfo.xf + "] .content").html(chatInfo.text);
+    }
+}
+
+// 退出聊天框
+$(document).ready(function() {
+    $("#msg_number").click(function() {
+        $("[xf_no=" + chat_xf + "]").css("display", "none");
+        $("#chat_detail").css("display", "none");
+    })
+})

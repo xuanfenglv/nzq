@@ -28,3 +28,38 @@ function genFriend(friend) {
         + '</div></div>';
     return friendHtml;
 }
+
+function genMyText(text) {
+    let textHtml = '<div class="outerChat">'
+        + '<img class="outerChat_photo i_photo" src="/nzq/photo/' + myXf + '.jpg"/>'
+        + '<div class="outerChat_msg i_msg outerChat_msg_blue">' + text + '</div>'
+        + '</div>';
+    $("[xf_no=" + onChatXf + "]").append(textHtml);
+}
+
+function genTextByChatInfo(chatInfo) {
+    let flag;
+    if (chatInfo.type == ChatInfoType.SEND) {
+        flag = i;
+    } else {
+        flag = f;
+    }
+    let textHtml = '<div class="outerChat">'
+        + '<img class="outerChat_photo '+flag+'_photo" src="/nzq/photo/' + chatInfo.xf + '.jpg"/>'
+        + '<div class="outerChat_msg '+flag+'_msg outerChat_msg_blue">' + chatInfo.text + '</div>'
+        + '</div>';
+    return textHtml;
+}
+// todo 去dom中查名字，杜绝,serverTime渲染页面
+function createSession(chatInfo) {
+    let d = new Date();
+    let session = '<div class="msg_window" friendid="' + chatInfo.xf
+        + '" onclick="showChatDetail(' + chatInfo.xf + ')">'
+        + '<img class="friend_photo" src="/nzq/photo/' + chatInfo.xf
+        + '.jpg" />' + '<div class="friend_name">'
+        + $("div[xf = " + chatInfo.xf + "] .friend_msg_name").html() + '</div>'
+        + '<div class="msg_time">'+d.getHours()+":"+d.getMinutes()+'</div>'
+        + '<div class="content">'+chatInfo.text+'</div>' + '<div class="number">0</div>'
+        + '</div>';
+    imDomObj.session.prepend(session);
+}
