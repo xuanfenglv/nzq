@@ -5,6 +5,7 @@ class ChatHandlerManager {
 		
 		this.handlerMapping.set(1, new ChatInitHandler());
 		this.handlerMapping.set(2, new ChatHandler());
+		this.handlerMapping.set(8, new AppHandler());
 	}
 	handle(msg) {
 		let handler = this.handlerMapping.get(msg.msgId);

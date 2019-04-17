@@ -52,6 +52,8 @@ public class ImStatusHandler {
                 e.printStackTrace();
             }
         });
+        // 移除缓存
+        IMCacheManager.remove(xf);
 
     }
 }

@@ -6,7 +6,7 @@ let CommonUtils = {
             return true;
         } else {
             // todo 做一个通用的
-            showErro(msg.errorMsg);
+            showError(msg.errorMsg);
             return false;
         }
     }

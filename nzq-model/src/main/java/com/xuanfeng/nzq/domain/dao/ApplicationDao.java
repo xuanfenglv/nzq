@@ -1,6 +1,7 @@
 package com.xuanfeng.nzq.domain.dao;
 
 import com.xuanfeng.nzq.api.response.app.ShortApplication;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -14,8 +15,8 @@ import java.util.List;
 
 public interface ApplicationDao {
 
-    @Select("select id form Application where sendXf=#{sendXf} and receiveXf=#{receiveXf}")
-    Long selectApplicationId(Long sendXf, Long receiveXf);
+    @Select("select id from Application where send_xf=#{sendXf} and receive_xf=#{receiveXf}")
+    Long selectApplicationId(@Param("sendXf") Long sendXf, @Param("receiveXf") Long receiveXf);
 
     @Update("update Application set status=#{status} where id=#{applicatinId}")
     int changStatus(Long applicatinId, Byte status);

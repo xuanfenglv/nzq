@@ -9,7 +9,7 @@ public class Application {
 
     private String text;
 
-    private Long friendGroupId;
+    private Long groupId;
 
     private String remark;
 
@@ -51,12 +51,12 @@ public class Application {
         this.text = text == null ? null : text.trim();
     }
 
-    public Long getFriendGroupId() {
-        return friendGroupId;
+    public Long getGroupId() {
+        return groupId;
     }
 
-    public void setFriendGroupId(Long friendGroupId) {
-        this.friendGroupId = friendGroupId;
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     public String getRemark() {

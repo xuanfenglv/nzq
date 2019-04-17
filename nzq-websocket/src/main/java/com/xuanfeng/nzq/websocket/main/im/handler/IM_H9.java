@@ -1,11 +1,7 @@
 package com.xuanfeng.nzq.websocket.main.im.handler;
 
 import com.xuanfeng.nzq.commons.RetEnum;
-import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import com.xuanfeng.nzq.commons.constant.ApplicationStatusEnum;
-import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
-import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.domain.dao.ApplicationDao;
 import com.xuanfeng.nzq.domain.dao.FriendDao;
 import com.xuanfeng.nzq.domain.dao.UserDao;
@@ -13,11 +9,15 @@ import com.xuanfeng.nzq.domain.mapper.ApplicationMapper;
 import com.xuanfeng.nzq.domain.mapper.FriendMapper;
 import com.xuanfeng.nzq.domain.model.Application;
 import com.xuanfeng.nzq.domain.model.Friend;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.main.im.msg.notice.AgreeFriendApplicationNotice;
 import com.xuanfeng.nzq.websocket.main.im.msg.request.AgreeFriendApplicationReq;
 import com.xuanfeng.nzq.websocket.main.im.msg.response.AgreeFriendApplicationResp;
 import com.xuanfeng.nzq.websocket.util.ImSessions;
+import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +54,7 @@ public class IM_H9 extends IMsgHandler {
         // 存库
         // 请求方好友信息
         Friend friend1 = new Friend();
-        friend1.setGroupId(application.getFriendGroupId());
+        friend1.setGroupId(application.getGroupId());
         friend1.setFxf(application.getReceiveXf());
         friend1.setXf(application.getSendXf());
         friend1.setRemark(application.getRemark());
@@ -82,7 +82,7 @@ public class IM_H9 extends IMsgHandler {
         String sendNickname = userDao.queryNickname(application.getSendXf());
         AgreeFriendApplicationResp resp = new AgreeFriendApplicationResp();
         resp.setApplicationId(req.getApplicationId());
-        notice.setGroupId(application.getFriendGroupId());
+        notice.setGroupId(application.getGroupId());
         notice.setXf(application.getSendXf());
         notice.setNickname(sendNickname);
 

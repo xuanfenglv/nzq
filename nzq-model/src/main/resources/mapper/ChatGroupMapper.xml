@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.xuanfeng.nzq.domain.model.ChatGroup">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="receiveXf" jdbcType="BIGINT" property="receiveXf" />
+    <result column="xf" jdbcType="BIGINT" property="xf" />
     <result column="notice" jdbcType="VARCHAR" property="notice" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
     <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, receiveXf, notice, ctime, mtime
+    id, name, xf, notice, ctime, mtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -26,9 +26,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ChatGroup (name, receiveXf, notice,
+    insert into ChatGroup (name, xf, notice, 
       ctime, mtime)
-    values (#{name,jdbcType=VARCHAR}, #{receiveXf,jdbcType=BIGINT}, #{notice,jdbcType=VARCHAR},
+    values (#{name,jdbcType=VARCHAR}, #{xf,jdbcType=BIGINT}, #{notice,jdbcType=VARCHAR}, 
       #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xuanfeng.nzq.domain.model.ChatGroup">
@@ -40,8 +40,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="receiveXf != null">
-        receiveXf,
+      <if test="xf != null">
+        xf,
       </if>
       <if test="notice != null">
         notice,
@@ -57,8 +57,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="receiveXf != null">
-        #{receiveXf,jdbcType=BIGINT},
+      <if test="xf != null">
+        #{xf,jdbcType=BIGINT},
       </if>
       <if test="notice != null">
         #{notice,jdbcType=VARCHAR},
@@ -77,8 +77,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="receiveXf != null">
-        receiveXf = #{receiveXf,jdbcType=BIGINT},
+      <if test="xf != null">
+        xf = #{xf,jdbcType=BIGINT},
       </if>
       <if test="notice != null">
         notice = #{notice,jdbcType=VARCHAR},
@@ -95,7 +95,7 @@
   <update id="updateByPrimaryKey" parameterType="com.xuanfeng.nzq.domain.model.ChatGroup">
     update ChatGroup
     set name = #{name,jdbcType=VARCHAR},
-      receiveXf = #{receiveXf,jdbcType=BIGINT},
+      xf = #{xf,jdbcType=BIGINT},
       notice = #{notice,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=TIMESTAMP},
       mtime = #{mtime,jdbcType=TIMESTAMP}

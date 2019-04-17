@@ -1,16 +1,18 @@
 package com.xuanfeng.nzq.websocket.main.im.handler;
 
-import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import com.xuanfeng.nzq.commons.constant.ApplicationStatusEnum;
-import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.domain.dao.UserDao;
 import com.xuanfeng.nzq.domain.model.Application;
 import com.xuanfeng.nzq.service.ApplicationService;
+import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.main.im.msg.notice.SendFriendApplicationNotice;
 import com.xuanfeng.nzq.websocket.main.im.msg.request.SendFriendApplicationReq;
 import com.xuanfeng.nzq.websocket.main.im.msg.response.SendFriendApplicationResp;
+import com.xuanfeng.nzq.websocket.util.ImSessions;
+import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -48,11 +50,13 @@ public class IM_H8 extends IMsgHandler {
         String receiveNickname = userDao.queryNickname(req.getReceiveXf());
 
         // 推送
-        SendFriendApplicationNotice push = new SendFriendApplicationNotice();
-        push.setXf(xf);
-        push.setNickname(sendNickname);
-        push.setText(req.getText());
-        push.setApplicationId(applicationd.getId());
+        SendFriendApplicationNotice notice = new SendFriendApplicationNotice();
+        notice.setXf(xf);
+        notice.setNickname(sendNickname);
+        notice.setText(req.getText());
+        notice.setApplicationId(applicationd.getId());
+
+        ImSessions.sendMsgToXf(req.getReceiveXf(),new NoticeMsg(req.getMsgId(),notice));
         // 响应
         SendFriendApplicationResp resp = new SendFriendApplicationResp();
         resp.setApplicationId(applicationd.getId());

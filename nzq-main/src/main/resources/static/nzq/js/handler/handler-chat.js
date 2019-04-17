@@ -47,10 +47,10 @@ class ChatHandler extends BaseHandler {
 class AppHandler extends BaseHandler {
     handleResponse(data) {
         // 发送好友申请成功
-
+        genMyApp(data);
     }
     handleNotice(data) {
         // 收到一条好友申请消息
-
+        genReceiveApp(data);
     }
 }

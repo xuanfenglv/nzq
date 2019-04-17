@@ -3,13 +3,13 @@
 <mapper namespace="com.xuanfeng.nzq.domain.mapper.ChatInfoMapper">
   <resultMap id="BaseResultMap" type="com.xuanfeng.nzq.domain.model.ChatInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="receiveXf" jdbcType="BIGINT" property="sendxf" />
+    <result column="sendXf" jdbcType="BIGINT" property="sendxf" />
     <result column="receiveXf" jdbcType="BIGINT" property="receivexf" />
     <result column="text" jdbcType="VARCHAR" property="text" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, receiveXf, receiveXf, text, ctime
+    id, sendXf, receiveXf, text, ctime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -25,7 +25,7 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ChatInfo (receiveXf, receiveXf, text,
+    insert into ChatInfo (sendXf, receiveXf, text, 
       ctime)
     values (#{sendxf,jdbcType=BIGINT}, #{receivexf,jdbcType=BIGINT}, #{text,jdbcType=VARCHAR}, 
       #{ctime,jdbcType=TIMESTAMP})
@@ -37,7 +37,7 @@
     insert into ChatInfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sendxf != null">
-        receiveXf,
+        sendXf,
       </if>
       <if test="receivexf != null">
         receiveXf,
@@ -68,7 +68,7 @@
     update ChatInfo
     <set>
       <if test="sendxf != null">
-        receiveXf = #{sendxf,jdbcType=BIGINT},
+        sendXf = #{sendxf,jdbcType=BIGINT},
       </if>
       <if test="receivexf != null">
         receiveXf = #{receivexf,jdbcType=BIGINT},
@@ -84,7 +84,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xuanfeng.nzq.domain.model.ChatInfo">
     update ChatInfo
-    set receiveXf = #{sendxf,jdbcType=BIGINT},
+    set sendXf = #{sendxf,jdbcType=BIGINT},
       receiveXf = #{receivexf,jdbcType=BIGINT},
       text = #{text,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=TIMESTAMP}

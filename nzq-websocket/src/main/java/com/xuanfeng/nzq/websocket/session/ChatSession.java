@@ -81,8 +81,7 @@ public class ChatSession extends WsServer {
     public void selfOffline() throws IOException {
         // 移除会话
         ImSessions.removeXf(this.xf);
-        // 移除缓存
-        IMCacheManager.remove(this.xf);
+
         logger.info("下线用户是：{},当前在线人数为:{}", this.xf, ImSessions.getOnlineCount());
         // 推送下线消息
         ImStatusHandler.changeStatus(this.xf,UserStatusEnum.离线);
