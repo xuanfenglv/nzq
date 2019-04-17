@@ -35,8 +35,8 @@ public interface UserBaseController {
             @RequestParam(value = "nickname",required = false) String nickname,
             @RequestParam(value = "sex",required = false) Byte sex,
             @RequestParam(value = "grade",required = false) Byte grade,
-            @RequestParam(value = "pageSize",required = true) Integer pageSize,
-            @RequestParam(value = "pageNum",required = true) Integer pageNum
+            @RequestParam(value = "pageSize",required = false,defaultValue = "100") Integer pageSize,
+            @RequestParam(value = "pageNum",required = false,defaultValue = "1") Integer pageNum
     );
 
     @PutMapping("self")

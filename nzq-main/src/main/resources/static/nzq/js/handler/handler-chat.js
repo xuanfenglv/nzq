@@ -42,3 +42,15 @@ class ChatHandler extends BaseHandler {
         }
 	}
 }
+
+// 8
+class AppHandler extends BaseHandler {
+    handleResponse(data) {
+        // 发送好友申请成功
+
+    }
+    handleNotice(data) {
+        // 收到一条好友申请消息
+
+    }
+}

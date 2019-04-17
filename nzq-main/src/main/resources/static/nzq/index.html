@@ -1099,23 +1099,23 @@
 						</div>
 						<div class="condition_grade">
 							<select name="段位" id="search_friend_grade" class="grade_select">
-								<option value="all" selected="selected">段位：全部</option>
-								<option value="青铜3">青铜3</option>
-								<option value="青铜2">青铜2</option>
-								<option value="青铜1">青铜1</option>
-								<option value="白银3">白银3</option>
-								<option value="白银2">白银2</option>
-								<option value="白银1">白银1</option>
-								<option value="黄金3">黄金3</option>
-								<option value="黄金2">黄金2</option>
-								<option value="黄金1">黄金1</option>
-								<option value="铂金3">铂金3</option>
-								<option value="铂金2">铂金2</option>
-								<option value="铂金1">铂金1</option>
-								<option value="钻石3">钻石3</option>
-								<option value="钻石2">钻石2</option>
-								<option value="钻石1">钻石1</option>
-								<option value="最强王者">最强王者</option>
+								<option value="" selected="selected">段位：全部</option>
+								<option value="1">青铜3</option>
+								<option value="2">青铜2</option>
+								<option value="3">青铜1</option>
+								<option value="4">白银3</option>
+								<option value="5">白银2</option>
+								<option value="6">白银1</option>
+								<option value="7">黄金3</option>
+								<option value="8">黄金2</option>
+								<option value="9">黄金1</option>
+								<option value="10">铂金3</option>
+								<option value="11">铂金2</option>
+								<option value="12">铂金1</option>
+								<option value="13">钻石3</option>
+								<option value="14">钻石2</option>
+								<option value="15">钻石1</option>
+								<option value="16">最强王者</option>
 							</select>
 
 						</div>
@@ -1423,7 +1423,7 @@
 
 				<div id="error">
 					<img class="error_img" src="/nzq/img/i.png" />
-					<div class="error_title">网络出问题了</div>
+					<div class="error_title"></div>
 				</div>
 				<div id="db_error">
 					<img class="error_img" src="/nzq/img/i.png" />
@@ -1445,10 +1445,12 @@
 </body>
 <!--jquery-->
 <script src="js/common/jquery-3.1.1.min.js"></script>
-<!--常量值-->
-<script src="/nzq/js/common/constant.js"></script>
 <!--枚举-->
 <script src="/nzq/js/common/enum.js"></script>
+<!--常量值-->
+<script src="/nzq/js/common/constant.js"></script>
+<!--日志-->
+<script src="/nzq/js/common/logger.js"></script>
 <!--全局变量-->
 <script src="/nzq/js/common/public.js"></script>
 
@@ -1480,6 +1482,7 @@
 <!--im-->
 <script src="/nzq/js/im/main.js"></script>
 <script src="/nzq/js/im/switch.js"></script>
+<script src="/nzq/js/im/api.js"></script>
 <!--game-->
 <!--<script src="/nzq/js/game.js"></script>-->
 <!--游戏运行时-->

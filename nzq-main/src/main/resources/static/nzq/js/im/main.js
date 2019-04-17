@@ -74,3 +74,36 @@ function createOrUpdateSession(chatInfo) {
         $("div[friendid=" + chatInfo.xf + "] .content").html(chatInfo.text);
     }
 }
+
+/**
+ * 显示添加好友页面
+ * @param xf
+ */
+function showAddFriend(xf) {
+    // 清空分组下拉列表
+    $("#group").html("");
+    // 给下拉列表赋值 todo 优化
+    var groups = document.getElementsByClassName("group_detail");
+    for(var i = 0; i < groups.length; i++) {
+        let group = groups[i];
+        let id = group.id;
+        let name = group.getElementsByClassName("group_name")[0].innerHTML;
+        $("#group").html($("#group").html()+'<option value="'+id+'">'+name+'</option>');
+    }
+    // 把一片dom copy过来
+    $("#add_friend_data").html($("[search_friend_id = "+xf+"]").html());
+    // 显示添加好友页面
+    $("#add_friend").css("display", "inline");
+    // 清空备注
+    $("#remark").val("");
+    // 设置全局变量
+    imParam.receiveApplicationXf = xf;
+
+}
+
+/**
+ * 初始化申请
+ */
+function initApplication() {
+    getApp();
+}

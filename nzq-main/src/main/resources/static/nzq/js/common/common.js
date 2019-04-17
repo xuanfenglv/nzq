@@ -2,69 +2,13 @@
 let CommonUtils = {
     checkRet: function (msg) {
         let ret = msg.ret;
-        switch (ret) {
-            case 1:
-                return true;
-            case 2:
-                //未登录
-                layer.msg(tip, {
-                    icon: 0,
-                    time: 1000
-                });
-                break;
-            case 3:
-                // 参数不正确
-                layer.msg(tip, {
-                    icon: 2,
-                    time: 1000
-                });
-                break;
-            case 4:
-                // 权限不足
-                layer.msg(tip, {
-                    icon: 5,
-                    time: 1000
-                });
-                break;
-            case 5:
-                // 需要备注
-                layer.msg(tip, {
-                    icon: 3,
-                    time: 1000
-                });
-                break;
-            case 6:
-                // 已被封号
-                layer.msg('已被封号', {
-                    icon: 4,
-                    time: 1000
-                });
-                break;
-            case 7:
-                // 登录失败
-                layer.msg(tip, {
-                    icon: 2,
-                    time: 1000
-                });
-                break;
-            case 8:
-                // 服务器故障
-                layer.msg(tip, {
-                    icon: 2,
-                    time: 1000
-                });
-                break;
-            case 9:
-                // 服务器故障
-                layer.msg(tip, {
-                    icon: 2,
-                    time: 1000
-                });
-                break;
-            default:
-                break;
+        if (ret == 1) {
+            return true;
+        } else {
+            // todo 做一个通用的
+            showErro(msg.errorMsg);
+            return false;
         }
-        return false;
     }
 }
 
@@ -208,4 +152,22 @@ function getMyXf() {
     imParam.myXf = val;
     imDomObj.idContainer.html(imParam.myXf);
     imDomObj.photo.attr("src","/nzq/photo/"+imParam.myXf+".jpg");
+}
+
+/**
+ * 关闭蒙层
+ */
+function endRunning() {
+    $("#running").css("display","none");
+}
+// 打开蒙层
+function showRunning(title) {
+//	console.log("showtime");
+    $("#running_title").html(title+"...");
+    $("#running").css("display","inline");
+}
+// 显示错误
+function showError(msg) {
+    $("#error").slideDown(600).delay(1500).slideUp(600);
+    $("#error .error_title").html(msg);
 }

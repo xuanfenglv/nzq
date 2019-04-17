@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -51,7 +52,7 @@ public class UserController implements UserBaseController {
             HttpSession session = SessionUtil.getSession(true);
             UserSessionInfo sessionInfo = new UserSessionInfo();
             sessionInfo.setXf(request.getXf());
-            session.setAttribute("user",sessionInfo);
+            session.setAttribute("user", sessionInfo);
 
             return ResultUtil.createSuccessResult();
 
@@ -64,7 +65,7 @@ public class UserController implements UserBaseController {
     @Override
     public Result<SelfUserInfo> querySelfUserInfo() {
         logger.info("Enter method querySelfUserInfo.");
-        UserSessionInfo info =SessionUtil.getUserSessionInfo();
+        UserSessionInfo info = SessionUtil.getUserSessionInfo();
         SelfUserInfo selfUserInfo = service.querySelfUserInfo(info.getXf());
         logger.info("End method querySelfUserInfo.");
         return ResultUtil.createSuccessResult(selfUserInfo);
@@ -73,7 +74,7 @@ public class UserController implements UserBaseController {
     @Override
     public Result updateSelfUserInfo(@RequestBody UpdateSelfInfoRequest request) {
         logger.info("Enter method updateSelfUserInfo,request:{}.", request);
-        service.updateSelfUserInfo(request,SessionUtil.getUserSessionInfo().getXf());
+        service.updateSelfUserInfo(request, SessionUtil.getUserSessionInfo().getXf());
         logger.info("End method updateSelfUserInfo.");
         return ResultUtil.createSuccessResult();
     }
@@ -87,9 +88,15 @@ public class UserController implements UserBaseController {
     }
 
     @Override
-    public Result<List<OtherUserInfo>> searchOtherUsers(String nickname, Byte sex, Byte grade,Integer pageSize, Integer pageNum) {
-        logger.info("Enter method searchOtherUsers,nickname:{},sex:{},grade:{},lastXf:{}.",nickname, sex,grade,pageSize,pageNum);
-        List<OtherUserInfo> otherUserInfos = service.searchOtherUsers(nickname,sex,grade,pageSize,pageNum);
+    public Result<List<OtherUserInfo>> searchOtherUsers(
+            @RequestParam(value = "nickname", required = false) String nickname,
+            @RequestParam(value = "sex", required = false) Byte sex,
+            @RequestParam(value = "grade", required = false) Byte grade,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "100") Integer pageSize,
+            @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum) {
+
+        logger.info("Enter method searchOtherUsers,nickname:{},sex:{},grade:{},lastXf:{}.", nickname, sex, grade, pageSize, pageNum);
+        List<OtherUserInfo> otherUserInfos = service.searchOtherUsers(nickname, sex, grade, pageSize, pageNum);
         logger.info("End method searchOtherUsers.");
         return ResultUtil.createSuccessResult(otherUserInfos);
     }

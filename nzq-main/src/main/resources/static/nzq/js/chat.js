@@ -460,361 +460,14 @@ function removeFriend(xf) {
 	
 }
 
-function createSession(chat_xf) {
-	var d = new Date();
-	var msg_window = '<div class="msg_window" friendid="' + chat_xf
-			+ '" onclick="showChatDetail(' + chat_xf + ')">'
-			+ '<img class="friend_photo" src="/nzq/photo/' + chat_xf
-			+ '.jpg" />' + '<div class="friend_name">'
-			+ $("div[xf = " + chat_xf + "] .friend_msg_name").html() + '</div>'
-			+ '<div class="msg_time">'+d.getHours()+":"+d.getMinutes()+'</div>'
-			+ '<div class="content"></div>' + '<div class="number">0</div>'
-			+ '</div>';
-	// alert("2");
-	$("#msglist").html($("#msglist").html() + msg_window);
-}
-function sendMessageAndCreateSession() {
-//	 alert("1");
-	createSession(chat_xf);
-//	 alert("3");
-	sendMessage();
-	// 创建会话后send1替换send2
-	$("#send_button1").css("display", "inline");
-	$("#send_button2").css("display", "none");
-}
-// --+
-$(document).ready(function() {
-	$("#friend").click(function() {
-		$("#friendlist").css("display", "inline");
-		$("#msg").css({
-			"background-color" : "#1296db",
-			"color" : "white"
-		});
-		$("#friend").css({
-			"background" : "white",
-			"color" : "#1296db"
-		});
-		$("#addfriend").css("display", "none");
-		$("#editgroup").css("display", "inline");
-	})
-})
-//--++
-$(document).ready(function() {
-	$("#msg").click(function() {
-		$("#friendlist").css("display", "none");
-		$("#friend").css({
-			"background-color" : "#1296db",
-			"color" : "white"
-		});
-		$("#msg").css({
-			"background" : "white",
-			"color" : "#1296db"
-		});
-		$("#addfriend").css("display", "inline");
-		$("#editgroup").css("display", "none");
-	})
-})
-// 退出聊天框--++
-$(document).ready(function() {
-	$("#msg_number").click(function() {
-		$("[xf_no=" + chat_xf + "]").css("display", "none");
-		$("#chat_detail").css("display", "none");
-	})
-})
-
-$(document).ready(function() {
-	$("#addfriend").click(function() {
-		$("#search_friend").css("display", "inline");
-	})
-})
-
-$(document).ready(function() {
-	$("#editgroup").click(function() {
-		$("#my_groups").html("");
-		var group;
-		var id;
-		var name;
-		var group1;
-		var groups = document.getElementsByClassName("group_detail");
-		for(var i = 0; i < groups.length; i++) {
-			group = groups[i];
-			id = group.id;
-			name = group.getElementsByClassName("group_name")[0].innerHTML;
-			if(i==0) {
-				group1 = '<div class="mygroup">'
-					+'<div class="groupname" mygroupid="'+id+'" onclick="showEditGroupName('+id+')" >'+name+'</div>'
-					+'</div>';
-			} else {
-				group1 = '<div class="mygroup">'
-					+'<div class="groupname" mygroupid="'+id+'" onclick="showEditGroupName('+id+')" >'+name+'</div>'
-					+'<img class="delete_group" title="删除分组" onclick="showDeleteGroup('+id+')" src="/nzq/img/delete_group.png" />'
-					+'</div>';
-			}
-			
-			$("#my_groups").html($("#my_groups").html()+group1);
-			console.log(id+" "+name);
-		}
-		$("#manage_group").css("display","inline");
-	})
-})
-
-$(document).ready(function() {
-	$("#search_friend_return").click(function() {
-		$("#search_friend").css("display", "none");
-//		var x;
-//		for (x in friendGroup)
-//		{
-//		alert(friendGroup[x].sno+friendGroup[x].sname);
-//		}
-	})
-})
-
-$(document).ready(function() {
-	$("#w").click(function() {
-		$("#conditon_sex").attr("sex","w");
-		$("#w").css({ "background-color": "#1296db", "color": "white" });
-		$("#m").css({ "background-color": "white", "color": "black" });
-		$("#n").css({ "background-color": "white", "color": "black" });
-	})
-})
-$(document).ready(function() {
-	$("#m").click(function() {
-		$("#conditon_sex").attr("sex","m");
-		$("#m").css({ "background-color": "#1296db", "color": "white" });
-		$("#w").css({ "background-color": "white", "color": "black" });
-		$("#n").css({ "background-color": "white", "color": "black" });
-	})
-})
-$(document).ready(function() {
-	$("#n").click(function() {
-		$("#conditon_sex").attr("sex","n");
-		$("#n").css({ "background-color": "#1296db", "color": "white" });
-		$("#w").css({ "background-color": "white", "color": "black" });
-		$("#m").css({ "background-color": "white", "color": "black" });
-	})
-})
-//通过xf查找用户
-$(document).ready(function() {
-	$("#search_photo").click(function() {
-		var xf = $("#search_friend_xf").val();
-		if(xf=="") {
-			alert("请输入xf号后再点击查询！！！");
-			return;
-		} else if(!(/^[1-9]\d{4,9}$/.test(xf))) {
-			alert("请输入正确的xf号格式！！！");
-			return;
-		}
-		alert(xf);
-		
-		$.ajax({
-			url : "/nzq/GetUserInfoByXf",
-			data : {
-				xf3 : xf
-			},
-			method : 'get',
-			dataType : 'json', // 很重要!!!. 预期服务器返回的数据类型
-			error : function() {
-				alert("通过xf号查找好友出现错误!!!");
-			},
-			success : function(data) {
-				if(data==null) {
-					//无当前xf号的
-					alert("未找到");
-				} else {
-					//展示搜索到的用户
-					//alert("success--用户>nickname："+data.nickname+data.xf+data.sex+data.age+data.grade);
-					search_item = '<div class="search_friend_item">'
-						+'<div class="search_friend_one" search_friend_id="'+data.xf+'">'
-						+'<img class="friend_msg_photo" src="/nzq/photo/'+data.xf+'.jpg" />'
-						+'<div class="friend_msg_data">'
-						+'<div class="search_friend_msg">'
-						+'<div class="search_friend_msg_name">'+data.nickname+'</div>'
-						+'<div class="search_friend_msg_xf">('+data.xf+')</div>'
-						+'</div>'
-						+'<div class="friend_msg_detail">'
-						+'<div class="friend_msg_sex_'+data.sex+'">'
-						+'<img src="/nzq/img/'+data.sex+'.png" style="width: 10px;height:10px;margin-top: 1px;margin-left: 1px;" /> '+data.age+''
-						+'</div>'
-						+'<div class="friend_msg_grade">'+data.grade+'</div>'
-						+'</div>'
-						+'</div>'
-						+'</div>'
-						+'<button class="add_button" onclick="showAddFriend('+data.xf+')" >添加</button>'
-						+'</div>';
-//					var search_item = '<div class="search_friend_item">'
-//										+'<div class="friend_msg" search_friend_id="'+data.xf+'">'
-//										+'<img class="friend_msg_photo" src="/nzq/photo/'+data.xf+'.jpg" />'
-//										+'<div class="friend_msg_data">'
-//										+'<div class="friend_msg_name">'+data.nickname+'&nbsp;<span style="color:lightslategray">('+data.xf+')</span></div>'
-//										+'<div class="friend_msg_detail">'
-//										+'<div class="friend_msg_sex_'+data.sex+'">'
-//										+'<img src="/nzq/img/'+data.sex+'.png" style="width: 10px;height:10px;margin-top: 1px;margin-left: 1px;" /> '+data.age+''
-//										+'</div>'
-//										+'<div class="friend_msg_grade">'+data.grade+'</div>'
-//										+'</div>'
-//										+'</div>'
-//										+'</div>'
-//										+'<button class="add_button">添加</button>'
-//										+'</div>';
-					$("#search_friend_result").html(search_item);
-				}
-			}
-		})
-	})
-})
 //通过条件查找用户
 $(document).ready(function() {
-	$("#condition_button").click(function() {
-		showRunning("搜索中");
-		var nickname = $("#search_friend_nickname").val();
-		var sex = $("#conditon_sex").attr("sex");
-		var grade = $("#search_friend_grade").val();
-		var myxf = $("#id_container").html();
-		$.ajax({
-			url : "/nzq/GetUserInfoByCondition",
-			data : {
-				myxf : myxf,
-				nickname : nickname,
-				sex : sex,
-				grade : grade
-			},
-			method : 'post',
-			dataType : 'json', // 很重要!!!. 预期服务器返回的数据类型
-			error : function() {
-				endRunning();
-				showError();
-				alert("通过条件查找好友出现错误!!!");
-			},
-			success : function(data) {
-				if(data==null) {
-					//无当前xf号的
-					alert("未找到");
-				} else {
-					endRunning();
-					//展示搜索到的用户
-					var search_item;
-					$("#search_friend_result").html("");
-					var add = "";
-					$.each(data,function(index) {
-						if(data[index].isFriend==0) {
-							add = '<button class="add_button" onclick="showAddFriend('+data[index].xf+')" >添加</button>';
-						} else {
-							add = "";
-						}
-						search_item = '<div class="search_friend_item">'
-							+'<div class="search_friend_one" search_friend_id="'+data[index].xf+'">'
-							+'<img class="friend_msg_photo" src="/nzq/photo/'+data[index].xf+'.jpg" />'
-							+'<div class="friend_msg_data">'
-							+'<div class="search_friend_msg">'
-							+'<div class="search_friend_msg_name">'+data[index].nickname+'</div>'
-							+'<div class="search_friend_msg_xf">('+data[index].xf+')</div>'
-							+'</div>'
-							+'<div class="friend_msg_detail">'
-							+'<div class="friend_msg_sex_'+data[index].sex+'">'
-							+'<img src="/nzq/img/'+data[index].sex+'.png" style="width: 10px;height:10px;margin-top: 1px;margin-left: 1px;" /> '+data[index].age+''
-							+'</div>'
-							+'<div class="friend_msg_grade">'+data[index].grade+'</div>'
-							+'</div>'
-							+'</div>'
-							+'</div>'
-							+add
-							+'</div>';
-						$("#search_friend_result").html($("#search_friend_result").html()+search_item);
-					})
-				}
-			}
-		})
-	})
+
 })
 
-//添加好友
-$(document).ready(function() {
-	$("#add_friend_return").click(function() {
-		$("#add_friend").css("display", "none");
-	})
-})
-function showAddFriend(xf) {
-	$("#group").html("");
-	var group;
-	var id;
-	var name;
-	var group1;
-	var groups = document.getElementsByClassName("group_detail");
-	for(var i = 0; i < groups.length; i++) {
-		group = groups[i];
-		id = group.id;
-		name = group.getElementsByClassName("group_name")[0].innerHTML;
-		$("#group").html($("#group").html()+'<option value="'+id+'">'+name+'</option>');
-	}
-	$("#add_friend_data").html($("[search_friend_id = "+xf+"]").html());
-	$("#add_friend").css("display", "inline");
-	$("#remark").val("");
-	receive_xf = xf;
-	
-}
-//已废除
-//online notice
-function sendOnlineNotice() {
-	var id = setInterval(function() {
-		websocket.send("3"+ $("#id_container").html()+"." + friend_xf);
-		clearInterval(id);
-	}, 100)
-	
-}
-//已废除
-function sendOfflineNotice() {
-//	alert(friend_xf);
-	websocket.send("4"+ $("#id_container").html()+"." + friend_xf);
-}
-//send add friend application
-$(document).ready(function() {
-	$("#add_friend_send").click(function() {
-		showRunning("发送请求中");
-		var friend_msg = $("#add_friend_data .search_friend_msg .search_friend_msg_name").html();
-//		alert(friend_msg);
-		var send_xf = $("#id_container").html();
-		var text = $("#add_friend_msg").val();
-//		alert(text);
-		var send_sno = $("#group").val();
-		var send_remark = $("#remark").val();
-		console.log("数据传递"+send_xf+receive_xf+text+send_sno+send_remark);
 
-		$.ajax({
-			url : "/nzq/SendApplication",
-			data : {
-				send_xf : send_xf,
-				receive_xf : receive_xf,
-				text : text,
-				send_sno : send_sno,
-				send_remark : send_remark,
-			},
-			dataType : 'text', 
-			method : 'post',
-			error : function() {
-				endRunning();
-				showError();
-				console.log("前台发送好友申请失败");
-			},
-			success : function(text) {
-				if(text=="success") {
-					endRunning();
-					$("[search_friend_id="+receive_xf+"]").parent().children(".add_button").remove();
-					console.log("好友申请存入数据库成功");
-					//本地添加申请记录
-					addSendApplication(receive_xf,friend_msg);
-					websocket.send("5."+send_xf+"."+receive_xf);
-				} else {
-					endRunning();
-					showDBError();
-					console.log("好友申请存入数据库失败");
-				}
-				
-			}
-		})
-		//发送成功后关闭
-		$("#add_friend").css("display", "none");
-	})
-})
+
+
 function addSendApplication(xf,friend_msg) {
 	if($("[application_send_id="+xf+"]").length>0) {
 		$("[application_send_id="+xf+"]").remove();
@@ -1048,12 +701,13 @@ $(document).ready(function() {
 		
 	})
 })
+// --++
 $(document).ready(function() {
 	$("#newfriend").click(function() {
 		$("#application").css("display", "inline");
 	})
 })
-//open friendset
+//open friendset --++
 $(document).ready(function() {
 	$("#f_detail").click(function() {
 		$("#friend_note .note").html($("[xf = "+chat_xf+"] .friend_msg_name").html());
@@ -1061,12 +715,13 @@ $(document).ready(function() {
 		$("#chat_friendset").css("display", "inline");
 	})
 })
-//close friendset
+//close friendset --++
 $(document).ready(function() {
 	$("#chat_friendset_return").click(function() {
 		$("#chat_friendset").css("display", "none");
 	})
 })
+// --++
 $(document).ready(function() {
 	$("#application_return").click(function() {
 		$("#application").css("display", "none");
@@ -1672,7 +1327,7 @@ function showTip(title) {
 	$("#chatTip").html(title);
 	$("#chatTip").fadeIn().delay(500).fadeOut();
 }
-//网络连接错误
+//网络连接错误 --++
 function showError() {
 	$("#error").slideDown(600).delay(1500).slideUp(600);
 }
@@ -1687,6 +1342,7 @@ function sleep(n) { //n表示的毫秒数
         		break;
 }  
 //end提示框----------------------------------------------------
+// --++
 $(document).ready(function() {
 	$("#friendinfo_return").click(function() {
 		$("#friendinfo").css("display","none");
@@ -1710,7 +1366,7 @@ function groupToGroup(g1, g2) {
 	$("#"+g1).parent().remove();
 	
 }
-
+// --++
 $(document).ready(function() {
 	$("#friend_info").click(function() {
 		showRunning("正在获取好友资料");

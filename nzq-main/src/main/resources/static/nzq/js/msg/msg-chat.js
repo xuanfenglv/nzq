@@ -17,3 +17,14 @@ class SendTextMsg extends Msg {
     }
 
 }
+
+// 8. 发送好友申请
+class SendAppMsg extends Msg{
+    constructor(receiveXf, text, groupId, remark) {
+        super(8);
+        this.receiveXf = receiveXf;
+        this.text = text;
+        this.groupId = groupId;
+        this.remark = remark;
+    }
+}

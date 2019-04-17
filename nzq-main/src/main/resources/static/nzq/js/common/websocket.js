@@ -7,6 +7,7 @@ function chatInitMethod() {
 
 class WebSocketUtil {
 	constructor(name,address,handlerManager,initMethod) {
+        this.logger = new Logger(name);
 		this.name = name;
 		this.websocket = new WebSocket(address);
 		this.initMethod = initMethod;
@@ -29,13 +30,13 @@ class WebSocketUtil {
 	}
 	onMessage(event) {
 		var msg = JSON.parse(event.data);
-		console.log('[收到消息:'+msg.msgId+']	    '+event.data)
+        this.logger.info('[收到消息:'+msg.msgId+']	    '+event.data)
 		this.handlerManager.handle(msg);
 	}
 	
 	sendMsg(msg) {
 		let msgStr = JSON.stringify(msg);
-        console.log('[发送消息:'+msg.msgId+']	    '+msgStr)
+        this.logger.info('[发送消息:'+msg.msgId+']	    '+msgStr)
 		this.websocket.send(msgStr);
 	}
 }
