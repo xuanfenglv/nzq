@@ -1,14 +1,3 @@
-// 显示某个分组的好友列表
-function showFriends(id) {
-    $("[groupid=" + id + "]").toggle();
-
-    if ($("[groupid=" + id + "]").is(":visible")) {
-        $("[imgid=" + id + "]").attr("src", "/nzq/img/down.png");
-    } else {
-        $("[imgid=" + id + "]").attr("src", "/nzq/img/right.png");
-    }
-}
-
 // 显示好友聊天框
 /**
  * 1.如果此好友有未读消息，更新此好友未读消息数和总未读消息数，如果未读消息数==0则隐藏
@@ -19,13 +8,14 @@ function showFriends(id) {
 function showChatDetail(xf) {
     // 打开
     imDomObj.chatPage.css("display", "inline");
-    // 此好友的未读消息数
-    let thisFriendUnreadMsgNo = friendInfoUtil.getUnreadMsgNo(xf);
 
-    if (thisFriendUnreadMsgNo > 0) {
-        // 清空此好友的未读消息
-        friendInfoUtil.clearUnreadMsgNo(xf);
-    }
+    // 设置头部好友名字+状态
+    let friendInfo = friendInfoUtil.getFriendInfo(xf);
+    imDomObj.chatFriendName.html(friendInfo.getName(xf));
+    imDomObj.chatFriendStatus.html(friendInfo.getStatusDesc());
+
+    // 清空此好友的未读消息
+    friendInfoUtil.clearUnreadMsgNo(xf);
 
     // 设置当前聊天xf
     imParam.onChatXf = xf;
@@ -73,37 +63,4 @@ function createOrUpdateSession(chatInfo) {
     } else {
         $("div[friendid=" + chatInfo.xf + "] .content").html(chatInfo.text);
     }
-}
-
-/**
- * 显示添加好友页面
- * @param xf
- */
-function showAddFriend(xf) {
-    // 清空分组下拉列表
-    $("#group").html("");
-    // 给下拉列表赋值 todo 优化
-    var groups = document.getElementsByClassName("group_detail");
-    for(var i = 0; i < groups.length; i++) {
-        let group = groups[i];
-        let id = group.id;
-        let name = group.getElementsByClassName("group_name")[0].innerHTML;
-        $("#group").html($("#group").html()+'<option value="'+id+'">'+name+'</option>');
-    }
-    // 把一片dom copy过来
-    $("#add_friend_data").html($("[search_friend_id = "+xf+"]").html());
-    // 显示添加好友页面
-    $("#add_friend").css("display", "inline");
-    // 清空备注
-    $("#remark").val("");
-    // 设置全局变量
-    imParam.receiveApplicationXf = xf;
-
-}
-
-/**
- * 初始化申请
- */
-function initApplication() {
-    getApp();
 }

@@ -11,6 +11,24 @@ public class AgreeFriendApplicationResp {
     private Long xf;
     private Long groupId;
     private String nickname;
+    private String remark;
+    private Byte status;
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
 
     public Long getXf() {
         return xf;

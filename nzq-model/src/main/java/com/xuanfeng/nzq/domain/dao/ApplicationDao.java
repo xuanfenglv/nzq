@@ -21,7 +21,9 @@ public interface ApplicationDao {
     @Update("update Application set status=#{status} where id=#{applicatinId}")
     int changStatus(Long applicatinId, Byte status);
 
-    // 查询与某人相关的好友申请
-    @Select("select app.*,(select nickname from User where id = app.send_xf) sendNickname,(select nickname from User where id = app.receive_xf) receiveNickname from Application app where (send_xf=#{xf} and send_visible=1) or (receive_xf=#{xf} and receive_visible=1)")
+    // 查询与某人相关的好友申请(按照时间降序排列)
+    @Select("select app.*,(select nickname from User where id = app.send_xf) sendNickname,(select nickname from User where id = app.receive_xf) receiveNickname " +
+            "from Application app where (send_xf=#{xf} and send_visible=1) or (receive_xf=#{xf} and receive_visible=1)  " +
+            "order by mtime desc")
     List<ShortApplication> selectByXf(Long xf);
 }

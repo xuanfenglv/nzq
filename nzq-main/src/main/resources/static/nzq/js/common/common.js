@@ -23,17 +23,28 @@ class ChatInfo {
 }
 
 class FriendInfo {
-    constructor(props) {
+    constructor() {
         // 聊天list
         this.chatList = [];
         // 未读消息数
         this.unreadMsgNo = 0;
+        // 简要信息
+        this.info = null;
+    }
+
+    getName() {
+        return this.info.remark?this.info.remark:this.info.nickname;
+    }
+
+    getStatusDesc() {
+        return this.info.status==UserStatus.OFFLINE?'[离线]':'[在线]';
     }
 
 }
 
 // 用一个map存放所有人的聊天信息
 let friendInfoUtil = {
+    logger: new Logger("friendInfoUtil"),
     map: new Map(),
     totalUnreadMsgNo:0,
     getFriendInfo: function (xf) {
@@ -43,6 +54,20 @@ let friendInfoUtil = {
             this.map.set(xf, friendInfo);
         }
         return friendInfo;
+    },
+    addInfo: function (friend) {
+        let friendInfo = this.getFriendInfo(friend.xf);
+        friendInfo.info = friend;
+    },
+    getInfo(xf) {
+        let friendInfo = this.getFriendInfo(xf);
+        return friendInfo.info;
+    },
+    getName(xf) {
+        return this.getFriendInfo(xf).getName();
+    },
+    getStatusDesc(xf) {
+        return this.getFriendInfo(xf).getStatusDesc();
     },
     addChatInfo: function (chatInfo) {
         let friendInfo = this.getFriendInfo(chatInfo.xf);
@@ -61,21 +86,26 @@ let friendInfoUtil = {
         return friendInfo.chatList;
     },
     clearUnreadMsgNo: function (xf) {
+        this.logger.debug(`开始清空未读消息数,xf:${xf}`);
         let friendInfo = this.getFriendInfo(xf);
-
-        // 更新总未读
-        this.totalUnreadMsgNo -= friendInfo.unreadMsgNo;
-        // 更新dom
-        imDomObj.totalUnreadMsgNo.html(this.totalUnreadMsgNo);
-        if (this.totalUnreadMsgNo <= 0) {
-            imDomObj.totalUnreadMsgNo.css("display", "none");
+        this.logger.debug(`未读消息数:${friendInfo.unreadMsgNo}`);
+        if (friendInfo.unreadMsgNo > 0) {
+            // 更新总未读
+            this.totalUnreadMsgNo -= friendInfo.unreadMsgNo;
+            // 更新dom
+            imDomObj.totalUnreadMsgNo.html(this.totalUnreadMsgNo);
+            if (this.totalUnreadMsgNo <= 0) {
+                imDomObj.totalUnreadMsgNo.css("display", "none");
+            }
+            // 清空当前好友未读
+            friendInfo.unreadMsgNo = 0;
+            // 更新dom
+            let dom = $("div[friendid=" + xf + "] .number")
+            dom.html("0");
+            dom.css("display", "none");
         }
-        // 清空当前好友未读
-        friendInfo.unreadMsgNo = 0;
-        // 更新dom
-        let dom = $("div[friendid=" + xf + "] .number")
-        dom.html("0");
-        dom.css("display", "none");
+
+
     },
     addUnreadMsgNo: function (xf) {
         let friendInfo = this.getFriendInfo(xf);
@@ -104,6 +134,10 @@ let friendInfoUtil = {
     }
 }
 
+let groupInfo={
+
+}
+
 class GroupNo {
     constructor() {
         this.total = 0;
@@ -111,7 +145,6 @@ class GroupNo {
     }
 
 }
-
 // 分组在线离线数量
 let groupNoInfo = {
     map: new Map(),

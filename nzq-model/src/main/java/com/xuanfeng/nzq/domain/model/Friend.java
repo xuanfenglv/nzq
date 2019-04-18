@@ -13,9 +13,19 @@ public class Friend {
 
     private String remark;
 
+    private Byte status;
+
     private Date ctime;
 
     private Date mtime;
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
 
     public Long getId() {
         return id;

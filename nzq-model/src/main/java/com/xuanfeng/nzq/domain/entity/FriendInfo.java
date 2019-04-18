@@ -5,20 +5,19 @@ package com.xuanfeng.nzq.domain.entity;
  * @author: lvxianqing
  * @create: 2018/11/23 10:48
  */
-
 public class FriendInfo {
-    private Long id;
+    private Long xf;
     private String nickname;
     private String remark;
     private Byte status;
     private Long groupId;
 
-    public Long getId() {
-        return id;
+    public Long getXf() {
+        return xf;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setXf(Long xf) {
+        this.xf = xf;
     }
 
     public String getNickname() {

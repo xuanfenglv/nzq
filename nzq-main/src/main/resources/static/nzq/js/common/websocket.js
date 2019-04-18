@@ -23,14 +23,14 @@ class WebSocketUtil {
 	}
 	
 	onClose() {
-		console.log(this.name + "连接关闭")
+        this.logger.log("连接关闭")
 	}
 	onError() {
-		console.log(this.name + "发生错误")
+        this.logger.log("发生错误")
 	}
 	onMessage(event) {
 		var msg = JSON.parse(event.data);
-        this.logger.info('[收到消息:'+msg.msgId+']	    '+event.data)
+        this.logger.info('[收到消息:'+msg.msgId+']  '+event.data)
 		this.handlerManager.handle(msg);
 	}
 	

@@ -8,10 +8,15 @@ class Logger {
             this.output(log, LogLevel.INFO.name);
         }
     }
+    debug(log) {
+        if (LogLevel.DEBUG.id >= logLevel) {
+            this.output(log, LogLevel.DEBUG.name);
+        }
+    }
 
     output(log, level) {
         let time = new Date().format("yyyy-MM-dd hh:mm:ss.S");
-        console.log(time + '  ' + level + ' [' + this.name + ']  ' + log);
+        console.log(time + ' ' + level + ' [' + this.name + '] ' + log);
     }
 
 }

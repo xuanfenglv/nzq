@@ -7,8 +7,10 @@ import com.xuanfeng.nzq.domain.dao.FriendDao;
 import com.xuanfeng.nzq.domain.dao.UserDao;
 import com.xuanfeng.nzq.domain.mapper.ApplicationMapper;
 import com.xuanfeng.nzq.domain.mapper.FriendMapper;
+import com.xuanfeng.nzq.domain.mapper.UserMapper;
 import com.xuanfeng.nzq.domain.model.Application;
 import com.xuanfeng.nzq.domain.model.Friend;
+import com.xuanfeng.nzq.domain.model.User;
 import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
 import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
 import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
@@ -41,6 +43,9 @@ public class IM_H9 extends IMsgHandler {
     private FriendDao friendDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     protected ResponseMsg handle(RequestMsg message, long xf, Session session) throws IOException {
         AgreeFriendApplicationReq req = (AgreeFriendApplicationReq)message;
@@ -70,21 +75,25 @@ public class IM_H9 extends IMsgHandler {
         friendMapper.insertSelective(friend2);
         logger.info("[DB] insert friend,friend1:{},friend2:{}",friend1,friend2);
         // 推送
-        String receiveNickname = userDao.queryNickname(xf);
+        User receiveUser = userMapper.selectByPrimaryKey(xf);
         AgreeFriendApplicationNotice notice = new AgreeFriendApplicationNotice();
         notice.setApplicationId(req.getApplicationId());
         notice.setGroupId(req.getGroupId());
         notice.setXf(xf);
-        notice.setNickname(receiveNickname);
+        notice.setNickname(receiveUser.getNickname());
+        notice.setRemark(application.getRemark());
+        notice.setStatus(receiveUser.getImStatus());
 
         ImSessions.sendMsgToXf(application.getSendXf(),new NoticeMsg(req.getMsgId(),notice));
         // 响应
-        String sendNickname = userDao.queryNickname(application.getSendXf());
+        User sendUser = userMapper.selectByPrimaryKey(application.getSendXf());
         AgreeFriendApplicationResp resp = new AgreeFriendApplicationResp();
         resp.setApplicationId(req.getApplicationId());
         notice.setGroupId(application.getGroupId());
         notice.setXf(application.getSendXf());
-        notice.setNickname(sendNickname);
+        notice.setNickname(sendUser.getNickname());
+        notice.setRemark(req.getRemark());
+        notice.setStatus(sendUser.getImStatus());
 
         return WsResultUtil.createRespSuccessResult(resp);
     }
