@@ -75,12 +75,12 @@ class Im_H9 extends BaseHandler {
 class Im_H10 extends BaseHandler {
     handleResponse(data) {
         // 修改申请状态
-        $("[application_receive_id = "+data.applicationId+"] .a_r").html("已拒绝");
+        $("[application_receive_id = "+data.id+"] .a_r").html("已拒绝");
     }
 
     handleNotice(data) {
         // 修改申请状态
-        $("[application_send_id = " +data.applicationId+ "] .app_condition").html("拒绝了你的好友申请");
+        $("[application_send_id = " +data.id+ "] .app_condition").html("拒绝了你的好友申请");
     }
 }
 
