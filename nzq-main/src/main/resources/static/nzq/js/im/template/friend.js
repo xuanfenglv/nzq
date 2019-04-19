@@ -81,7 +81,6 @@ function genFriend(friend) {
     } else {
         $("[groupid=" + friend.groupId + "] .online").append(friendHtml);
         groupNoInfo.addOnline(friend.groupId);
-        groupNoInfo.addOnline(friend.groupId);
     }
     groupNoInfo.addTotal(friend.groupId);
 }

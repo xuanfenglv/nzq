@@ -41,6 +41,8 @@ class AppHandler extends BaseHandler {
     handleResponse(data) {
         // 发送好友申请成功
         genMyApp(data);
+        // 关一下发送申请页面
+        $("#add_friend").css("display", "none");
     }
 
     handleNotice(data) {

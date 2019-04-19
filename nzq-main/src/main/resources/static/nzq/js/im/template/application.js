@@ -16,7 +16,7 @@ function genApp(apps) {
                 } else if (app.status == AppStatus.REJECT) {
                     statusText = '拒绝了你的好友申请';
                 }
-                let appSend = '<div application_send_id="' + app.receiveXf + '" class="bar" >'
+                let appSend = '<div application_send_id="' + app.id + '" class="bar" >'
                     + '<img src="/nzq/photo/' + app.receiveXf + '.jpg" class="application_photo" />'
                     + '<div class="app_container">'
                     + '	<div class="app_name">' + app.receiveNickname + '</div>'
@@ -29,7 +29,7 @@ function genApp(apps) {
                 var statusText;
                 if (app.status == AppStatus.SEND) {
                     statusText = '<div class="accept" onclick="showAcceptApplication(' + app.id + ')">同意</div>'
-                        + '<div class="refuse" onclick="refuseApplication(' + app.sendXf + ')">拒绝</div>';
+                        + '<div class="refuse" onclick="refuseApplication(' + app.id + ')">拒绝</div>';
                 } else if (app.status == AppStatus.ADD) {
                     statusText = "已添加";
                 } else if (app.status == AppStatus.REJECT) {
@@ -59,11 +59,11 @@ function genApp(apps) {
  */
 function genMyApp(app) {
     // 移除旧的
-    if ($("[application_send_id = " + app.xf + "]").length > 0) {
-        $("[application_send_id = " + app.xf + "]").remove();
+    if ($("[application_send_id = " + app.id + "]").length > 0) {
+        $("[application_send_id = " + app.id + "]").remove();
     }
     let statusText = '已发送验证消息';
-    let appSend = '<div application_send_id="' + app.xf + '" class="bar" >'
+    let appSend = '<div application_send_id="' + app.id + '" class="bar" >'
         + '<img src="/nzq/photo/' + app.xf + '.jpg" class="application_photo" />'
         + '<div class="app_container">'
         + '	<div class="app_name">' + app.nickname + '</div>'
@@ -80,22 +80,22 @@ function genMyApp(app) {
  */
 function genReceiveApp(app) {
     // 移除旧的
-    if ($("[application_receive_id = " + app.xf + "]").length > 0) {
-        $("[application_receive_id = " + app.xf + "]").remove();
+    if ($("[application_receive_id = " + app.id + "]").length > 0) {
+        $("[application_receive_id = " + app.id + "]").remove();
     }
 
     // 插入新的
-    let appReceive = '<div application_receive_id="' + app.xf + '" class="bar">'
+    let appReceive = '<div application_receive_id="' + app.id + '" class="bar">'
         + '<img src="/nzq/photo/' + app.xf + '.jpg" class="application_photo" />'
         + '<div class="app_container">'
         + '	<div class="app_name">' + app.nickname + '</div>'
         + '	<div class="app_condition">' + app.text + '</div>'
         + '</div>'
         + '<div class="a_r">'
-        + '	<div class="accept" onclick="acceptApplication(' + app.xf + ')">同意</div>'
-        + '	<div class="refuse" onclick="refuseApplication(' + app.xf + ')">拒绝</div>'
+        + '	<div class="accept" onclick="showAcceptApplication(' + app.id + ')">同意</div>'
+        + '	<div class="refuse" onclick="refuseApplication(' + app.id + ')">拒绝</div>'
         + '</div>'
-        + '<div class="app_del" onclick="removeReceiveApplication(' + app.xf + ')">删除</div>'
+        + '<div class="app_del" onclick="removeReceiveApplication(' + app.id + ')">删除</div>'
         + '</div>';
     imDomObj.appReceive.prepend(appReceive);
 }

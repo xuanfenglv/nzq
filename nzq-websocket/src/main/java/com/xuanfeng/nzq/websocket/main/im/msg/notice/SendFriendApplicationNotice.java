@@ -7,17 +7,17 @@ package com.xuanfeng.nzq.websocket.main.im.msg.notice;
  */
 
 public class SendFriendApplicationNotice {
-    private Long applicationId;
+    private Long id;
     private Long xf;
     private String text;
     private String nickname;
 
-    public Long getApplicationId() {
-        return applicationId;
+    public Long getId() {
+        return id;
     }
 
-    public void setApplicationId(Long applicationId) {
-        this.applicationId = applicationId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getXf() {

@@ -6,6 +6,8 @@
     <title></title>
     <script type="text/javascript" src="/nzq/js/common/jquery-3.1.1.min.js"></script>
     <script src="/nzq/js/common/ajax.js"></script>
+    <!--日志-->
+    <script src="/nzq/js/common/logger.js"></script>
     <!--通用工具-->
     <script src="/nzq/js/common/common.js"></script>
     <style>
@@ -131,9 +133,7 @@
             let xf = $("#username").val();
             let pwd = $("#pwd").val();
             httpUtil.post("/users/login", JSON.stringify({xf: xf, pwd: pwd}), (result) => {
-                if (result.ret == 1) {
-                    window.location.href = "/nzq/index.html?xf=" + xf;
-                }
+                window.location.href = "/nzq/index.html?xf=" + xf;
             })
         })
 

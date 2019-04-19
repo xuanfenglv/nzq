@@ -19,7 +19,7 @@ public interface ApplicationDao {
     Long selectApplicationId(@Param("sendXf") Long sendXf, @Param("receiveXf") Long receiveXf);
 
     @Update("update Application set status=#{status} where id=#{applicatinId}")
-    int changStatus(Long applicatinId, Byte status);
+    int changStatus(@Param("applicatinId") Long applicatinId, @Param("status") Byte status);
 
     // 查询与某人相关的好友申请(按照时间降序排列)
     @Select("select app.*,(select nickname from User where id = app.send_xf) sendNickname,(select nickname from User where id = app.receive_xf) receiveNickname " +

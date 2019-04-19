@@ -19,14 +19,18 @@ function showAcceptApplication(appId) {
  * 接受申请
  */
 function acceptApplication() {
-    let msg = AcceptAppMsg(imParam.acceptAppId);
+    let remark = imDomObj.remarkInAcceptApp.val();
+    let groupId = imDomObj.groupListInAcceptApp.val();
+    let msg = new AcceptAppMsg(imParam.acceptAppId,groupId,remark);
     imWs.sendMsg(msg);
 }
 /**
  * 拒绝申请
  * @param send_xf
  */
-function refuseApplication(send_xf) {
+function refuseApplication(appId) {
+    let msg = new RejectAppMsg(appId);
+    imWs.sendMsg(msg);
 }
 
 /**

@@ -16,7 +16,7 @@ import java.io.IOException;
 public abstract class IMsgHandler {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public void process(JSONObject parms,long xf, Session session,int msgId) throws IOException {
+	public void process(JSONObject parms,long xf, Session session,int msgId) {
 
 		RequestMsg message = null;
 		ResponseMsg result = null;
@@ -43,7 +43,12 @@ public abstract class IMsgHandler {
 		// 发生故障了就直接返回，不执行handle方法
 		if (result == null) {
 			logger.info("[chat][协议{}][message:{}]",message.getMsgId(),message);
-			result = handle(message,xf,session);
+			try {
+				result = handle(message,xf,session);
+			} catch (IOException e) {
+				logger.error("处理消息时发生错误");
+				result= new ResponseMsg(RetEnum.其他错误,e.getMessage());
+			}
 		}
 
 		if (result != null) {

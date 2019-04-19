@@ -54,12 +54,12 @@ public class IM_H8 extends IMsgHandler {
         notice.setXf(xf);
         notice.setNickname(sendNickname);
         notice.setText(req.getText());
-        notice.setApplicationId(applicationd.getId());
+        notice.setId(applicationd.getId());
 
         ImSessions.sendMsgToXf(req.getReceiveXf(),new NoticeMsg(req.getMsgId(),notice));
         // 响应
         SendFriendApplicationResp resp = new SendFriendApplicationResp();
-        resp.setApplicationId(applicationd.getId());
+        resp.setId(applicationd.getId());
         resp.setXf(req.getReceiveXf());
         resp.setNickname(receiveNickname);
         return WsResultUtil.createRespSuccessResult(resp);

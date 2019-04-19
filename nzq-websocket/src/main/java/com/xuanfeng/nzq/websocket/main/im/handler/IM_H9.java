@@ -67,8 +67,8 @@ public class IM_H9 extends IMsgHandler {
         // 接收方好友信息
         Friend friend2 = new Friend();
         friend2.setGroupId(req.getGroupId());
-        friend2.setFxf(application.getReceiveXf());
-        friend2.setXf(application.getSendXf());
+        friend2.setFxf(application.getSendXf());
+        friend2.setXf(application.getReceiveXf());
         friend2.setRemark(req.getRemark());
 
         friendMapper.insertSelective(friend1);
@@ -78,7 +78,7 @@ public class IM_H9 extends IMsgHandler {
         User receiveUser = userMapper.selectByPrimaryKey(xf);
         AgreeFriendApplicationNotice notice = new AgreeFriendApplicationNotice();
         notice.setApplicationId(req.getApplicationId());
-        notice.setGroupId(req.getGroupId());
+        notice.setGroupId(application.getGroupId());
         notice.setXf(xf);
         notice.setNickname(receiveUser.getNickname());
         notice.setRemark(application.getRemark());
@@ -89,11 +89,11 @@ public class IM_H9 extends IMsgHandler {
         User sendUser = userMapper.selectByPrimaryKey(application.getSendXf());
         AgreeFriendApplicationResp resp = new AgreeFriendApplicationResp();
         resp.setApplicationId(req.getApplicationId());
-        notice.setGroupId(application.getGroupId());
-        notice.setXf(application.getSendXf());
-        notice.setNickname(sendUser.getNickname());
-        notice.setRemark(req.getRemark());
-        notice.setStatus(sendUser.getImStatus());
+        resp.setGroupId(req.getGroupId());
+        resp.setXf(application.getSendXf());
+        resp.setNickname(sendUser.getNickname());
+        resp.setRemark(req.getRemark());
+        resp.setStatus(sendUser.getImStatus());
 
         return WsResultUtil.createRespSuccessResult(resp);
     }

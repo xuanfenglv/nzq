@@ -47,11 +47,11 @@ public class IM_H10 extends IMsgHandler {
         applicationDao.changStatus(req.getApplicationId(), ApplicationStatusEnum.已拒绝.getStatus());
         // 推送
         RejectFriendApplicationNotice notice = new RejectFriendApplicationNotice();
-        notice.setApplicationId(req.getApplicationId());
+        notice.setId(req.getApplicationId());
         ImSessions.sendMsgToXf(application.getSendXf(),new NoticeMsg(req.getMsgId(),notice));
         // 响应
         RejectFriendApplicationResp resp = new RejectFriendApplicationResp();
-        resp.setApplicationId(req.getApplicationId());
+        resp.setId(req.getApplicationId());
         return WsResultUtil.createRespSuccessResult(resp);
     }
 

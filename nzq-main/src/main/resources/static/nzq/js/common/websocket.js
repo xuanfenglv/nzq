@@ -21,19 +21,19 @@ class WebSocketUtil {
 	onOpen() {
 		this.initMethod();
 	}
-	
+
 	onClose() {
-        this.logger.log("连接关闭")
+        this.logger.info("连接关闭")
 	}
 	onError() {
-        this.logger.log("发生错误")
+        this.logger.info("发生错误")
 	}
 	onMessage(event) {
 		var msg = JSON.parse(event.data);
         this.logger.info('[收到消息:'+msg.msgId+']  '+event.data)
 		this.handlerManager.handle(msg);
 	}
-	
+
 	sendMsg(msg) {
 		let msgStr = JSON.stringify(msg);
         this.logger.info('[发送消息:'+msg.msgId+']	    '+msgStr)
