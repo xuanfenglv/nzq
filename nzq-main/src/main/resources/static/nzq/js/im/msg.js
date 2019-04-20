@@ -46,3 +46,11 @@ class RejectAppMsg extends Msg {
         this.applicationId = applicationId;
     }
 }
+
+// 11. 删除好友
+class DeleteFriend extends Msg {
+    constructor(xf) {
+        super(11);
+        this.xf = xf;
+    }
+}

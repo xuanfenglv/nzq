@@ -35,6 +35,7 @@ public class ChatSession extends WsServer {
     public void setChatMainHandler(MainHandler chatMainHandler) {
         ChatSession.chatMainHandler = chatMainHandler;
     }
+
     @Autowired
     public void setLoginService(UserService loginService) {
         ChatSession.loginService = loginService;
@@ -63,7 +64,7 @@ public class ChatSession extends WsServer {
     @OnError
     public void onError(Session session, Throwable error) {
         System.out.println("发生错误");
-//		error.printStackTrace();
+//        error.printStackTrace();
     }
 
     /**
@@ -73,23 +74,26 @@ public class ChatSession extends WsServer {
      * @param session 可选的参数
      */
     @OnMessage
-    public void onMessage(String message, Session session) throws IOException {
-        chatMainHandler.process(message, this, session);
+    public void onMessage(String message, Session session) {
+        try {
+            chatMainHandler.process(message, this, session);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
     public void selfOffline() throws IOException {
+        logger.info("下线用户是：{},当前在线人数为:{}", this.xf, ImSessions.getOnlineCount());
         // 移除会话
         ImSessions.removeXf(this.xf);
 
-        logger.info("下线用户是：{},当前在线人数为:{}", this.xf, ImSessions.getOnlineCount());
         // 推送下线消息
-        ImStatusHandler.changeStatus(this.xf,UserStatusEnum.离线);
+        ImStatusHandler.changeStatus(this.xf, UserStatusEnum.离线);
         // 移除缓存
         IMCacheManager.remove(xf);
     }
-
-
 
 
 }

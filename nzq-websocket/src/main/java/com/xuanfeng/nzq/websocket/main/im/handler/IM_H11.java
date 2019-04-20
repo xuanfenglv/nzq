@@ -27,11 +27,12 @@ public class IM_H11 extends IMsgHandler {
     private FriendDao friendDao;
 
     @Override
-    protected ResponseMsg handle(RequestMsg message, long xf, Session session) throws IOException {
+    protected ResponseMsg handle(RequestMsg message, long xf, Session session) {
         DeleteFriendReq req = (DeleteFriendReq)message;
         friendDao.deleteFriend(xf, req.getXf());
-        // 推送
+        friendDao.deleteFriend(req.getXf(),xf);
 
+        // 推送
         DeleteFriendNotice notice = new DeleteFriendNotice();
         notice.setXf(xf);
         ImSessions.sendMsgToXf(req.getXf(),new NoticeMsg(req.getMsgId(),notice));

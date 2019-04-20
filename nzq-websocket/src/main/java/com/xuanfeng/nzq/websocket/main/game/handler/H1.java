@@ -28,7 +28,7 @@ public class H1 extends IMsgHandler {
 
     @Autowired
     private FriendDao friendDao;
-    
+
     @Override
     protected ResponseMsg handle(RequestMsg message, long xf, Session session) {
         InitAccountReq req = (InitAccountReq) message;
@@ -36,18 +36,14 @@ public class H1 extends IMsgHandler {
 
 
         if (NzqGameSessions.constainsXf(xf)) {
-            try {
-                NzqGameSessions.sendMsgToXf(xf, WsResultUtil.createNoticeResult(GameMsgId.初始化账号));
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            NzqGameSessions.sendMsgToXf(xf, WsResultUtil.createNoticeResult(GameMsgId.初始化账号));
+
             NzqGameSessions.removeXf(xf);
         }
         // TODO: 2019/1/2 判断是否需要断线重连
         NzqGameCache cache = NzqGameCacheManager.get(xf);
 
-        if(cache!=null&&cache.getNzqStatusEnum()==NzqStatusEnum.战斗中) {
+        if (cache != null && cache.getNzqStatusEnum() == NzqStatusEnum.战斗中) {
             // TODO: 2019/1/2 如果房间还在
         }
         // 初始化用户信息
@@ -58,11 +54,11 @@ public class H1 extends IMsgHandler {
         NzqGameCacheManager.add(xf, NzqGameCache);
 
         ImSessions.addxf(xf, session);
-        
+
         NzqGameStatusHandler.changeStatus(xf, NzqStatusEnum.闲逛中);
 
-        logger.info("用户上线,xf:{}：" , xf);
-        
+        logger.info("用户上线,xf:{}：", xf);
+
         return WsResultUtil.createRespSuccessResult();
     }
 

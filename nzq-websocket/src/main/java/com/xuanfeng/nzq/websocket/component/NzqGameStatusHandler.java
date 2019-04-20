@@ -12,8 +12,6 @@ import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 /**
  * @description: 状态变化处理器
  * @author: lvxianqing
@@ -31,8 +29,8 @@ public class NzqGameStatusHandler {
     }
 
     /**
-     *
      * 更新玩家状态
+     *
      * @param xf
      * @param statusEnum
      */
@@ -44,13 +42,10 @@ public class NzqGameStatusHandler {
         NzqGameCache cache = NzqGameCacheManager.get(xf);
         cache.setNzqStatusEnum(statusEnum);
         // 避免多次序列化
-        String statusChangeMessage = JSON.toJSONString(WsResultUtil.createNoticeResult(GameMsgId.状态变化,new StatusChangeNotice(xf,statusEnum)));
+        String statusChangeMessage = JSON.toJSONString(WsResultUtil.createNoticeResult(GameMsgId.状态变化, new StatusChangeNotice(xf, statusEnum)));
         cache.getFriendXf().forEach(friendXf -> {
-            try {
-                ImSessions.sendMsgToXf(friendXf, statusChangeMessage);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            ImSessions.sendMsgToXf(friendXf, statusChangeMessage);
+
         });
 
     }

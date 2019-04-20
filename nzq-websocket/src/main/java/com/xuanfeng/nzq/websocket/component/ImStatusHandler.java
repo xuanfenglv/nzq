@@ -6,13 +6,11 @@ import com.xuanfeng.nzq.service.UserService;
 import com.xuanfeng.nzq.websocket.javabean.IMCache;
 import com.xuanfeng.nzq.websocket.main.im.constant.ImMsgId;
 import com.xuanfeng.nzq.websocket.main.im.msg.notice.StatusChangeNotice;
-import com.xuanfeng.nzq.websocket.util.ImSessions;
 import com.xuanfeng.nzq.websocket.util.IMCacheManager;
+import com.xuanfeng.nzq.websocket.util.ImSessions;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 /**
  * @description: 状态变化处理器
@@ -31,8 +29,8 @@ public class ImStatusHandler {
     }
 
     /**
-     *
      * 更新玩家状态
+     *
      * @param xf
      * @param statusEnum
      */
@@ -44,13 +42,9 @@ public class ImStatusHandler {
         IMCache IMCache = IMCacheManager.get(xf);
         IMCache.setImStatus(statusEnum);
         // 避免多次序列化
-        String statusChangeMessage = JSON.toJSONString(WsResultUtil.createNoticeResult(ImMsgId.状态变化,new StatusChangeNotice(xf,statusEnum)));
+        String statusChangeMessage = JSON.toJSONString(WsResultUtil.createNoticeResult(ImMsgId.状态变化, new StatusChangeNotice(xf, statusEnum)));
         IMCache.getFriendXf().forEach(friendXf -> {
-            try {
-                ImSessions.sendMsgToXf(friendXf, statusChangeMessage);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            ImSessions.sendMsgToXf(friendXf, statusChangeMessage);
         });
     }
 }

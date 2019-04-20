@@ -87,10 +87,10 @@ class Im_H10 extends BaseHandler {
 // 11. 删除好友
 class Im_H11 extends BaseHandler{
     handleResponse(data) {
-        removeFriend(data.xf);
+        friendInfoUtil.remove(data.xf);
     }
 
     handleNotice(data) {
-        removeFriend(data.xf);
+        friendInfoUtil.remove(data.xf);
     }
 }

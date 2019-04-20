@@ -5,6 +5,7 @@ import com.xuanfeng.nzq.api.request.friends.UpdateRemarkRequest;
 import com.xuanfeng.nzq.api.response.user.FriendUserInfo;
 import com.xuanfeng.nzq.domain.entity.FriendInfo;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -20,7 +21,7 @@ public interface FriendDao {
     List<FriendInfo> selectFriendInfos(Long xf);
 
     @Delete("delete from Friend where xf=#{xf} and fxf=#{fxf}")
-    int deleteFriend(Long fxf, Long xf);
+    int deleteFriend(@Param("fxf") Long fxf, @Param("xf") Long xf);
 
     @Select("select nickname,sex,birthday,tel,grade from `User` where id=#{xf}")
     FriendUserInfo selectFriendInfo(Long xf);

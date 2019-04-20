@@ -136,12 +136,12 @@ let friendInfoUtil = {
         // 减少分组人数
         let friendInfo = friendInfoUtil.getFriendInfo(xf).info;
         let groupId = friendInfo.groupId;
-        if (friendInfoUtil.getFriendInfo().info.status == UserStatus.ONLINE) {
+        if (friendInfo.status == UserStatus.ONLINE) {
             groupNoInfo.subOnline(groupId);
         }
         groupNoInfo.subTotal(groupId);
         // 移除数据
-        this.map.remove(xf);
+        this.map.delete(xf);
         // 从dom中移除好友
         $("[xf=" + xf + "]").remove();
 

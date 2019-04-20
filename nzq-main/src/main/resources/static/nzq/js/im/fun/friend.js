@@ -35,14 +35,10 @@ function showAddFriend(xf) {
     $("#remark").val("");
     // 设置全局变量
     imParam.receiveApplicationXf = xf;
-
 }
 
-//9.deleteFriend
-// todo
 function deleteFriend(xf) {
-    var xf = msg.substr(1);
-    showTip($("[xf="+xf+"] .friend_msg_name").html()+" 删除了你");
-    removeFriend(xf);
-}
+    let msg = new DeleteFriend(xf);
+    imWs.sendMsg(msg);
 
+}

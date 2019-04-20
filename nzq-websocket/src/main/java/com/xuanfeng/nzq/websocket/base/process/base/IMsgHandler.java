@@ -42,10 +42,9 @@ public abstract class IMsgHandler {
 		}
 		// 发生故障了就直接返回，不执行handle方法
 		if (result == null) {
-			logger.info("[chat][协议{}][message:{}]",message.getMsgId(),message);
 			try {
 				result = handle(message,xf,session);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				logger.error("处理消息时发生错误");
 				result= new ResponseMsg(RetEnum.其他错误,e.getMessage());
 			}

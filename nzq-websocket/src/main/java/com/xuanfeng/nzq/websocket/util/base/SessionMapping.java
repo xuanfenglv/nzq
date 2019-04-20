@@ -4,7 +4,6 @@ import com.xuanfeng.nzq.websocket.base.msg.notice.NoticeMsg;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 
 import javax.websocket.Session;
-import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -25,14 +24,14 @@ public class SessionMapping {
         return sessions.get(xf);
     }
 
-    public static void sendMsgToXf(long xf, NoticeMsg msg)  throws IOException {
+    public static void sendMsgToXf(long xf, NoticeMsg msg) {
         Session session = sessions.get(xf);
         if (session!=null) {
             SendMsgUtil.sendMessage(session, msg);
         }
     }
 
-    public static void sendMsgToXf(long xf, String msg)  throws IOException {
+    public static void sendMsgToXf(long xf, String msg) {
         Session session = sessions.get("xf");
         if (session!=null) {
             SendMsgUtil.sendMessage(session, msg);

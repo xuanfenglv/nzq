@@ -96,4 +96,8 @@ $(() => {
         $("#chat_friendset").css("display", "none");
     })
 // 添加好友====================================================================================
+    // 删除好友
+        $("#delete_friend_button").click(function() {
+            deleteFriend(imParam.onChatXf);
+        })
 })

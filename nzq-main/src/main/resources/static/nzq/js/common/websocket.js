@@ -36,7 +36,7 @@ class WebSocketUtil {
 
 	sendMsg(msg) {
 		let msgStr = JSON.stringify(msg);
-        this.logger.info('[发送消息:'+msg.msgId+']	    '+msgStr)
+        this.logger.info('[发送消息:'+msg.msgId+'] '+msgStr)
 		this.websocket.send(msgStr);
 	}
 }

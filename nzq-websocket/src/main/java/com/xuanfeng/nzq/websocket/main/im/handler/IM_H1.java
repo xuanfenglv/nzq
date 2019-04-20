@@ -45,12 +45,8 @@ public class IM_H1 extends IMsgHandler {
 
 
         if (ImSessions.constainsXf(xf)) {
-            try {
-                ImSessions.sendMsgToXf(xf, WsResultUtil.createNoticeResult(GameMsgId.初始化账号));
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            ImSessions.sendMsgToXf(xf, WsResultUtil.createNoticeResult(GameMsgId.初始化账号));
+
             ImSessions.removeXf(xf);
         }
         // 初始化用户信息
@@ -62,9 +58,9 @@ public class IM_H1 extends IMsgHandler {
 
         ImSessions.addxf(xf, session);
         // TODO: 2018/11/23 短线重连
-        ImStatusHandler.changeStatus(xf,UserStatusEnum.在线);
+        ImStatusHandler.changeStatus(xf, UserStatusEnum.在线);
 
-        logger.info("用户上线,xf:{}：" , xf);
+        logger.info("用户上线,xf:{}：", xf);
         // 好友列表
         List<FriendInfo> friendInfos = friendDao.selectFriendInfos(xf);
         List<GroupInfo> groupInfos = friendGroupDao.selectGroupInfos(xf);
