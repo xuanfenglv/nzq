@@ -45,15 +45,4 @@ function deleteFriend(xf) {
     showTip($("[xf="+xf+"] .friend_msg_name").html()+" 删除了你");
     removeFriend(xf);
 }
-function removeFriend(xf) {
-    if($("[xf="+xf+"]").parent().attr("class")=="online") {
-        var online_num = $("[xf="+xf+"]").parent().parent().parent().children(".group_detail").children(".online_number").children(".f_online").html();
-        online_num = online_num * 1 - 1 ;
-        $("[xf="+xf+"]").parent().parent().parent().children(".group_detail").children(".online_number").children(".f_online").html(online_num);
-    }
-    var total_num = $("[xf="+xf+"]").parent().parent().parent().children(".group_detail").children(".online_number").children(".f_total").html();
-    total_num = total_num * 1 - 1 ;
-    $("[xf="+xf+"]").parent().parent().parent().children(".group_detail").children(".online_number").children(".f_total").html(total_num);
-    $("[xf="+xf+"]").remove();
 
-}

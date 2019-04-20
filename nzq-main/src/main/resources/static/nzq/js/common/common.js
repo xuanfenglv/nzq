@@ -131,6 +131,20 @@ let friendInfoUtil = {
     getUnreadMsgNo: function (xf) {
         let friendInfo = this.getFriendInfo(xf);
         return friendInfo.unreadMsgNo;
+    },
+    remove: function (xf) {
+        // 减少分组人数
+        let friendInfo = friendInfoUtil.getFriendInfo(xf).info;
+        let groupId = friendInfo.groupId;
+        if (friendInfoUtil.getFriendInfo().info.status == UserStatus.ONLINE) {
+            groupNoInfo.subOnline(groupId);
+        }
+        groupNoInfo.subTotal(groupId);
+        // 移除数据
+        this.map.remove(xf);
+        // 从dom中移除好友
+        $("[xf=" + xf + "]").remove();
+
     }
 }
 

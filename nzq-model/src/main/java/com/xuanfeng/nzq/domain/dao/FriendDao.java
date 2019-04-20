@@ -16,7 +16,7 @@ public interface FriendDao {
     @Select("select fxf from Friend where xf = #{xf}")
     Set<Long> selectFriendIds(Long xf);
 
-    @Select("select fxf xf,remark,nickname,im_status status,group_id from Friend f,`User` u where u.id=f.xf and u.id=#{xf}")
+    @Select("select fxf xf,remark,nickname,im_status status,group_id from Friend f,`User` u where u.id = f.fxf AND f.xf=#{xf}")
     List<FriendInfo> selectFriendInfos(Long xf);
 
     @Delete("delete from Friend where xf=#{xf} and fxf=#{fxf}")
