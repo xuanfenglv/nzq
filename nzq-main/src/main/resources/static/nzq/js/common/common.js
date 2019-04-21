@@ -42,7 +42,7 @@ class FriendInfo {
 
 }
 
-// 用一个map存放所有人的聊天信息
+// 存放好友信息、聊天信息、未读消息数
 let friendInfoUtil = {
     logger: new Logger("friendInfoUtil"),
     map: new Map(),
@@ -189,6 +189,15 @@ let groupNoInfo = {
         let groupNo = this.getGroupNo(groupId);
         groupNo.total--;
         $("#" + groupId + " .f_total").html(groupNo.total);
+    },
+    move(deleteGroupId, defaultGroupId) { // 移动分组
+        let deleteGroupNo = this.getGroupNo(deleteGroupId);
+        let defaultGroupNo = this.getGroupNo(defaultGroupId);
+        defaultGroupNo.total += deleteGroupNo.total;
+        defaultGroupNo.online += deleteGroupNo.online;
+
+        $("#" + defaultGroupId + " .f_online").html(defaultGroupNo.online);
+        $("#" + defaultGroupId + " .f_total").html(defaultGroupNo.total);
     }
 }
 

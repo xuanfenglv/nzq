@@ -31,4 +31,8 @@ public interface FriendDao {
 
     @Update("update Friend set group_id=#{groupId} where xf = #{xf} and fxf=#{fxf}")
     int updateGroup(UpdateGroupRequest request);
+
+    @Update("update Friend set group_id = #{defaultGroupId}  where xf = #{xf} and group_id = #{deletedGroupId}")
+    int moveFriend(@Param("defaultGroupId") Long defaultGroupId,@Param("deletedGroupId") Long deletedGroupId,@Param("xf") Long xf);
+
 }

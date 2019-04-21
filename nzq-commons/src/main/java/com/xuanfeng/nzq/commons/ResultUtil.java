@@ -1,5 +1,7 @@
 package com.xuanfeng.nzq.commons;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * @description: Result工具类
  * @author: lvxianqing
@@ -7,7 +9,9 @@ package com.xuanfeng.nzq.commons;
  */
 
 public class ResultUtil {
-    private static Result result= new Result();
+    private static final Result result= new Result();
+
+    public static final String NO_LOGIN = JSON.toJSONString(createFailedResult(RetEnum.NOTLOGIN, "未登录"));
 
     public static Result createSuccessResult() {
         return result;

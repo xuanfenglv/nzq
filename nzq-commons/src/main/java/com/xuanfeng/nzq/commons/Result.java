@@ -1,5 +1,7 @@
 package com.xuanfeng.nzq.commons;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * @description: http请求的result
  * @author: lvxianqing
@@ -61,5 +63,11 @@ public class Result<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
+
     }
 }

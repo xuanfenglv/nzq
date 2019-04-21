@@ -8,6 +8,7 @@ let groupList;
 $(() => {
     imDomObj = {
         groupBox: $("#fl_group"),
+        manageGroupBox:$("#my_groups"),
         totalUnreadMsgNo: $(".newMsg_num"),
         chatBox: $(".chat_box"),
         session: $("#msglist"),
@@ -32,7 +33,8 @@ $(() => {
         searchFriendNickname: $("#search_friend_nickname"),
         searchFriendGrade: $("#search_friend_grade"),
         chatFriendName: $("#f_name"),
-        chatFriendStatus: $("#f_state")
+        chatFriendStatus: $("#f_state"),
+        groupName:$("#edit_groupname_menu_input")
     }
 })
 
@@ -44,6 +46,8 @@ let imParam = {
     totalUnreadMsgNo: 0,
     searchSex: null,
     acceptAppId: null,
+    editGroupStatus:null,
+    onEditGroupId:null,
     // 累加未读消息数
     addTotalUnreadMsgNo: function () {
         this.totalUnreadMsgNo++;

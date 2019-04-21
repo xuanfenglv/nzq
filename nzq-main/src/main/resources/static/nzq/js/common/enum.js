@@ -26,3 +26,8 @@ let AppStatus={
     ADD:1,
     REJECT:2
 }
+// 编辑分组状态
+let EditGroupStatus={
+    ADD:{id:0, name: '添加分组'},
+    EDIT:{id:1,name:'编辑分组'}
+}

@@ -14,4 +14,7 @@ import java.util.List;
 public interface FriendGroupDao {
     @Select("select id,name from FriendGroup where xf=#{xf}")
     List<GroupInfo> selectGroupInfos(Long xf);
+
+    @Select("select min(id) from FriendGroup where xf=#{xf}")
+    Long selectDefaultGroupId(Long xf);
 }
