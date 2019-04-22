@@ -26,4 +26,10 @@ public interface ApplicationDao {
             "from Application app where (send_xf=#{xf} and send_visible=1) or (receive_xf=#{xf} and receive_visible=1)  " +
             "order by mtime desc")
     List<ShortApplication> selectByXf(Long xf);
+
+    @Update("update Application set send_visible=0 where id=#{id}")
+    int senderDelete(Long id);
+
+    @Update("update Application set receive_visible=0 where id=#{id}")
+    int receiverDelete(Long id);
 }

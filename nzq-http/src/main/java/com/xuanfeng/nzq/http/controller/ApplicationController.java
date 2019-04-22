@@ -30,7 +30,15 @@ public class ApplicationController implements ApplicationBaseController {
     public Result<List<ShortApplication>> selectByXf(@PathVariable("xf") Long xf) {
         logger.info("enter selectByXf,xf:{}",xf);
         List<ShortApplication> applicationList = service.selectByXf(xf);
-        logger.info("end selectByXf.");
+        logger.info("exist selectByXf.");
         return ResultUtil.createSuccessResult(applicationList);
+    }
+
+    @Override
+    public Result delete(@PathVariable("id") Long id) {
+        logger.info("enter method delete id:{}",id);
+        Result result = service.delete(id);
+        logger.info("exist method add result:{}",result);
+        return result;
     }
 }

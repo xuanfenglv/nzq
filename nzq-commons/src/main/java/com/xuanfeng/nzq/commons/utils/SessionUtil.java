@@ -42,4 +42,12 @@ public class SessionUtil {
         return (UserSessionInfo)getSession(false).getAttribute("user");
     }
 
+    /**
+     * 获取当前用户账号
+     * @return
+     */
+    public static Long getXf() {
+        return getUserSessionInfo().getXf();
+    }
+
 }
