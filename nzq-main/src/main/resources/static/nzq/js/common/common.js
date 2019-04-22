@@ -58,6 +58,7 @@ let friendInfoUtil = {
     addInfo: function (friend) {
         let friendInfo = this.getFriendInfo(friend.xf);
         friendInfo.info = friend;
+        genFriend(friend);
     },
     getInfo(xf) {
         let friendInfo = this.getFriendInfo(xf);
@@ -79,6 +80,7 @@ let friendInfoUtil = {
         }
         // 更新（创建）会话
         createOrUpdateSession(chatInfo);
+        SoundManager.playNewMessage();
     },
     getChatInfos: function (xf) {
         let friendInfo = this.getFriendInfo(xf);
@@ -145,6 +147,18 @@ let friendInfoUtil = {
         // 从dom中移除好友
         $("[xf=" + xf + "]").remove();
 
+    },
+    updateStatus: function (xf,status) {
+        // 先移除再插入
+        let friend = this.getInfo(xf);
+        friend.status = status;
+        this.remove(xf);
+        this.addInfo(friend);
+        if (UserStatus.ONLINE == status) {
+            SoundManager.playOnline();
+        } else {
+            SoundManager.playOffline()
+        }
     }
 }
 
@@ -226,4 +240,28 @@ function showRunning(title) {
 function showError(msg) {
     $("#error").slideDown(600).delay(1500).slideUp(600);
     $("#error .error_title").html(msg);
+}
+function genAudio(src) {
+    var audio = document.createElement("audio");
+    audio.src = src;
+    return audio;
+}
+let SoundManager={
+    online: genAudio(sound.ONLINE),
+    offline: genAudio(sound.OFFLINE),
+    newMessage: genAudio(sound.NEW_MESSAGE),
+    dropChess: genAudio(sound.DROP_CHESS),
+
+    playOnline:function () {
+        this.online.play();
+    },
+    playOffline:function () {
+        this.offline.play();
+    },
+    playNewMessage:function () {
+        this.newMessage.play();
+    },
+    playDropChess:function () {
+        this.dropChess.play();
+    }
 }

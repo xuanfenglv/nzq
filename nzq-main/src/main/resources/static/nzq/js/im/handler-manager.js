@@ -9,6 +9,7 @@ class ChatHandlerManager {
 		this.handlerMapping.set(9, new Im_H9());
 		this.handlerMapping.set(10, new Im_H10());
 		this.handlerMapping.set(11, new Im_H11());
+		this.handlerMapping.set(12, new Im_H12());
 	}
 	handle(msg) {
 		let handler = this.handlerMapping.get(msg.msgId);

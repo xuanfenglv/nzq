@@ -1332,11 +1332,11 @@
                         <div id="xf_id">{{myInfo.id}}</div>
                     </div>
                     <img id="myinfo_quit_edit" title="放弃修改" src="/nzq/img/close.png" v-show="!isShow"
-                         @:click="quitEditMyInfo"/>
+                         @click="quitEditMyInfo"/>
                     <img id="myinfo_return" title="返回" src="/nzq/img/myinfo_return.png" v-show="isShow"
-                         @:click="quitMyInfo"/>
+                         @click="quitMyInfo"/>
                     <img id="myinfo_edit_sign" :src="isShow?'/nzq/img/edit_sign.png':'/nzq/img/submit_sign.png'"
-                         @:click="editMyInfo"/>
+                         @click="editMyInfo"/>
                     <div id="my_phone_err">
                         <img class="myinfo_err_sign" src="/nzq/img/err_sign.png"/>
                         <div id="phone_err_content"></div>
@@ -1479,9 +1479,9 @@
 
 </body>
 <!--vue-->
-<script src="js/common/vue.js"></script>
+<script src="/nzq/js/common/vue.js"></script>
 <!--jquery-->
-<script src="js/common/jquery-3.1.1.min.js"></script>
+<script src="/nzq/js/common/jquery-3.1.1.min.js"></script>
 <!--枚举-->
 <script src="/nzq/js/common/enum.js"></script>
 <!--常量值-->
@@ -1512,6 +1512,7 @@
 
 <!--im-->
 <script src="/nzq/js/im/common.js"></script>
+<script src="/nzq/js/im/sound.js"></script>
 <!--消息处理器-->
 <script src="/nzq/js/im/msg.js"></script>
 <script src="/nzq/js/im/handler.js"></script>

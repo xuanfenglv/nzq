@@ -20,19 +20,19 @@ let myInfoVue = new Vue({
         openSelfInfo:true,
         isShow:true
     },
-    method:{
+    methods:{
         quitMyInfo:function () {
            this.openSelfInfo=false;
         },
         editMyInfo:function () {
             if(this.isShow) {
-                myInfoVue.isShow=false;
+                this.isShow=false;
             } else {
                 updateMyUserInfo();
             }
         },
         quitEditMyInfo:function () {
-            myInfoVue.isShow=true;
+            this.isShow=true;
         }
     }
 });

@@ -10,7 +10,7 @@ class ChatInitHandler extends BaseHandler {
         })
         // 插入好友
         friendList.forEach(friend => {
-            genFriend(friend);
+
             friendInfoUtil.addInfo(friend);
         })
     }
@@ -94,3 +94,12 @@ class Im_H11 extends BaseHandler{
         friendInfoUtil.remove(data.xf);
     }
 }
+
+// 12. 状态变化
+class Im_H12 extends BaseHandler{
+
+    handleNotice(data) {
+        friendInfoUtil.updateStatus(data.xf,data.status);
+    }
+}
+

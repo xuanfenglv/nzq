@@ -31,3 +31,11 @@ let EditGroupStatus={
     ADD:{id:0, name: '添加分组'},
     EDIT:{id:1,name:'编辑分组'}
 }
+let sound = {
+    ONLINE: '/nzq/sound/online.wav',
+    OFFLINE: '/nzq/sound/offline.wav',
+    NEW_MESSAGE: '/nzq/sound/dididi.wav',
+    DROP_CHESS:'/nzq/sound/luozi3.mp3'
+};
+
+console.log(1)

@@ -42,3 +42,22 @@ function deleteFriend(xf) {
     imWs.sendMsg(msg);
 
 }
+
+function offToON(xf) {
+    // dom移动
+    var grandpa = $("[xf ="+xf+"]").parent().parent();
+    grandpa.find($(".online")).append($("[xf ="+xf+"]"));
+    grandpa.find($(".online")).find($("[xf ="+xf+"]")).find($(".friend_msg_content")).html("<span>[在线]</span>");
+    grandpa.find($(".offline")).find($("[xf ="+xf+"]")).remove();
+    // 播放声音
+    SoundManager.playNewMessage();
+    // 修改好友状态
+}
+function onToOff(msg) {
+    var xf = msg.substr(1);
+    var grandpa = $("[xf ="+xf+"]").parent().parent();
+    grandpa.find($(".offline")).append($("[xf ="+xf+"]"));
+    grandpa.find($(".offline")).find($("[xf ="+xf+"]")).find($(".friend_msg_content")).html("<span>[离线]</span>");
+    grandpa.find($(".online")).find($("[xf ="+xf+"]")).remove();
+    playOffline();
+}

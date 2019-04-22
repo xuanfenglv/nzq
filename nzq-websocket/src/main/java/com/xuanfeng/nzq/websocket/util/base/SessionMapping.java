@@ -32,7 +32,7 @@ public class SessionMapping {
     }
 
     public static void sendMsgToXf(long xf, String msg) {
-        Session session = sessions.get("xf");
+        Session session = sessions.get(xf);
         if (session!=null) {
             SendMsgUtil.sendMessage(session, msg);
         }
