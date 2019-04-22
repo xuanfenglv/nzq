@@ -1128,7 +1128,7 @@
 	height: 560px;
 	background-color: gray;
 	position: absolute;
-	z-index: 5;
+	z-index: -1;
 	background: rgba(105, 105, 105, 0.7);
 	display: none;
 }
@@ -1156,9 +1156,6 @@
 	position: absolute;
 	top: 5px;
 	right: 10px;
-}
-#myinfo_quit_edit {
-	display: none;
 }
 
 #myinfo_photo {
@@ -1274,7 +1271,6 @@
 	border-left-width: 0px;
 	border-top-width: 0px;
 	border-right-width: 0px;
-	display: none;
 }
 
 #myinfo_name_edit {
@@ -1287,7 +1283,6 @@
 	font-size: 17px;
 	background-color: transparent;
 	border: solid 1px white;
-	display: none;
 	text-align: left;
 }
 
@@ -1305,7 +1300,6 @@
 	border: solid 1px gray;
 	font-size: 16px;
 	color: gray;
-	display: none;
 }
 
 #my_phone_err,#my_birthday_err {

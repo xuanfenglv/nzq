@@ -14,7 +14,7 @@ function updateMyUserInfo() {
         myInfoVue.myInfo.sex = myInfoVue.editMyInfo.sex;
         myInfoVue.myInfo.tel = myInfoVue.editMyInfo.tel;
 
-        showStatus();
+        myInfoVue.isShow=true;
     });
 }
 function getOtherUserInfo(xf, callback) {
