@@ -97,10 +97,6 @@
 
 }
 
-#computer_fight, #friend_fight {
-	display: none;
-}
-
 #computer_fight {
 	background-size: 100%;
 }
@@ -709,7 +705,7 @@
 }
 /*end閭�----------------------------------------------*/
 	/*begin yuezhanzhunbei----------------------------------------------*/
-.game_yue_competitor { 
+.game_yue_competitor {
 	width : 1000px;
 	height: 612px;
 	background-color: darkgray;
@@ -1807,7 +1803,7 @@
 	left: 66px;
 	background-color: white;
 	border-radius: 10px;
-	
+
 }
 
 .gy3_exchange {

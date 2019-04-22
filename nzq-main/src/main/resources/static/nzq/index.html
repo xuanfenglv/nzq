@@ -35,17 +35,17 @@
         <div id="display">
             <div id="play">
                 <div id="play_menu">
-                    <div id="playergame" style="box-shadow: #BCBD93 2px 2px 2px;">
+                    <div id="playergame" style="box-shadow: #BCBD93 2px 2px 2px;" @click="changeMainPage(1)">
                         玩家对战
                     </div>
-                    <div id="conputergame">
+                    <div id="conputergame" @click="changeMainPage(2)">
                         人机对战
                     </div>
-                    <div id="friendgame">
+                    <div id="friendgame" @click="changeMainPage(3)">
                         好友约战
                     </div>
                 </div>
-                <div id="player_fight">
+                <div id="player_fight" v-show="mainMenuButton==1">
                     <div id="play_mode">
 
                         <div id="wuziqi">
@@ -86,7 +86,7 @@
                         <div id="confirm_game">确认</div>
                     </div>
                 </div>
-                <div id="computer_fight">
+                <div id="computer_fight" v-show="mainMenuButton==2">
 
 
                     <div id="computer_fight_introduce">
@@ -94,7 +94,7 @@
                     </div>
                     <div id="computer_begin">开始挑战</div>
                 </div>
-                <div id="friend_fight">
+                <div id="friend_fight" v-show="mainMenuButton==3">
                     <div id="play_mode_f">
                         <div id="wuziqi_f">
                             <img src="/nzq/img/wuziqi_sign2.png" class="wuziqi_sign"/> 双人五子棋
@@ -1517,6 +1517,7 @@
 <script src="/nzq/js/im/msg.js"></script>
 <script src="/nzq/js/im/handler.js"></script>
 <script src="/nzq/js/im/handler-manager.js"></script>
+<script src="/nzq/js/im/switch.js"></script>
 <!--chat-->
 <script src="/nzq/js/im/fun/chat.js"></script>
 <script src="/nzq/js/im/event/chat.js"></script>
@@ -1544,7 +1545,10 @@
 <script src="/nzq/js/im/template/self.js"></script>
 
 <!--game-->
-<!--<script src="/nzq/js/game.js"></script>-->
+<script src="/nzq/js/game/msg.js"></script>
+<script src="/nzq/js/game/handler.js"></script>
+<script src="/nzq/js/game/handler-manager.js"></script>
+<script src="/nzq/js/game/switch.js"></script>
 <!--游戏运行时-->
 <script src="/nzq/js/playgame.js"></script>
 <!--棋盘-->
