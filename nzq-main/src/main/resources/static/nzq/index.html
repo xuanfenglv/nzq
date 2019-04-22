@@ -1256,14 +1256,14 @@
 				<div id="log_window"></div>
 				<div id="myinfo">
 					<div id="myinfo_first">
-
-						<img id="myinfo_photo" th:src="${'/nzq/photo/'+receiveXf+'.jpg'}" src="/nzq/photo/10001.jpg" />
-						<div id="myinfo_name"></div>
-						<input id="myinfo_name_edit" value="" maxlength="10" />
+                        <!--name-->
+						<img id="myinfo_photo" :src="getPhoto(myInfo.id)"/>
+						<div id="myinfo_name">{{myInfo.nickname}}</div>
+						<input id="myinfo_name_edit" v-model="editMyInfo.nickname" maxlength="10" />
 
 						<div id="myinfo_xfid">
 							<img class="myinfo_xfid_photo" src="/nzq/img/xfid_photo.png" />
-							<div id="xf_id" th:text=${receiveXf}>10001</div>
+							<div id="xf_id">{{myInfo.id}}</div>
 						</div>
 						<img id="myinfo_quit_edit" title="放弃修改" src="/nzq/img/close.png" />
 						<img id="myinfo_return" title="返回"
@@ -1279,55 +1279,58 @@
 						</div>
 
 					</div>
+                    <!--birthday-->
 					<div id="myinfo_second">
 						<div class="myinfo_detail">
 							<img class="myinfo_detail_photo" src="/nzq/img/birth.png" />
 
 							<div class="myinfo_detail_label">生日</div>
-							<div class="myinfo_detail_content" id="my_birth"></div>
-							<input class="myinfo_edit" id="edit_my_birth" />
+							<div class="myinfo_detail_content" id="my_birth">{{myInfo.birthday}}</div>
+							<input class="myinfo_edit" id="edit_my_birth" v-model="editMyInfo.birthday"/>
 						</div>
 
 						<div class="myinfo_detail">
 							<img class="myinfo_detail_photo" src="/nzq/img/age.png" />
 
 							<div class="myinfo_detail_label">年龄</div>
-							<div class="myinfo_detail_content" id="my_age"></div>
+							<div class="myinfo_detail_content" id="my_age">{{myInfo.age}}</div>
 						</div>
 
+                        <!--sex-->
 						<div class="myinfo_detail">
 							<img class="myinfo_detail_photo" src="/nzq/img/sex.png" />
 
 							<div class="myinfo_detail_label">性别</div>
-							<div class="myinfo_detail_content" id="my_sex"></div>
+							<div class="myinfo_detail_content" id="my_sex">{{myInfo.sex==1?"男":"女"}}</div>
 
-							<select id="select_my_sex">
-								<option value="m">男</option>
-								<option value="w">女</option>
+							<select id="select_my_sex" v-model="editMyInfo.sex">
+								<option value="1">男</option>
+								<option value="0">女</option>
 							</select>
-
 						</div>
+
+                        <!--tel-->
 						<div class="myinfo_detail">
 							<img class="myinfo_detail_photo" src="/nzq/img/phone.png" />
 
 							<div class="myinfo_detail_label">手机</div>
-							<div class="myinfo_detail_content" id="my_phone"></div>
+							<div class="myinfo_detail_content" id="my_phone">{{myInfo.tel}}</div>
 
-							<input class="myinfo_edit" id="edit_my_phone" maxlength="11" />
+							<input class="myinfo_edit" id="edit_my_phone" maxlength="11" v-model="editMyInfo.tel" />
 
 						</div>
 						<div class="myinfo_detail">
 							<img class="myinfo_detail_photo" src="/nzq/img/grade.png" />
 
 							<div class="myinfo_detail_label">段位</div>
-							<div class="myinfo_detail_content" id="my_grade"></div>
+							<div class="myinfo_detail_content" id="my_grade">{{myInfo.grade}}</div>
 						</div>
 
 						<div class="myinfo_detail">
 							<img class="myinfo_detail_photo" src="/nzq/img/money.png" />
 
 							<div class="myinfo_detail_label">金币</div>
-							<div class="myinfo_detail_content" id="my_money"></div>
+							<div class="myinfo_detail_content" id="my_money">{{myInfo.money}}</div>
 						</div>
 					</div>
 
@@ -1477,6 +1480,7 @@
 <script src="/nzq/js/common/run.js"></script>
 
 <!--im-->
+<script src="/nzq/js/im/common.js"></script>
 <!--消息处理器-->
 <script src="/nzq/js/im/msg.js"></script>
 <script src="/nzq/js/im/handler.js"></script>

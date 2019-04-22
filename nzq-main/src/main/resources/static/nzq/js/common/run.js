@@ -14,6 +14,8 @@ function initIm() {
     imWs = new WebSocketUtil("聊天连接",chatWsAddress,new ChatHandlerManager(),chatInitMethod);
     // 查询好友申请（发送&接受）
     initApplication();
+    // 查询自己信息
+    getSelfUserInfo();
 }
 function initGame() {
 

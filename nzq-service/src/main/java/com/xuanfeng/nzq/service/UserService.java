@@ -4,6 +4,7 @@ import com.xuanfeng.nzq.api.request.user.RegisterUserRequest;
 import com.xuanfeng.nzq.api.request.user.UpdateSelfInfoRequest;
 import com.xuanfeng.nzq.api.response.user.OtherUserInfo;
 import com.xuanfeng.nzq.api.response.user.SelfUserInfo;
+import com.xuanfeng.nzq.commons.utils.DateUtil;
 import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
 import com.xuanfeng.nzq.domain.constant.UserStatusEnum;
 import com.xuanfeng.nzq.domain.dao.UserDao;
@@ -59,7 +60,9 @@ public class UserService {
     }
 
     public SelfUserInfo querySelfUserInfo(Long xf) {
-        return dao.querySelfUserInfo(xf);
+        SelfUserInfo selfUserInfo = dao.querySelfUserInfo(xf);
+        selfUserInfo.setAge(DateUtil.getAge(selfUserInfo.getBirthday()));
+        return selfUserInfo;
     }
 
     public OtherUserInfo searchOtherUser(Long xf) {

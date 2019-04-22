@@ -1,3 +1,22 @@
+function getSelfUserInfo() {
+    let url = '/users/self';
+    httpUtil.get(url, null, user => {
+        myInfoVue.myInfo = user;
+        myInfoVue.editMyInfo = user;
+    });
+}
+
+function updateMyUserInfo() {
+    let url = '/users/self';
+    httpUtil.put(url, JSON.stringify(myInfoVue.editMyInfo), () => {
+        myInfoVue.myInfo.nickname = myInfoVue.editMyInfo.nickname;
+        myInfoVue.myInfo.birthday = myInfoVue.editMyInfo.birthday;
+        myInfoVue.myInfo.sex = myInfoVue.editMyInfo.sex;
+        myInfoVue.myInfo.tel = myInfoVue.editMyInfo.tel;
+
+        showStatus();
+    });
+}
 function getOtherUserInfo(xf, callback) {
     let url = `/users/strangers/${xf}`;
     httpUtil.get(url, null, callback);

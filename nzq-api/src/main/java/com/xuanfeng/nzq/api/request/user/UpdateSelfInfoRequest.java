@@ -1,6 +1,7 @@
 package com.xuanfeng.nzq.api.request.user;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 public class UpdateSelfInfoRequest {
     private String nickname;
     private Byte sex;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String tel;
 }

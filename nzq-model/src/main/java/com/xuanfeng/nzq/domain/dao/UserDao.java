@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface UserDao {
 
-    @Select("select nickname,sex,birthday,tel,grade,money from `User` where id=#{xf}")
+    @Select("select id,nickname,sex,birthday,tel,grade,money from `User` where id=#{xf}")
     SelfUserInfo querySelfUserInfo(Long xf);
 
     @Select("select id,nickname,sex,birthday,grade from `User` where id=#{xf}")

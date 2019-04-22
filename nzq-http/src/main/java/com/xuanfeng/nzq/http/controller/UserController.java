@@ -65,8 +65,8 @@ public class UserController implements UserBaseController {
     @Override
     public Result<SelfUserInfo> querySelfUserInfo() {
         logger.info("Enter method querySelfUserInfo.");
-        UserSessionInfo info = SessionUtil.getUserSessionInfo();
-        SelfUserInfo selfUserInfo = service.querySelfUserInfo(info.getXf());
+        Long xf = SessionUtil.getXf();
+        SelfUserInfo selfUserInfo = service.querySelfUserInfo(xf);
         logger.info("End method querySelfUserInfo.");
         return ResultUtil.createSuccessResult(selfUserInfo);
     }
@@ -74,7 +74,7 @@ public class UserController implements UserBaseController {
     @Override
     public Result updateSelfUserInfo(@RequestBody UpdateSelfInfoRequest request) {
         logger.info("Enter method updateSelfUserInfo,request:{}.", request);
-        service.updateSelfUserInfo(request, SessionUtil.getUserSessionInfo().getXf());
+        service.updateSelfUserInfo(request, SessionUtil.getXf());
         logger.info("End method updateSelfUserInfo.");
         return ResultUtil.createSuccessResult();
     }
