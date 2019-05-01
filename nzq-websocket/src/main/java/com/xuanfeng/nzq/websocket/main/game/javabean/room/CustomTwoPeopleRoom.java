@@ -9,12 +9,15 @@ import com.xuanfeng.nzq.websocket.component.NzqGameStatusHandler;
 import com.xuanfeng.nzq.websocket.constant.RoomType;
 import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
+import com.xuanfeng.nzq.websocket.main.game.constant.Position;
 import com.xuanfeng.nzq.websocket.main.game.javabean.room.base.BaseTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.main.game.javabean.room.base.CustomRoom;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.ComeInRoomNotice;
 import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
 import com.xuanfeng.nzq.websocket.util.SendMsgUtil;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.websocket.Session;
 import java.util.concurrent.locks.ReentrantLock;
@@ -26,6 +29,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 
 public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     // 黑色方请求交换截止时间
     private long blackExchange;
@@ -86,6 +90,8 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
                 // 房间销毁
                 CustomRooms.delete(id);
             } else {
+                // 房主换人
+                owner = white;
                 // 通知房间存在的人
                 SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(GameMsgId.退出房间));
 
@@ -98,6 +104,8 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
                 // 房间销毁
                 CustomRooms.delete(id);
             } else {
+                // 房主换人
+                owner = black;
                 // 通知房间存在的人
                 SendMsgUtil.sendMessage(blackSession, new NoticeMsg(GameMsgId.退出房间));
             }
@@ -107,25 +115,29 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
     }
 
     public void requestExchange(Long xf) {
+        long deadline = System.currentTimeMillis() + 5000;
         if (black.equals(xf)) {
             SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(GameMsgId.请求换位));
-            blackExchange = System.currentTimeMillis() + 5000;
+            blackExchange = deadline;
         } else if (white.equals(xf)) {
             SendMsgUtil.sendMessage(blackSession, new NoticeMsg(GameMsgId.请求换位));
-            whiteExchange = System.currentTimeMillis() + 5000;
+            whiteExchange = deadline;
         }
     }
 
     public void confirmExchange(Long xf) {
         enterRoomLock.lock();
+        long now = System.currentTimeMillis();
         if (black.equals(xf)) {
-            if (whiteExchange < System.currentTimeMillis()) {
+            if (whiteExchange < now) {
+                logger.info("确认换位超时");
                 return;
             }
             SendMsgUtil.sendMessage(blackSession, new ResponseMsg(GameMsgId.接受换位));
             SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(GameMsgId.接受换位));
         } else {
-            if (blackExchange < System.currentTimeMillis()) {
+            if (blackExchange < now) {
+                logger.info("确认换位超时");
                 return;
             }
             SendMsgUtil.sendMessage(whiteSession, new ResponseMsg(GameMsgId.接受换位));
@@ -137,13 +149,14 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
     }
 
     public void rejectExchange(Long xf) {
+        long now = System.currentTimeMillis();
         if (black.equals(xf)) {
-            if (whiteExchange >= System.currentTimeMillis()) {
-                SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(GameMsgId.接受换位));
+            if (whiteExchange >= now) {
+                SendMsgUtil.sendMessage(whiteSession, new NoticeMsg(GameMsgId.拒绝换位));
             }
         } else {
-            if (blackExchange >= System.currentTimeMillis()) {
-                SendMsgUtil.sendMessage(blackSession, new NoticeMsg(GameMsgId.接受换位));
+            if (blackExchange >= now) {
+                SendMsgUtil.sendMessage(blackSession, new NoticeMsg(GameMsgId.拒绝换位));
             }
         }
     }
@@ -154,12 +167,11 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
      * @param xf
      * @return 返回进入的位置
      */
-    public int enterRoom(Long xf, Session session) {
+    public Position enterRoom(Long xf, Session session) {
         if (isFull()) {
-            return 0;
+            return Position.NOTHING;
         }
-        boolean success = true;
-        int position = 0;
+        Position position;
 
         enterRoomLock.lock();
         Session noticeSession = null;
@@ -167,27 +179,29 @@ public class CustomTwoPeopleRoom extends BaseTwoPeopleRoom implements CustomRoom
             super.white = xf;
             super.whiteSession = session;
             noticeSession = blackSession;
-            position = 2;
+            position = Position.WHITE;
         } else if (black == null) {
             super.black = xf;
             super.blackSession = session;
             noticeSession = whiteSession;
-            position = 1;
+            position = Position.BLACK;
         } else {
             // 竞争到锁后没有空位
-            success = false;
+
+            position = Position.NOTHING;
         }
-        if (success) {
+        // 成功进入房间，发送推送通知房间的其他人
+        if (position!=Position.NOTHING) {
             NzqGameCache cache = NzqGameCacheManager.get(xf);
             cache.setRoomId(id);
             // 推送
             ComeInRoomNotice notice = new ComeInRoomNotice();
             notice.setXf(xf);
             SendMsgUtil.sendMessage(noticeSession, WsResultUtil.createNoticeResult(GameMsgId.接受邀请, notice));
+            // 修改状态
+            NzqGameStatusHandler.changeStatus(xf, NzqStatusEnum.房间中);
 
         }
-        // 修改房间
-        NzqGameStatusHandler.changeStatus(xf, NzqStatusEnum.房间中);
         enterRoomLock.unlock();
 
         return position;

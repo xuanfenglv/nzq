@@ -1,6 +1,7 @@
 let myInfoVue = new Vue({
     el: '#myinfo',
     data: {
+        onlineFriendList:[],
         myInfo:{
             id: 10001,
             nickname: "王尼玛",

@@ -26,25 +26,25 @@ public class NzqGameConfig {
         HandlerManager handlerManager = new HandlerManager();
 
         handlerManager.putAHandler(1,h1());
-        handlerManager.putAHandler(1,h2());
-        handlerManager.putAHandler(1,h3());
-        handlerManager.putAHandler(1,h4());
-        handlerManager.putAHandler(1,h5());
-        handlerManager.putAHandler(1,h6());
-        handlerManager.putAHandler(1,h7());
-        handlerManager.putAHandler(1,h8());
-        handlerManager.putAHandler(1,h9());
-        handlerManager.putAHandler(1,h10());
-        handlerManager.putAHandler(1,h11());
-        handlerManager.putAHandler(1,h12());
-        handlerManager.putAHandler(1,h13());
-        handlerManager.putAHandler(1,h14());
-        handlerManager.putAHandler(1,h15());
-        handlerManager.putAHandler(1,h16());
-        handlerManager.putAHandler(1,h17());
-        handlerManager.putAHandler(1,h18());
-        handlerManager.putAHandler(1,h19());
-        handlerManager.putAHandler(1,h20());
+        handlerManager.putAHandler(2,h2());
+        handlerManager.putAHandler(3,h3());
+        handlerManager.putAHandler(4,h4());
+        handlerManager.putAHandler(5,h5());
+        handlerManager.putAHandler(6,h6());
+        handlerManager.putAHandler(7,h7());
+        handlerManager.putAHandler(8,h8());
+        handlerManager.putAHandler(9,h9());
+        handlerManager.putAHandler(10,h10());
+        handlerManager.putAHandler(11,h11());
+        handlerManager.putAHandler(12,h12());
+        handlerManager.putAHandler(13,h13());
+        handlerManager.putAHandler(14,h14());
+        handlerManager.putAHandler(15,h15());
+        handlerManager.putAHandler(16,h16());
+        handlerManager.putAHandler(17,h17());
+        handlerManager.putAHandler(18,h18());
+        handlerManager.putAHandler(19,h19());
+        handlerManager.putAHandler(20,h20());
 
         return handlerManager;
     }

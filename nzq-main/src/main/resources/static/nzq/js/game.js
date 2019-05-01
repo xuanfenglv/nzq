@@ -140,7 +140,7 @@ function friendAcceptInvitation3(msg) {
 		if($("#gy3_competitor_img_"+myLocation+" .gy3_house_owner").css("display")!="none") {
 			$("#gy3_competitor_img_black .gy3_exit").css("display", "inline");
 		}
-		
+
 		$("#gy3_competitor_black .gy3_competitor_photo").attr("src","/nzq/photo/"+fxf_loc[0]+".jpg");
 		$("#gy3_competitor_black .gy3_competitor_name").html($("[xf="+fxf_loc[0]+"] .friend_msg_name").html());
 		$("#gy3_competitor_black").css("display", "inline");
@@ -162,7 +162,7 @@ function friendAcceptInvitation3(msg) {
 		if($("#gy3_competitor_img_"+myLocation+" .gy3_house_owner").css("display")!="none") {
 			$("#gy3_competitor_img_red .gy3_exit").css("display", "inline");
 		}
-		
+
 		$("#gy3_competitor_red .gy3_competitor_photo").attr("src","/nzq/photo/"+fxf_loc[0]+".jpg");
 		$("#gy3_competitor_red .gy3_competitor_name").html($("[xf="+fxf_loc[0]+"] .friend_msg_name").html());
 		$("#gy3_competitor_red").css("display", "inline");
@@ -200,13 +200,13 @@ function iInRoom(msg) {
 		$("#tick_white").css("display", "none");
 		$("#tick_black").css("display", "none");
 		$("#change_white").css("display", "none");
-		
+
 		$("#black_house_owner").css("display", "inline");
 		$("#change_black").css("display", "inline");
-		
+
 		$("#gy_competitor_black .gy_competitor_photo").attr("src","/nzq/photo/"+xf_loc[0]+".jpg");
 		$("#gy_competitor_black .gy_competitor_name").html($("[xf="+xf_loc[0]+"] .friend_msg_name").html());
-		
+
 		$("#gy_competitor_white .gy_competitor_photo").attr("src","/nzq/photo/"+myxf+".jpg");
 		$("#gy_competitor_white .gy_competitor_name").html($("#myinfo_name").html());
 	} else {
@@ -216,16 +216,16 @@ function iInRoom(msg) {
 		$("#tick_black").css("display", "none");
 		$("#tick_white").css("display", "none");
 		$("#change_black").css("display", "none");
-		
+
 		$("#white_house_owner").css("display", "inline");
-		
-		
-		
+
+
+
 		$("#change_white").css("display", "inline");
-		
+
 		$("#gy_competitor_white .gy_competitor_photo").attr("src","/nzq/photo/"+xf_loc[0]+".jpg");
 		$("#gy_competitor_white .gy_competitor_name").html($("[xf="+xf_loc[0]+"] .friend_msg_name").html());
-		
+
 		$("#gy_competitor_black .gy_competitor_photo").attr("src","/nzq/photo/"+myxf+".jpg");
 		$("#gy_competitor_black .gy_competitor_name").html($("#myinfo_name").html());
 	}
@@ -324,7 +324,7 @@ function changeLocation3(msg) {
 	} else {
 		exchangeAnotherAndNull(msg)
 	}
-	
+
 }
 //21
 function refuseMyInvitation(msg) {
@@ -352,7 +352,7 @@ function friendExist3(msg) {
 	if($("#gy_competitor_"+theLast).css("display")=="none") {
 		$("#gy3_start").css("display","inline");
 	}
-	
+
 }
 //23
 function tickOut3() {
@@ -421,20 +421,20 @@ function changeLocationBetweenTwoPlayer3(msg) {
 		ex2 = msg.substr(5).split(".");
 		exchange2GY3detail(ex2);
 	}
-	
+
 }
 //7
 function friendExist() {
 	if(myLocation == "black") {
 		$("#white_house_owner").css("display", "none");
 		$("#change_white").css("display", "none");
-		
+
 		$("#gy_competitor_white").css("display", "none");
 		$("#black_house_owner").css("display", "inline");
 	} else {
 		$("#black_house_owner").css("display", "none");
 		$("#change_black").css("display", "none");
-		
+
 		$("#gy_competitor_black").css("display", "none");
 		$("#white_house_owner").css("display", "inline");
 	}
@@ -461,7 +461,7 @@ function ReceiveRequestChangeLocation() {
 		$("#change_white").css("display", "none");
 		duifang = "white";
 	}
-	
+
 	$("#gy_ex"+duifang+"_count").html("5");
 	$("#gy_exchange_request_"+duifang).css("display", "inline");
 //	alert(duifang);
@@ -474,7 +474,7 @@ function ReceiveRequestChangeLocation() {
 					clearInterval(Time1);
 				}
 			}, 1000);
-	
+
 }
 //10
 function changeLocationBetweenTwoPlayerDealer(msg) {
@@ -492,47 +492,47 @@ function changeLocationBetweenTwoPlayerDealer(msg) {
 		}
 		gameWarn("被请求方拒绝换位");
 	}
-	
+
 }
 function changeLocationBetweenTwoPlayer() {
 	exchangeGYdetail();
 	if($("#black_house_owner").css("display")=="none") {//white是房主
 		if(myLocation=="white") {
 			$("#gy_black_cover").css("display", "none");
-			
+
 			$("#tick_black").css("display", "none");
-			
+
 			$("#tick_white").css("display", "inline");
-			
+
 			$("#change_black").css("display", "none");
 			$("#change_white").css("display", "inline");
 		} else {
 			$("#gy_white_cover").css("display", "none");
-			
+
 			$("#change_black").css("display", "inline");
 			$("#change_white").css("display", "none");
 		}
-		
+
 
 		$("#black_house_owner").css("display","inline");
 		$("#white_house_owner").css("display","none");
 	} else {
 		if(myLocation=="black") {
 			$("#gy_white_cover").css("display", "none");
-			
+
 			$("#tick_white").css("display", "none");
-			
+
 			$("#tick_black").css("display", "inline");
-			
+
 			$("#change_black").css("display", "inline");
 			$("#change_white").css("display", "none");
 		} else {
 			$("#gy_black_cover").css("display", "none");
-			
+
 			$("#change_black").css("display", "none");
 			$("#change_white").css("display", "inline");
 		}
-		
+
 		$("#black_house_owner").css("display","none");
 		$("#white_house_owner").css("display","inline");
 	}
@@ -550,18 +550,18 @@ function beginGy5() {
 		var src = $("#gy_competitor_white .gy_competitor_photo").attr("src");
 		$("#player1_photo").attr("src",src);
 		$("#player1_name").html($("#gy_competitor_white .gy_competitor_name").html());
-		
+
 		src = $("#gy_competitor_black .gy_competitor_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		$("#player3_name").html($("#gy_competitor_black .gy_competitor_name").html());
-		
+
 		daojishi3();
 	} else {
 		myOrder = 1;
 		var src = $("#gy_competitor_black .gy_competitor_photo").attr("src");
 		$("#player1_photo").attr("src",src);
 		$("#player1_name").html($("#gy_competitor_black .gy_competitor_name").html());
-		
+
 		src = $("#gy_competitor_white .gy_competitor_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		$("#player3_name").html($("#gy_competitor_white .gy_competitor_name").html());
@@ -571,7 +571,7 @@ function beginGy5() {
 	$("#wuziqi_game").css("display", "inline");
 	$("#game_yue_competitor2").css("display", "none");
 	$("#game_yue_competitor").css("display", "none");
-	
+
 //	$("#yaoqing").css("display", "none");
 }
 function beginGy4() {
@@ -581,26 +581,26 @@ function beginGy4() {
 		var src = $("#gy3_competitor_white .gy3_competitor_photo").attr("src");
 		$("#player1_photo").attr("src",src);
 		$("#player1_name").html($("#gy3_competitor_white .gy3_competitor_name").html());
-		
+
 		src = $("#gy3_competitor_red .gy3_competitor_photo").attr("src");
 		$("#player2_photo").attr("src",src);
 		$("#player2_name").html($("#gy3_competitor_black .gy3_competitor_name").html());
-		
+
 		src = $("#gy3_competitor_black .gy3_competitor_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		$("#player3_name").html($("#gy3_competitor_black .gy3_competitor_name").html());
-		
+
 		daojishi3();
 	} else if(myLocation == "white") {
 		myOrder = 1;
 		var src = $("#gy3_competitor_black .gy3_competitor_photo").attr("src");
 		$("#player1_photo").attr("src",src);
 		$("#player1_name").html($("#gy3_competitor_black .gy3_competitor_name").html());
-		
+
 		src = $("#gy3_competitor_red .gy3_competitor_photo").attr("src");
 		$("#player2_photo").attr("src",src);
 		$("#player2_name").html($("#gy3_competitor_red .gy3_competitor_name").html());
-		
+
 		src = $("#gy3_competitor_white .gy3_competitor_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		$("#player3_name").html($("#gy3_competitor_white .gy3_competitor_name").html());
@@ -610,22 +610,22 @@ function beginGy4() {
 		var src = $("#gy3_competitor_black .gy3_competitor_photo").attr("src");
 		$("#player1_photo").attr("src",src);
 		$("#player1_name").html($("#gy3_competitor_black .gy3_competitor_name").html());
-		
+
 		src = $("#gy3_competitor_white .gy3_competitor_photo").attr("src");
 		$("#player2_photo").attr("src",src);
 		$("#player2_name").html($("#gy3_competitor_white .gy3_competitor_name").html());
-		
+
 		src = $("#gy3_competitor_red .gy3_competitor_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		$("#player3_name").html($("#gy3_competitor_red .gy3_competitor_name").html());
-		
+
 		daojishi1();
 	}
 	$("#inner_chat_record").html("");
 	$("#wuziqi_game").css("display", "inline");
 	$("#game_yue_competitor2").css("display", "none");
 	$("#game_yue_competitor").css("display", "none");
-	
+
 //	$("#yaoqing").css("display", "none");
 }
 function beginPp5() {
@@ -634,7 +634,7 @@ function beginPp5() {
 		myOrder = 0;
 		var src = $("#pz2_white_photo").attr("src");
 		$("#player1_photo").attr("src",src);
-		
+
 		src = $("#pz2_black_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		daojishi3();
@@ -642,7 +642,7 @@ function beginPp5() {
 		myOrder = 1;
 		var src = $("#pz2_black_photo").attr("src");
 		$("#player1_photo").attr("src",src);
-		
+
 		src = $("#pz2_white_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		daojishi1();
@@ -657,10 +657,10 @@ function beginPp4() {
 		myOrder = 0;
 		var src = $("#pz3_white_photo").attr("src");
 		$("#player1_photo").attr("src",src);
-		
+
 		src = $("#pz3_red_photo").attr("src");
 		$("#player2_photo").attr("src",src);
-		
+
 		src = $("#pz3_black_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		daojishi3();
@@ -668,10 +668,10 @@ function beginPp4() {
 		myOrder = 1;
 		var src = $("#pz3_black_photo").attr("src");
 		$("#player1_photo").attr("src",src);
-		
+
 		src = $("#pz3_red_photo").attr("src");
 		$("#player2_photo").attr("src",src);
-		
+
 		src = $("#pz3_white_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		daojishi1();
@@ -679,10 +679,10 @@ function beginPp4() {
 		myOrder = 2;
 		var src = $("#pz3_black_photo").attr("src");
 		$("#player1_photo").attr("src",src);
-		
+
 		src = $("#pz3_white_photo").attr("src");
 		$("#player2_photo").attr("src",src);
-		
+
 		src = $("#pz3_red_photo").attr("src");
 		$("#player3_photo").attr("src",src);
 		daojishi1();
@@ -815,7 +815,7 @@ function match5Confirm() {
 		//alert("开始");
 		beginPp5();
 	}
-	
+
 }
 //36
 function match4Confirm(msg) {
@@ -835,7 +835,7 @@ function match4Confirm(msg) {
 		//alert("开始");
 		beginPp4();
 	}
-	
+
 }
 //--------------------------------------------------------------------
 
@@ -898,48 +898,6 @@ $(document).ready(function() {
 	})
 })
 
-$(document).ready(function() {
-	$("#wuziqi").click(function() {
-		pPModel = 2;
-		$("#wuziqi_introduce").css("visibility","visible");
-		$("#siziqi_introduce").css("visibility","hidden");
-		$("#game_pattern").css("left","50px");
-	})
-})
-$(document).ready(function() {
-	$("#siziqi").click(function() {
-		pPModel = 3;
-		$("#wuziqi_introduce").css("visibility","hidden");
-		$("#siziqi_introduce").css("visibility","visible");
-		$("#game_pattern").css("left","650px");
-	})
-})
-
-$(document).ready(function() {
-	$("#wuziqi_f").click(function() {
-		roomModel = 2;
-		$("#wuziqi_introduce_f").css("visibility","visible");
-		$("#siziqi_introduce_f").css("visibility","hidden");
-	})
-})
-$(document).ready(function() {
-	$("#siziqi_f").click(function() {
-		roomModel = 3;
-		$("#wuziqi_introduce_f").css("visibility","hidden");
-		$("#siziqi_introduce_f").css("visibility","visible");
-	})
-})
-
-$(document).ready(function() {
-	$(".quit_game").click(function() {
-		$("#play").css("display", "none");
-		$("#person").css("display", "none");
-		$("#commodity").css("display", "none");
-		$("#store").css("display", "none");
-
-		$("#homepage").css("display", "inline");
-	})
-})
 //榜单切换bangdanqiehuan
 $(document).ready(function() {
 	$("#treasure_friend").click(function() {
@@ -958,27 +916,6 @@ $(document).ready(function() {
 	})
 })
 
-$(document).ready(function() {
-	$("#playergame").click(function() {
-		$("#computer_fight").css("display","none");
-		$("#friend_fight").css("display","none");
-		$("#player_fight").css("display","inline");
-	})
-})
-$(document).ready(function() {
-	$("#conputergame").click(function() {
-		$("#computer_fight").css("display","inline");
-		$("#friend_fight").css("display","none");
-		$("#player_fight").css("display","none");
-	})
-})
-$(document).ready(function() {
-	$("#friendgame").click(function() {
-		$("#computer_fight").css("display","none");
-		$("#friend_fight").css("display","inline");
-		$("#player_fight").css("display","none");
-	})
-})
 //begin
 $(document).ready(function() {
 	$("#yaoqing_close").hover(function() {
@@ -995,186 +932,8 @@ $(document).ready(function() {
 		$("#yaoqing").css("display","none");
 	})
 })
-//erzhu
-$(document).ready(function() {
-	$("#playergame").click(function() {
-		$("#playergame").css("box-shadow", "#BCBD93 2px 2px 2px");
-		$("#conputergame").css("box-shadow", "");
-		$("#friendgame").css("box-shadow", "");
-		$("#game").css("background-image", "url(/nzq/img/bgimg.jpg)");
-	})
-})
-$(document).ready(function() {
-	$("#conputergame").click(function() {
-		$("#playergame").css("box-shadow", "");
-		$("#conputergame").css("box-shadow", "#BCBD93 2px 2px 2px");
-		$("#friendgame").css("box-shadow", "");
-		$("#game").css("background-image", "url(/nzq/img/bgimg2.jpg)");
-	})
-})
-$(document).ready(function() {
-	$("#friendgame").click(function() {
-		$("#playergame").css("box-shadow", "");
-		$("#conputergame").css("box-shadow", "");
-		$("#friendgame").css("box-shadow", "#BCBD93 2px 2px 2px");
-		$("#game").css("background-image", "url(/nzq/img/bgimg3.jpg)");
-	})
-})
 
-$(document).ready(function() {
-	$("#siziqi").click(function() {
-		$("#siziqi .siziqi_sign").attr("src", "/nzq/img/siziqi_sign3.png");
-		$("#wuziqi .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign.png");
 
-	})
-})
-
-$(document).ready(function() {
-	$("#wuziqi").click(function() {
-		$("#wuziqi .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign2.png");
-		$("#siziqi .siziqi_sign").attr("src", "/nzq/img/siziqi_sign.png");
-
-	})
-})
-
-$(document).ready(function() {
-	$("#siziqi_f").click(function() {
-		$("#siziqi_f .siziqi_sign").attr("src", "/nzq/img/siziqi_sign3.png");
-		$("#wuziqi_f .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign.png");
-
-	})
-})
-
-$(document).ready(function() {
-	$("#wuziqi_f").click(function() {
-		$("#wuziqi_f .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign2.png");
-		$("#siziqi_f .siziqi_sign").attr("src", "/nzq/img/siziqi_sign.png");
-
-	})
-})
-
-$(document).ready(function() {
-	$("#siziqi").hover(function() {
-			//鼠标经过的操作
-			$("#siziqi .siziqi_sign").attr("src", "/nzq/img/siziqi_sign3.3.png");
-		},
-		function() {
-			//鼠标离开的操作
-			if($("#siziqi_introduce").css("visibility") == "hidden") {
-				$("#siziqi .siziqi_sign").attr("src", "/nzq/img/siziqi_sign.png");
-			} else {
-				$("#siziqi .siziqi_sign").attr("src", "/nzq/img/siziqi_sign3.png");
-			}
-
-		});
-})
-
-$(document).ready(function() {
-	$("#wuziqi").hover(function() {
-			//鼠标经过的操作
-			$("#wuziqi .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign2.2.png");
-		},
-		function() {
-			//鼠标离开的操作
-			if($("#wuziqi_introduce").css("visibility") == "hidden") {
-				$("#wuziqi .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign.png");
-			} else {
-				$("#wuziqi .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign2.png");
-			}
-		});
-})
-
-$(document).ready(function() {
-	$("#siziqi_f").hover(function() {
-			//鼠标经过的操作
-			$("#siziqi_f .siziqi_sign").attr("src", "/nzq/img/siziqi_sign3.3.png");
-		},
-		function() {
-			//鼠标离开的操作
-			if($("#siziqi_introduce_f").css("visibility") == "hidden") {
-				$("#siziqi_f .siziqi_sign").attr("src", "/nzq/img/siziqi_sign.png");
-			} else {
-				$("#siziqi_f .siziqi_sign").attr("src", "/nzq/img/siziqi_sign3.png");
-			}
-
-		});
-})
-
-$(document).ready(function() {
-	$("#wuziqi_f").hover(function() {
-			//鼠标经过的操作
-			$("#wuziqi_f .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign2.2.png");
-		},
-		function() {
-			//鼠标离开的操作
-			if($("#wuziqi_introduce_f").css("visibility") == "hidden") {
-				$("#wuziqi_f .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign.png");
-			} else {
-				$("#wuziqi_f .wuziqi_sign").attr("src", "/nzq/img/wuziqi_sign2.png");
-			}
-		});
-})
-//end
-//创建房间
-//s05
-$(document).ready(function() {
-	$("#confirm_game_f").click(function() {
-		if(roomModel == 2) {
-			create2Room();
-		} else {
-			create3Room();
-		}
-		
-	})
-})
-function create2Room() {
-	nzqGameWebSocket.send("05");
-	myLocation = "black";
-	$("#gy_start").css("display","inline");
-	$("#gy_competitor_black .gy_competitor_photo").attr("src","/nzq/photo/"+$("#id_container").html()+".jpg");
-	$("#gy_competitor_black .gy_competitor_name").html($("#myinfo_name").html());
-	
-	$("#black_house_owner").css("display", "inline");
-	$("#tick_black").css("display", "none");
-	$("#change_black").css("display", "none");
-	$("#gy_competitor_black").css("display", "inline");
-	
-	$("#white_house_owner").css("display", "none");
-	$("#tick_white").css("display", "none");
-	$("#change_white").css("display", "none");
-	$("#gy_competitor_white").css("display", "none");
-	
-	$("#game_yue2_competitor").css("display","inline");
-	$("#game_yue_competitor").css("display","inline");
-	
-	getInvitationList();
-}
-function create3Room() {
-	nzqGameWebSocket.send("17");
-	myLocation = "black";
-	$("#gy3_start").css("display","inline");
-	$("#gy3_competitor_black .gy3_competitor_photo").attr("src","/nzq/photo/"+$("#id_container").html()+".jpg");
-	$("#gy3_competitor_black .gy3_competitor_name").html($("#myinfo_name").html());
-	
-	$("#gy3_competitor_img_black .gy3_house_owner").css("display", "inline");
-	$("#gy3_competitor_img_black .gy3_exit").css("display", "none");
-	$("#gy3_competitor_img_black .gy3_exchange").css("display", "none");
-	$("#gy3_competitor_black").css("display", "inline");
-	
-	$("#gy3_competitor_img_white .gy3_house_owner").css("display", "none");
-	$("#gy3_competitor_img_white .gy3_exit").css("display", "none");
-	$("#gy3_competitor_img_white .gy3_exchange").css("display", "none");
-	$("#gy3_competitor_white").css("display", "none");
-	
-	$("#gy3_competitor_img_red .gy3_house_owner").css("display", "none");
-	$("#gy3_competitor_img_red .gy3_exit").css("display", "none");
-	$("#gy3_competitor_img_red .gy3_exchange").css("display", "none");
-	$("#gy3_competitor_red").css("display", "none");
-	
-	$("#game_yue3_competitor").css("display","inline");
-	$("#game_yue_competitor").css("display","inline");
-	getInvitationList();
-}
 function getInvitationList() {
 	$("#gy_list_offline").html("");
 	$("#gy_list_online").html("");
@@ -1200,7 +959,7 @@ function getInvitationList() {
 				} else {
 					name = data[index].remark;
 				}
-				
+
 				if(data[index].fstatus==0) {
 					friend = '<div gyxf="'+data[index].fxf+'" class="gy_list_friend">'
 						+'<img class="gy_list_photo" src="/nzq/photo/'+data[index].fxf+'.jpg">'
@@ -1307,10 +1066,10 @@ function exchangeGY3detail() {
 		$("#gy3_competitor_img_"+myLocation+" .gy3_house_owner").css("display", "none");
 		$("#gy3_competitor_img_"+toLocation+" .gy3_house_owner").css("display", "inline");
 	}
-	
+
 	$("#gy3_competitor_"+myLocation).css("display", "none");
 	$("#gy3_competitor_"+toLocation).css("display", "inline");
-	
+
 	var p1 = $("#gy3_competitor_"+myLocation).html();
 	var p2 = $("#gy3_competitor_"+toLocation).html();
 	$("#gy3_competitor_"+myLocation).html(p2);
@@ -1322,18 +1081,18 @@ function exchangeAnotherAndNull(msg) {
 	if($("#gy3_competitor_img_"+player_kong[0]+" .gy3_house_owner").css("display")!="none") {
 		$("#gy3_competitor_img_"+player_kong[0]+" .gy3_house_owner").css("display", "none");
 		$("#gy3_competitor_img_"+player_kong[1]+" .gy3_house_owner").css("display", "inline");
-		
+
 	} else if($("#gy3_competitor_img_"+myLocation+" .gy3_house_owner").css("display")!="none") {
 		$("#gy3_competitor_img_"+player_kong[0]+" .gy3_exit").css("display", "none");
 		$("#gy3_competitor_img_"+player_kong[1]+" .gy3_exit").css("display", "inline");
 	}
-	
+
 	$("#gy3_competitor_img_"+player_kong[0]+" .gy3_exchange").css("display", "none");
 	$("#gy3_competitor_img_"+player_kong[1]+" .gy3_exchange").css("display", "inline");
-	
+
 	$("#gy3_competitor_"+player_kong[0]).css("display", "none");
 	$("#gy3_competitor_"+player_kong[1]).css("display", "inline");
-	
+
 	var p1 = $("#gy3_competitor_"+player_kong[0]).html();
 	var p2 = $("#gy3_competitor_"+player_kong[1]).html();
 	$("#gy3_competitor_"+player_kong[0]).html(p2);
@@ -1344,7 +1103,7 @@ function exchange22GY3detail() {
 	console.log("#gy3_competitor_img_"+toLocation+" .gy3_exchange");
 //	$("#gy3_competitor_img_"+toLocation+" .gy3_exchange").css("display", "none");//无效
 //	$("#gy3_competitor_img_"+myLocation+" .gy3_exchange").css("display", "inline");
-	
+
 	//我是房主
 	if($("#gy3_competitor_img_"+myLocation+" .gy3_house_owner").css("display")!="none") {
 		console.log("#gy3_competitor_img_"+myLocation+" .gy3_house_owner");
@@ -1356,7 +1115,7 @@ function exchange22GY3detail() {
 		$("#gy3_competitor_img_"+toLocation+" .gy3_house_owner").css("display", "none");
 		$("#gy3_competitor_img_"+myLocation+" .gy3_house_owner").css("display", "inline");
 	}
-	
+
 	var p1 = $("#gy3_competitor_"+myLocation).html();
 	var p2 = $("#gy3_competitor_"+toLocation).html();
 	$("#gy3_competitor_"+myLocation).html(p2);
@@ -1393,7 +1152,7 @@ function exchange2GY3detail(ex2) {
 	$("#gy3_competitor_img_"+ex2[1]+" .gy3_exit").css("display",exit[1]);
 	$("#gy3_competitor_img_"+ex2[0]+" .gy3_exchange").css("display", exchange[0]);
 	$("#gy3_competitor_img_"+ex2[1]+" .gy3_exchange").css("display", exchange[1]);
-	
+
 	var p1 = $("#gy3_competitor_"+ex2[0]).html();
 	var p2 = $("#gy3_competitor_"+ex2[1]).html();
 	$("#gy3_competitor_"+ex2[0]).html(p2);
@@ -1408,7 +1167,7 @@ function moveToBlack() {
 	exchangeGYdetail();
 	$("#black_house_owner").css("display", "inline");
 	$("#white_house_owner").css("display", "none");
-	
+
 	$("#gy_competitor_white").css("display","none");
 	$("#gy_competitor_black").css("display","inline");
 }
@@ -1416,7 +1175,7 @@ function moveToWhite() {
 	exchangeGYdetail();
 	$("#black_house_owner").css("display", "none");
 	$("#white_house_owner").css("display", "inline");
-	
+
 	$("#gy_competitor_white").css("display","inline");
 	$("#gy_competitor_black").css("display","none");
 }
@@ -1424,7 +1183,7 @@ function oneToAnother(one, another) {
 	exchangeGYdetail();
 	$("#black_house_owner").css("display", "none");
 	$("#white_house_owner").css("display", "inline");
-	
+
 	$("#gy_competitor_white").css("display","inline");
 	$("#gy_competitor_black").css("display","none");
 }
@@ -1436,7 +1195,7 @@ $(document).ready(function() {
 		} else {
 			nzqGameWebSocket.send("19."+roomId);
 		}
-		
+
 		$("#yaoqing").css("display", "none");
 	})
 })
@@ -1448,7 +1207,7 @@ $(document).ready(function() {
 		} else {
 			nzqGameWebSocket.send("21."+yaoxf);
 		}
-		
+
 		$("#yaoqing").css("display", "none");
 	})
 })
@@ -1516,7 +1275,7 @@ $(document).ready(function() {
 	$(".gy_exbutton_yes").click(function() {
 		clearInterval(Time1);
 		nzqGameWebSocket.send("10.1");
-		
+
 		if(myLocation == "black") {
 			$("#change_white").css("display", "inline");
 			$("#gy_exchange_request_white").css("display", "none");
@@ -1549,45 +1308,7 @@ $(document).ready(function() {
 })
 //s32
 //s35
-$(document).ready(function() {
-	$("#confirm_game").click(function() {
-		if(pPModel == 2) {
-			nzqGameWebSocket.send("32");
-		} else {
-			nzqGameWebSocket.send("35");
-		}
-		
-		$("#match_pipei_wait").css("display", "inline");
-		$("#pp_wait_count").html("00:00");
-		var timer = 0;
-		var min;
-		var s;
-		var dianjibiao="";
-		TimePP=setInterval(function(){
-			timer += 1;
-			if(timer<10) {
-				dianjibiao = "00:0"+timer;
-			} else if(timer<60) {
-				dianjibiao = "00:"+timer;
-			} else {
-				min = Math.floor(timer/60);
-				s = timer % 60;
-				if(min<10) {
-					if(s<10) {
-						dianjibiao = "0"+min+":0"+s;
-					} else {
-						dianjibiao = "0"+min+":"+s;
-					}
-				} else{
-					$("#match_pipei_wait").css("display", "none");
-					alert("太久未匹配到对手，已退出匹配队列");
-					clearInterval(TimePP);
-				}
-			}
-			$("#pp_wait_count").html(dianjibiao);
-		}, 1000);
-	})
-})
+
 $(document).ready(function() {
 	$("#pz2_start_button").click(function() {
 		nzqGameWebSocket.send("33");
@@ -1644,7 +1365,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#gy3_competitor_img_black .gy3_exit").click(function() {
 		nzqGameWebSocket.send("23.black");
-		
+
 		$("#gy3_competitor_img_black .gy3_exit").css("display", "none");
 		$("#gy3_competitor_img_black .gy3_exchange").css("display", "none");
 		$("#gy3_competitor_black").css("display", "none");
@@ -1654,7 +1375,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#gy3_competitor_img_white .gy3_exit").click(function() {
 		nzqGameWebSocket.send("23.white");
-		
+
 		$("#gy3_competitor_img_white .gy3_exit").css("display", "none");
 		$("#gy3_competitor_img_white .gy3_exchange").css("display", "none");
 		$("#gy3_competitor_white").css("display", "none");
@@ -1664,7 +1385,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#gy3_competitor_img_red .gy3_exit").click(function() {
 		nzqGameWebSocket.send("23.red");
-		
+
 		$("#gy3_competitor_img_red .gy3_exit").css("display", "none");
 		$("#gy3_competitor_img_red .gy3_exchange").css("display", "none");
 		$("#gy3_competitor_red").css("display", "none");
@@ -1675,7 +1396,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#gy3_competitor_img_black .gy3_exchange").click(function() {
 		nzqGameWebSocket.send("24.black");
-		
+
 		$("#gy3_black_count").html("5");
 		$(".gy3_exchange").css("display", "none");
 		$("#gy3_black_cover").css("display", "inline");
@@ -1694,7 +1415,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#gy3_competitor_img_white .gy3_exchange").click(function() {
 		nzqGameWebSocket.send("24.white");
-		
+
 		$("#gy3_white_count").html("5");
 		$(".gy3_exchange").css("display", "none");
 		$("#gy3_white_cover").css("display", "inline");
@@ -1713,7 +1434,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#gy3_competitor_img_red .gy3_exchange").click(function() {
 		nzqGameWebSocket.send("24.red");
-		
+
 		$("#gy3_red_count").html("5");
 		$(".gy3_exchange").css("display", "none");
 		$("#gy3_red_cover").css("display", "inline");
@@ -1732,10 +1453,10 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#agree_black").click(function() {
 		nzqGameWebSocket.send("25.1.black");
-		
+
 		$("#gy3_exchange_request_black").css("display", "none");
 		clearInterval(Time1);
-		
+
 		toLocation = "black";
 		exchange22GY3detail();
 		showOtherExchange()
@@ -1744,10 +1465,10 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#agree_white").click(function() {
 		nzqGameWebSocket.send("25.1.white");
-		
+
 		$("#gy3_exchange_request_white").css("display", "none");
 		clearInterval(Time1);
-		
+
 		toLocation = "white";
 		exchange22GY3detail();
 		showOtherExchange()
@@ -1756,10 +1477,10 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#agree_red").click(function() {
 		nzqGameWebSocket.send("25.1.red");
-		
+
 		$("#gy3_exchange_request_red").css("display", "none");
 		clearInterval(Time1);
-		
+
 		toLocation = "red";
 		exchange22GY3detail();
 		showOtherExchange()

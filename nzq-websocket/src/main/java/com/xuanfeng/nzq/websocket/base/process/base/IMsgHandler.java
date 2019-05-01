@@ -45,7 +45,7 @@ public abstract class IMsgHandler {
 			try {
 				result = handle(message,xf,session);
 			} catch (Exception e) {
-				logger.error("处理消息时发生错误");
+				logger.error("处理消息时发生错误:{}",e.getMessage());
 				result= new ResponseMsg(RetEnum.其他错误,e.getMessage());
 			}
 		}

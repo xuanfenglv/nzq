@@ -1,15 +1,16 @@
 package com.xuanfeng.nzq.websocket.main.game.handler;
 
 import com.xuanfeng.nzq.commons.RetEnum;
+import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
+import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.component.CustomRooms;
 import com.xuanfeng.nzq.websocket.component.Invitations;
 import com.xuanfeng.nzq.websocket.javabean.Invitation;
+import com.xuanfeng.nzq.websocket.main.game.constant.Position;
 import com.xuanfeng.nzq.websocket.main.game.javabean.room.CustomTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.main.game.msg.request.AcceptInvitationRequest;
 import com.xuanfeng.nzq.websocket.main.game.msg.response.AcceptInvitationResponse;
-import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
-import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 
 import javax.websocket.Session;
@@ -41,15 +42,15 @@ public class H4 extends IMsgHandler {
             responseMsg = WsResultUtil.createRespFailedResult(RetEnum.其他错误,"邀请者已退出房间");
         }
 
-        int position = room.enterRoom(xf, session);
+        Position position = room.enterRoom(xf, session);
 
-        if (position==0) {
+        if (position==Position.NOTHING) {
             responseMsg = WsResultUtil.createRespFailedResult(RetEnum.其他错误,"房间已满");
         } else {
             AcceptInvitationResponse response = new AcceptInvitationResponse();
             response.setBlack(room.getBlack());
             response.setWhite(room.getWhite());
-            response.setMyPosition(position);
+            response.setMyPosition(position.getId());
 
             responseMsg = WsResultUtil.createRespSuccessResult();
         }

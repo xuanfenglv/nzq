@@ -21,7 +21,7 @@ import java.io.IOException;
 @Component
 @ServerEndpoint("/nzqgameserver")
 public class NzqGameSession extends WsServer {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private static MainHandler mainHandler;
@@ -75,7 +75,11 @@ public class NzqGameSession extends WsServer {
 
 
 	public void selfOffline() throws IOException {
+		// 推送下线消息
+		NzqGameStatusHandler.changeStatus(this.xf, NzqStatusEnum.离线);
+
 		NzqGameSessions.removeXf(this.xf);
+
 		NzqGameCache cache = NzqGameCacheManager.get(this.xf);
 		// 如果在战斗中，先不清缓存，等待玩家断线重连使用
 		if (cache.getNzqStatusEnum() != NzqStatusEnum.战斗中) {
@@ -83,7 +87,6 @@ public class NzqGameSession extends WsServer {
 			// TODO: 2019/1/2 断线不重连的垃圾回收
 		}
 		logger.info("下线用户是：{},当前在线人数为:{}", this.xf, NzqGameSessions.getOnlineCount());
-		// 推送下线消息
-		NzqGameStatusHandler.changeStatus(this.xf, NzqStatusEnum.离线);
+
 	}
 }

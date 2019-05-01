@@ -6,8 +6,8 @@ import com.xuanfeng.nzq.service.UserService;
 import com.xuanfeng.nzq.websocket.javabean.NzqGameCache;
 import com.xuanfeng.nzq.websocket.main.game.constant.GameMsgId;
 import com.xuanfeng.nzq.websocket.main.game.msg.notice.StatusChangeNotice;
-import com.xuanfeng.nzq.websocket.util.ImSessions;
 import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
+import com.xuanfeng.nzq.websocket.util.NzqGameSessions;
 import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,7 +44,7 @@ public class NzqGameStatusHandler {
         // 避免多次序列化
         String statusChangeMessage = JSON.toJSONString(WsResultUtil.createNoticeResult(GameMsgId.状态变化, new StatusChangeNotice(xf, statusEnum)));
         cache.getFriendXf().forEach(friendXf -> {
-            ImSessions.sendMsgToXf(friendXf, statusChangeMessage);
+            NzqGameSessions.sendMsgToXf(friendXf, statusChangeMessage);
 
         });
 

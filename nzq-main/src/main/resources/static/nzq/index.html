@@ -6,12 +6,15 @@
     <link rel="stylesheet" href="/nzq/css/chat.css"/>
     <link rel="stylesheet" href="/nzq/css/game.css"/>
     <link rel="stylesheet" href="/nzq/css/playgame.css"/>
+
 </head>
 
 <body>
 
 <div id="main">
-    <div id="game">
+
+    <div id="game" :class="'bgImg'+mainMenuButton">
+
         <div id="menu">
             <div id="play_b">
                 <img id="play_b_sign" src="/nzq/img/play_b_sign.png"/> PLAY
@@ -35,13 +38,13 @@
         <div id="display">
             <div id="play">
                 <div id="play_menu">
-                    <div id="playergame" style="box-shadow: #BCBD93 2px 2px 2px;" @click="changeMainPage(1)">
+                    <div id="playergame" :class="mainMenuButton==1?'button_on':''" @click="changeMainPage(1)">
                         玩家对战
                     </div>
-                    <div id="conputergame" @click="changeMainPage(2)">
+                    <div id="conputergame" :class="mainMenuButton==2?'button_on':''" @click="changeMainPage(2)">
                         人机对战
                     </div>
-                    <div id="friendgame" @click="changeMainPage(3)">
+                    <div id="friendgame" :class="mainMenuButton==3?'button_on':''" @click="changeMainPage(3)">
                         好友约战
                     </div>
                 </div>
@@ -66,14 +69,14 @@
                         </div>
                         <div id="game_pattern">
                             <div id="pipei">
-                                <input type="radio" name="pattern_select" id="pattern_select" value="0"
+                                <input type="radio" name="pattern_select" class="pattern_select" value="0"
                                        checked="checked"/>
                                 <div id="pipei_text">
                                     匹配模式
                                 </div>
                             </div>
                             <div id="rank">
-                                <input type="radio" name="pattern_select" id="pattern_select" value="1"
+                                <input type="radio" name="pattern_select" class="pattern_select" value="1"
                                        disabled="disabled"/>
                                 <div id="rank_text">
                                     排位模式
@@ -113,7 +116,7 @@
                     </div>
                     <div id="play_begin_f">
                         <div class="quit_game">取消</div>
-                        <div id="confirm_game_f">确认</div>
+                        <div id="confirm_game_f" @click="createRoom()">确认</div>
                     </div>
                 </div>
             </div>
@@ -169,7 +172,7 @@
             </div>
         </div>
 
-        <div id="game_warn"></div>
+        <div id="game_warn" v-show="showGameWarn"></div>
 
         <div id="game_success">
             <div class="game_gray"></div>
@@ -235,7 +238,7 @@
             </div>
         </div>
 
-        <div id="match_ready_pz2">
+        <div id="match_ready_pz2" v-show="showMatchSize==MatchSize.TWO">
             <div class="game_gray"></div>
             <div id="match_ready_pz2_kuang">
 
@@ -269,7 +272,7 @@
             </div>
         </div>
 
-        <div id="match_ready_pz3">
+        <div id="match_ready_pz3" v-show="showMatchSize==MatchSize.THREE">
             <div class="game_gray"></div>
             <div id="match_ready_pz2_kuang">
                 <div class="pz_title">
@@ -319,7 +322,7 @@
             </div>
         </div>
 
-        <div id="match_pipei_wait">
+        <div id="match_pipei_wait" v-show="matchPipeiWait">
 
             <div class="pp_wait_return_middle">
                 <div class="pp_wait_predict">
@@ -333,11 +336,11 @@
 
         </div>
 
-        <div id="game_yue_competitor" class="game_yue_competitor">
-            <div id="game_yue2_competitor" class="gy_main">
+        <div id="game_yue_competitor" class="game_yue_competitor" v-show="showCustomRoom!=0">
+            <div id="game_yue2_competitor" class="gy_main" v-show="showCustomRoom==2">
                 <div id="gy_return">
-                    <img id="gy_return_photo" class="gy_return_photo"
-                         src="/nzq/game_img/gy_return.png" title="返回"/>
+                    <img class="gy_return_photo"
+                         src="/nzq/game_img/gy_return.png" title="返回" @click="quitRoom()"/>
                     <div class="gy_return_sign">准备</div>
                 </div>
 
@@ -347,37 +350,42 @@
                 </div>
 
                 <div id="gy_black">
+                    <!--空位置默认UI-->
                     <div class="gy_competitor_none">
                         <img class="gy_competitor_questionmark"
                              src="/nzq/game_img/gy_questionmark.png"/>
                         <button id="to_Black" class="gy_competitor_exchange">换位
                         </button>
                     </div>
-
-                    <div id="gy_competitor_black" class="gy_competitor_detail">
-                        <img class="gy_competitor_photo"/>
-                        <div class="gy_competitor_name">猪哥</div>
+                    <!--姓名+头像-->
+                    <div v-show="room.black.xf!=null" id="gy_competitor_black" class="gy_competitor_detail">
+                        <img class="gy_competitor_photo" :src="getPhotoUrl(room.black.xf)"/>
+                        <div class="gy_competitor_name">{{room.black.name}}</div>
                     </div>
-
-                    <div class="gy_competitor_cover" id="gy_black_cover">
-                        <div class="gy_exchange_count" id="gy_black_count"></div>
+                    <!--换位倒计时-->
+                    <div v-show="room.black.exchangeTimeResponse>0" class="gy_competitor_cover" id="gy_black_cover">
+                        <div class="gy_exchange_count" id="gy_black_count">{{room.black.exchangeTimeResponse}}</div>
                         <div class="gy_exchange_note">等待确认</div>
                     </div>
 
-                    <div id="gy_competitor_img_black" class="gy_competitor_img">
-                        <img id="black_house_owner" class="gy_house_owner"
-                             src="/nzq/game_img/gy_house.png"/> <img id="tick_black"
-                                                                     class="gy_exit" src="/nzq/game_img/gy_close.png"/>
-                        <div id="change_black" class="gy_exchange">
-                            <img src="/nzq/game_img/gy_exchange.png"
-                                 class="gy_exchange_sign"/>
+                    <!--标记-->
+                    <div v-show="room.black.xf!=null" id="gy_competitor_img_black" class="gy_competitor_img">
+                        <!--房主标记-->
+                        <img v-show="room.owner==Position.黑" id="black_house_owner" class="gy_house_owner"
+                             src="/nzq/game_img/gy_house.png"/>
+                        <!--踢人标记--><!--我是房主&&我不在此位置-->
+                        <img v-show="isMyRoom&&room.myPosition!=Position.黑" id="tick_black" class="gy_exit"
+                             src="/nzq/game_img/gy_close.png"/>
+                        <!--换位标记-->
+                        <div v-show="room.myPosition!=Position.黑" id="change_black" class="gy_exchange">
+                            <img src="/nzq/game_img/gy_exchange.png" class="gy_exchange_sign"/>
                         </div>
                     </div>
-
-                    <div id="gy_exchange_request_black" class="gy_exchange_request">
+                    <!--换位通知-->
+                    <div v-show="room.black.exchangeTimeNotice>0" id="gy_exchange_request_black" class="gy_exchange_request">
                         <div class="gy_ex_from ">
                             黑方请求与你换位(
-                            <div class="gy_excount" id="gy_exblack_count">15</div>
+                            <div class="gy_excount" id="gy_exblack_count">{{room.black.exchangeTimeNotice}}</div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
                         </div>
                         <div class="gy_ex_button">
@@ -401,30 +409,34 @@
                         </button>
                     </div>
 
-                    <div id="gy_competitor_white" class="gy_competitor_detail">
-                        <img class="gy_competitor_photo"/>
-                        <div class="gy_competitor_name">猪妹</div>
+                    <div v-show="room.white.xf!=null" id="gy_competitor_white" class="gy_competitor_detail">
+                        <img class="gy_competitor_photo" :src="getPhotoUrl(room.white.xf)"/>
+                        <div class="gy_competitor_name">{{room.white.name}}</div>
                     </div>
-
-                    <div class="gy_competitor_cover" id="gy_white_cover">
-                        <div class="gy_exchange_count" id="gy_white_count"></div>
+                    <!--换位倒计时确认-->
+                    <div v-show="room.white.exchangeTimeResponse>0" class="gy_competitor_cover" id="gy_white_cover">
+                        <div class="gy_exchange_count" id="gy_white_count">{{room.white.exchangeTimeResponse}}</div>
                         <div class="gy_exchange_note">等待确认</div>
                     </div>
 
-                    <div id="gy_competitor_img_white" class="gy_competitor_img">
-                        <img id="white_house_owner" class="gy_house_owner"
-                             src="/nzq/game_img/gy_house.png"/> <img id="tick_white"
-                                                                     class="gy_exit" src="/nzq/game_img/gy_close.png"/>
-                        <div id="change_white" class="gy_exchange">
-                            <img src="/nzq/game_img/gy_exchange.png"
-                                 class="gy_exchange_sign"/>
+                    <div v-show="room.white.xf!=null" id="gy_competitor_img_white" class="gy_competitor_img">
+                        <!--房主标记-->
+                        <img v-show="room.owner==Position.白" id="white_house_owner" class="gy_house_owner"
+                             src="/nzq/game_img/gy_house.png"/>
+                        <!--踢人标记--><!--我是房主&&我不在此位置-->
+                        <img v-show="isMyRoom&&room.myPosition!=Position.白" id="tick_white" class="gy_exit"
+                             src="/nzq/game_img/gy_close.png"/>
+                        <!--换位标记-->
+                        <div v-show="room.myPosition!=Position.白" id="change_white" class="gy_exchange">
+                            <img src="/nzq/game_img/gy_exchange.png" class="gy_exchange_sign"/>
                         </div>
                     </div>
 
-                    <div id="gy_exchange_request_white" class="gy_exchange_request">
+                    <!--换位通知-->
+                    <div v-show="room.white.exchangeTimeNotice>0" id="gy_exchange_request_white" class="gy_exchange_request">
                         <div class="gy_ex_from ">
                             白方请求与你换位(
-                            <div class="gy_excount" id="gy_exwhite_count">15</div>
+                            <div class="gy_excount" id="gy_exwhite_count">{{room.white.exchangeTimeNotice}}</div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
                         </div>
                         <div class="gy_ex_button">
@@ -440,14 +452,14 @@
                             id="gy_chat_content" placeholder="点击这里开始聊天"/>
 
                     </div>
-                    <button id="gy_start" disabled="disabled">开始游戏</button>
+                    <button v-show="isMyRoom" id="gy_start" :disabled="room.canStart">开始游戏</button>
                 </div>
             </div>
 
-            <div id="game_yue3_competitor" class="gy_main">
+            <div id="game_yue3_competitor" class="gy_main" v-show="showCustomRoom==3">
                 <div class="gy_return">
-                    <img id="gy3_return_photo" class="gy_return_photo"
-                         src="/nzq/game_img/gy_return.png" title="返回"/>
+                    <img class="gy_return_photo"
+                         src="/nzq/game_img/gy_return.png" title="返回" @click="quitRoom()"/>
                     <div class="gy_return_sign">准备</div>
                 </div>
 
@@ -612,8 +624,31 @@
 
                 <div class="gy_list_title">好友</div>
                 <div id="gy_list_content">
-                    <div id="gy_list_online"></div>
-                    <div id="gy_list_offline"></div>
+                    <div id="gy_list_online">
+                        <div v-for="friend in onlineFriendList" :gyxf="friend.xf" class="gy_list_friend">
+                            <img class="gy_list_photo" :src="'/nzq/photo/'+friend.xf+'.jpg'">
+                            <div class="gy_list_info">
+                                <div class="gy_list_name">{{friend.remark?friend.remark:friend.nickname}}</div>
+                                <div class="gy_list_grade">{{friend.grade}}</div>
+                                <div class="gy_list_state">{{getNzqStatus(friend.status)}}</div>
+                            </div>
+
+                            <button v-if="showYaoQing(friend.status)" class="gy_list_request"
+                                    @click="sendInvitation(friend.xf)">邀请
+                            </button>
+                        </div>
+                    </div>
+                    <div id="gy_list_offline">
+                        <div v-for="friend in offlineFriendList" :gyxf="friend.xf" class="gy_list_friend">
+                            <img class="gy_list_photo" :src="'/nzq/photo/'+friend.xf+'.jpg'">
+                            <div class="gy_list_info">
+                                <div class="gy_list_name">{{friend.remark?friend.remark:friend.nickname}}</div>
+                                <div class="gy_list_grade">{{friend.grade}}</div>
+                                <div class="gy_list_state">{{getNzqStatus(friend.status)}}</div>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -1321,6 +1356,7 @@
             <!--begin:个人资料-->
             <div id="myinfo" v-show="openSelfInfo">
                 <div id="log_window"></div>
+                {{onlineFriendList}}
                 <div id="myinfo_first">
                     <!--name-->
                     <img id="myinfo_photo" :src="getPhoto(myInfo.id)"/>
@@ -1476,7 +1512,6 @@
         <button id="bt3">3</button>
     </div>
 </div>
-
 </body>
 <!--vue-->
 <script src="/nzq/js/common/vue.js"></script>
@@ -1549,6 +1584,10 @@
 <script src="/nzq/js/game/handler.js"></script>
 <script src="/nzq/js/game/handler-manager.js"></script>
 <script src="/nzq/js/game/switch.js"></script>
+<script src="/nzq/js/game/event.js"></script>
+<script src="/nzq/js/game/public.js"></script>
+<script src="/nzq/js/game/function.js"></script>
+
 <!--游戏运行时-->
 <script src="/nzq/js/playgame.js"></script>
 <!--棋盘-->

@@ -2,6 +2,7 @@ package com.xuanfeng.nzq.websocket.main.game.handler;
 
 import com.xuanfeng.nzq.domain.constant.NzqStatusEnum;
 import com.xuanfeng.nzq.domain.dao.FriendDao;
+import com.xuanfeng.nzq.domain.entity.GameFriendInfo;
 import com.xuanfeng.nzq.websocket.base.msg.request.RequestMsg;
 import com.xuanfeng.nzq.websocket.base.msg.response.ResponseMsg;
 import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
@@ -16,7 +17,7 @@ import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.websocket.Session;
-import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,7 +34,6 @@ public class H1 extends IMsgHandler {
     protected ResponseMsg handle(RequestMsg message, long xf, Session session) {
         InitAccountReq req = (InitAccountReq) message;
         // TODO: 2018/11/23 token校验
-
 
         if (NzqGameSessions.constainsXf(xf)) {
             NzqGameSessions.sendMsgToXf(xf, WsResultUtil.createNoticeResult(GameMsgId.初始化账号));
@@ -53,13 +53,15 @@ public class H1 extends IMsgHandler {
         NzqGameCache.setFriendXf(fXfs);
         NzqGameCacheManager.add(xf, NzqGameCache);
 
-        ImSessions.addxf(xf, session);
+        NzqGameSessions.addxf(xf, session);
 
         NzqGameStatusHandler.changeStatus(xf, NzqStatusEnum.闲逛中);
 
+        List<GameFriendInfo> gameOnlineFriendInfos = friendDao.selectGameFriendInfos(xf);
+
         logger.info("用户上线,xf:{}：", xf);
 
-        return WsResultUtil.createRespSuccessResult();
+        return WsResultUtil.createRespSuccessResult(gameOnlineFriendInfos);
     }
 
     @Override

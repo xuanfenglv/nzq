@@ -6,6 +6,7 @@ import com.xuanfeng.nzq.websocket.base.process.base.IMsgHandler;
 import com.xuanfeng.nzq.websocket.component.CustomRooms;
 import com.xuanfeng.nzq.websocket.main.game.javabean.room.CustomTwoPeopleRoom;
 import com.xuanfeng.nzq.websocket.util.NzqGameCacheManager;
+import com.xuanfeng.nzq.websocket.util.WsResultUtil;
 
 import javax.websocket.Session;
 import java.io.IOException;
@@ -22,9 +23,12 @@ public class H10 extends IMsgHandler {
     protected ResponseMsg handle(RequestMsg message, long xf, Session session) throws IOException {
         Long roomId = Optional.ofNullable(NzqGameCacheManager.get(xf)).map(userCache -> userCache.getRoomId()).orElse(0l);
         CustomTwoPeopleRoom room = CustomRooms.get(roomId);
-        room.exist(xf);
+        // 如果房间还存在的话，退出房间，防止重复退出空指针
+        if (room != null) {
+            room.exist(xf);
+        }
 
-        return null;
+        return WsResultUtil.createRespSuccessResult();
     }
 
     @Override

@@ -1,6 +1,7 @@
 // 全局变量
 
 let imWs = null;
+let gameWs = null;
 let imDomObj;
 let groupList;
 

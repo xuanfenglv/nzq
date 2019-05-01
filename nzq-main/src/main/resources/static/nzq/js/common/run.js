@@ -18,5 +18,5 @@ function initIm() {
     getSelfUserInfo();
 }
 function initGame() {
-
+    gameWs = new WebSocketUtil("游戏连接",gameWsAddress,new GameHandlerManager(),gameInitMethod)
 }
